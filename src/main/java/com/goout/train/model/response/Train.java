@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @JSONType(naming = PropertyNamingStrategy.PascalCase)
-public class Ticket implements Serializable {
+public class Train implements Serializable {
 
     private Integer id;
     /**

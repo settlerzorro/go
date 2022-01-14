@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 @RestController
 @RequestMapping(value = "/train/",
-        produces = {MediaType.APPLICATION_JSON_VALUE},
         consumes = {MediaType.APPLICATION_JSON_VALUE}
 )
 public class TrainController {
@@ -112,9 +112,28 @@ public class TrainController {
     }
 
 
-    @PostMapping(value = "REAL_INSERT")
-    @ResponseBody
-    public RestResponse REAL_INSERT(@RequestParam("userId") Integer userId,HttpServletRequest request, @RequestBody JSONObject requestBody) {
-        return RestResponse.succuess(REAL_INSERT.getTicketList(userId,requestBody.toJavaObject(GetTicketListRequest.class)));
+//    @PostMapping(value = "REAL_INSERT")
+//    @ResponseBody
+//    public RestResponse REAL_INSERT(@RequestParam("userId") Integer userId,HttpServletRequest request, @RequestBody JSONObject requestBody) {
+//        return RestResponse.succuess(REAL_INSERT.getTicketList(userId,requestBody.toJavaObject(GetTicketListRequest.class)));
+//    }
+
+    @PostMapping("/insertTrain")
+    @PreAuthorize("hasRole('ROLE_GROUND_ADMIN')")
+    public RestResponse insertTrain(HttpServletRequest request,@RequestBody Train train) throws Exception {
+        return RestResponse.succuess(trainTicketService.insertTrain(train));
     }
+
+    @DeleteMapping("/deleteTrain")
+    @PreAuthorize("hasRole('ROLE_GROUND_ADMIN')")
+    public RestResponse deleteTrain(HttpServletRequest request,@RequestParam("id") Integer id) throws Exception {
+        return RestResponse.succuess(trainTicketService.deleteTrain(id));
+    }
+
+    @PostMapping("/updateTrain")
+    @PreAuthorize("hasRole('ROLE_GROUND_ADMIN')")
+    public RestResponse updateTrain(HttpServletRequest request,@RequestBody Train train) throws Exception {
+        return RestResponse.succuess(trainTicketService.updateTrain(train));
+    }
+
 }

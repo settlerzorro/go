@@ -1,4 +1,4 @@
-package com.goout.train.model.response;
+package com.goout.bus.entity;
 
 import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.annotation.JSONType;
@@ -7,14 +7,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 @JSONType(naming = PropertyNamingStrategy.PascalCase)
-public class CommentTrain  implements Serializable {
+public class CommentBus  implements Serializable {
     private Integer id;
     private Integer userId;
     private Date time;
     private String content;
-    private Integer trainId;
-
-    private Train ticket;
+    private Integer busId;
 
     public Integer getId() {
         return id;
@@ -48,19 +46,12 @@ public class CommentTrain  implements Serializable {
         this.content = content;
     }
 
-    public Integer getTrainId() {
-        return trainId;
+    public Integer getBusId() {
+        return busId;
     }
 
-    public void setTrainId(Integer trainId) {
-        this.trainId = trainId;
+    public void setBusId(Integer busId) {
+        this.busId = busId;
     }
 
-    public Train getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Train ticket) {
-        this.ticket = ticket;
-    }
 }

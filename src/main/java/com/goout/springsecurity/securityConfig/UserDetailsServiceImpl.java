@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Service("UserDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -50,6 +51,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         // 返回UserDetails实现类
-        return new User(user.getName(), user.getPassword(), authorities);
+        return new SysUser(user.getId(),user.getUsername(), user.getPassword(),true, authorities);
     }
 }

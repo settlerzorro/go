@@ -8,17 +8,17 @@ import java.util.List;
 
 @JSONType(naming = PropertyNamingStrategy.PascalCase)
 public class TicketList {
-    protected List<Ticket> tickets;
+    protected List<Train> tickets;
 
-    public List<Ticket> getTickets() {
+    public List<Train> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
+    public void setTickets(List<Train> tickets) {
         this.tickets = tickets;
     }
 
-    public TicketList(List<Ticket> tickets) {
+    public TicketList(List<Train> tickets) {
         this.tickets = tickets;
     }
 

@@ -76,14 +76,14 @@ public class TrainTicketServiceImpl implements ITrainTicketService {
             "depart_date=%s";
 
 
-    public List<Ticket> getTicketList(Integer userId,GetTicketListRequest requestBody) {
+    public List<Train> getTicketList(Integer userId, GetTicketListRequest requestBody) {
         requestBody.validate();
         Map map = new HashMap();
         map.put("fromStation",requestBody.getFromStation());
         map.put("toStation",requestBody.getToStation());
         map.put("fromDate",new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
-        List<Ticket> list = ticketMapper.select(map);
-        for(Ticket ticket : list){
+        List<Train> list = ticketMapper.select(map);
+        for(Train ticket : list){
             ticket.setCommentTrains(commentTrainMapper.selectByTrainId(ticket.getId()));
             ticket.setLikes(likeTrainMapper.selectByTrainIdAndUserId(ticket.getId(),userId));
         }
@@ -125,13 +125,28 @@ public class TrainTicketServiceImpl implements ITrainTicketService {
         return commentTrainMapper.deleteById(id);
     }
 
+    @Override
+    public boolean insertTrain(Train train) {
+       return ticketMapper.insertTrain(train);
+    }
+
+    @Override
+    public boolean deleteTrain(Integer id) {
+        return ticketMapper.deleteTrain(id);
+    }
+
+    @Override
+    public boolean updateTrain(Train train) {
+        return ticketMapper.updateTrain(train);
+    }
+
 
     /**
      * 从12306获取车票列表，先请求一次，若URL发生跳转则用新地址继续请求
      * @param requestBody 请求
      * @return 车票列表
      */
-    private List<Ticket> getTicketListFrom12306(Integer userId,GetTicketListRequest requestBody) {
+    private List<Train> getTicketListFrom12306(Integer userId, GetTicketListRequest requestBody) {
         JSONObject ret12306 = TrainHelper.requestTo12306(getTicketListUrl(requestBody));
         if(ret12306 == null){
             return new ArrayList<>();
@@ -167,8 +182,8 @@ public class TrainTicketServiceImpl implements ITrainTicketService {
      * @param data 12306车票列表信息
      * @return 平台的车票列表
      */
-    private List<Ticket> buildTicketList(Integer userId,GetTicketListRequest requestBody, JSONObject data) {
-        List<Ticket> ret = Lists.newArrayList();
+    private List<Train> buildTicketList(Integer userId, GetTicketListRequest requestBody, JSONObject data) {
+        List<Train> ret = Lists.newArrayList();
 
         //站点代码和名字映射
         JSONObject map = data.getJSONObject("map");
@@ -245,7 +260,7 @@ public class TrainTicketServiceImpl implements ITrainTicketService {
 
                 //TicketPrice ticketPrice = new TicketPrice();
 
-                Ticket ticket = new Ticket();
+                Train ticket = new Train();
                 ticket.setTrainNo(trainNo);
                 ticket.setTrainCode(trainCode);
                 ticket.setTrainType(getTrainType(trainCode));

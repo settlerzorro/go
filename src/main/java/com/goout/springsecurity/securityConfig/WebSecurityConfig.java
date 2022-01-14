@@ -56,13 +56,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/register",
                         "/train/getAllCity",
-                        "/train/getTicketList").permitAll()
+                        "/train/getTicketList",
+                        "/bus/getBusList").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // 设置登陆页
                 .formLogin().loginPage("/login")
                 // 设置登陆成功页
-                .defaultSuccessUrl("/").permitAll()
+                .defaultSuccessUrl("/loginSuccess").permitAll()
                 // 自定义登陆用户名和密码参数，默认为username和password
 //                .usernameParameter("username")
 //                .passwordParameter("password")

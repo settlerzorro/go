@@ -1,14 +1,12 @@
 package com.goout.train.dao;
 
 import com.goout.train.model.response.LikeTrain;
-import com.goout.train.model.response.Ticket;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface LikeTrainMapper {

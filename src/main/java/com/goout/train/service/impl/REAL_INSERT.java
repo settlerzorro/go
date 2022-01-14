@@ -93,8 +93,8 @@ public class REAL_INSERT implements IREALService {
             for(Station s:stas){
                 System.err.println("-----------------------------------------------"+new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
                 requestBody.setToStation(s.getStationCode());
-                List<Ticket> list = getTicketListFrom12306(userId,requestBody);
-                for(Ticket l : list){
+                List<Train> list = getTicketListFrom12306(userId,requestBody);
+                for(Train l : list){
                     l.setFromDate(new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
                     ticketMapper.insertTrain(l);
                 }
@@ -153,7 +153,7 @@ public class REAL_INSERT implements IREALService {
      * @param requestBody 请求
      * @return 车票列表
      */
-    private List<Ticket> getTicketListFrom12306(Integer userId,GetTicketListRequest requestBody) {
+    private List<Train> getTicketListFrom12306(Integer userId, GetTicketListRequest requestBody) {
         JSONObject ret12306 = TrainHelper.requestTo12306(getTicketListUrl(requestBody));
         if(ret12306 == null){
             return new ArrayList<>();
@@ -189,8 +189,8 @@ public class REAL_INSERT implements IREALService {
      * @param data 12306车票列表信息
      * @return 平台的车票列表
      */
-    private List<Ticket> buildTicketList(Integer userId,GetTicketListRequest requestBody, JSONObject data) {
-        List<Ticket> ret = Lists.newArrayList();
+    private List<Train> buildTicketList(Integer userId, GetTicketListRequest requestBody, JSONObject data) {
+        List<Train> ret = Lists.newArrayList();
 
         //站点代码和名字映射
         JSONObject map = data.getJSONObject("map");
@@ -267,7 +267,7 @@ public class REAL_INSERT implements IREALService {
 
                 //TicketPrice ticketPrice = new TicketPrice();
 
-                Ticket ticket = new Ticket();
+                Train ticket = new Train();
                 ticket.setTrainNo(trainNo);
                 ticket.setTrainCode(trainCode);
                 ticket.setTrainType(getTrainType(trainCode));

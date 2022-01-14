@@ -8,12 +8,12 @@ public interface SysUserMapper {
     @Select("SELECT * FROM sys_user WHERE id = #{id}")
     SysUser selectById(Integer id);
 
-    @Select("SELECT * FROM sys_user WHERE name = #{name}")
-    SysUser selectByName(String name);
+    @Select("SELECT * FROM sys_user WHERE username = #{username}")
+    SysUser selectByName(String username);
 
-    @Insert("insert into sys_user(name,password) values(#{name},#{password})")
+    @Insert("insert into sys_user(username,password) values(#{username},#{password})")
     Boolean insertUser(SysUser sysUser);
 
-    @Update("update sys_user set password = #{password} where name=#{name}")
-    Integer modifyPass(@Param("name") String name,@Param("password") String password);
+    @Update("update sys_user set password = #{password} where username=#{username}")
+    Integer modifyPass(@Param("username") String username,@Param("password") String password);
 }

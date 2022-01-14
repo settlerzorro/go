@@ -1,6 +1,7 @@
 package com.goout.springsecurity.controller;
 
 import com.goout.springsecurity.entity.SysUser;
+import com.goout.train.model.response.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,17 +20,17 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
     private Logger logger= LoggerFactory.getLogger(LoginController.class);
 
-    @RequestMapping("/")
-    public String showHome(){
+    @RequestMapping("/loginSuccess")
+    public RestResponse showHome(){
         String name= SecurityContextHolder.getContext().getAuthentication().getName();
-        logger.info("当前登录用户:{}",name);
-        return "home.html";
+        SysUser sys = (SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return RestResponse.succuess(sys);
     }
 
     @PostMapping("/login")
-    public String showLogin(@RequestBody SysUser sysUser) {
+    public RestResponse showLogin(@RequestBody SysUser sysUser) {
         System.out.println(sysUser);
-        return "login";
+        return RestResponse.succuess(true);
     }
 
     @RequestMapping("/regis")

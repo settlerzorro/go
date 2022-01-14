@@ -11,11 +11,95 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 14/01/2022 13:19:24
+ Date: 14/01/2022 21:52:34
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for bus
+-- ----------------------------
+DROP TABLE IF EXISTS `bus`;
+CREATE TABLE `bus`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `dptStation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出发站',
+  `arrStation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '到达站',
+  `dptDate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出发日',
+  `dptTime` varchar(2255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出发时间',
+  `coachType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '车型',
+  `ticketLeft` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '剩余票数',
+  `ticketPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '票价',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of bus
+-- ----------------------------
+INSERT INTO `bus` VALUES (82, '大连站南客运站一处', '沈阳', '2022-01-16', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (83, '大连站南客运站一处', '沈阳', '2022-01-16', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (84, '大连站南客运站一处', '沈阳', '2022-01-16', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (85, '大连站南客运站一处', '沈阳', '2022-01-17', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (86, '大连站南客运站一处', '沈阳', '2022-01-17', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (87, '大连站南客运站一处', '沈阳', '2022-01-17', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (88, '大连站南客运站一处', '沈阳', '2022-01-18', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (89, '大连站南客运站一处', '沈阳', '2022-01-18', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (90, '大连站南客运站一处', '沈阳', '2022-01-18', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (91, '大连站南客运站一处', '沈阳', '2022-01-19', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (92, '大连站南客运站一处', '沈阳', '2022-01-19', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (93, '大连站南客运站一处', '沈阳', '2022-01-19', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (94, '大连站南客运站一处', '沈阳', '2022-01-20', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (95, '大连站南客运站一处', '沈阳', '2022-01-20', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (96, '大连站南客运站一处', '沈阳', '2022-01-20', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (97, '大连站南客运站一处', '沈阳', '2022-01-21', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (98, '大连站南客运站一处', '沈阳', '2022-01-21', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (99, '大连站南客运站一处', '沈阳', '2022-01-21', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (100, '大连站南客运站一处', '沈阳', '2022-01-22', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (101, '大连站南客运站一处', '沈阳', '2022-01-22', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (102, '大连站南客运站一处', '沈阳', '2022-01-22', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (103, '大连站南客运站一处', '沈阳', '2022-01-23', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (104, '大连站南客运站一处', '沈阳', '2022-01-23', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (105, '大连站南客运站一处', '沈阳', '2022-01-23', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (106, '大连站南客运站一处', '沈阳', '2022-01-24', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (107, '大连站南客运站一处', '沈阳', '2022-01-24', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (108, '大连站南客运站一处', '沈阳', '2022-01-24', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (109, '大连站南客运站一处', '沈阳', '2022-01-25', '09:40', '客车', '35', 100.50);
+INSERT INTO `bus` VALUES (110, '大连站南客运站一处', '沈阳', '2022-01-25', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (111, '大连站南客运站一处', '沈阳', '2022-01-25', '09:40', '客车', '35', 100.50);
+INSERT INTO `bus` VALUES (112, '大连站南客运站一处', '沈阳', '2022-01-26', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (113, '大连站南客运站一处', '沈阳', '2022-01-26', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (114, '大连站南客运站一处', '沈阳', '2022-01-26', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (115, '大连站南客运站一处', '沈阳', '2022-01-27', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (116, '大连站南客运站一处', '沈阳', '2022-01-27', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (117, '大连站南客运站一处', '沈阳', '2022-01-27', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (118, '大连站南客运站一处', '沈阳', '2022-01-28', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (119, '大连站南客运站一处', '沈阳', '2022-01-28', '13:30', '客车', '19', 100.50);
+INSERT INTO `bus` VALUES (120, '大连站南客运站一处', '沈阳', '2022-01-28', '09:40', '客车', '36', 100.50);
+INSERT INTO `bus` VALUES (121, '大连站南客运站一处', '沈阳', '2022-01-29', '09:40', '客车', '35', 111.00);
+INSERT INTO `bus` VALUES (122, '大连站南客运站一处', '沈阳', '2022-01-29', '13:30', '客车', '19', 111.00);
+INSERT INTO `bus` VALUES (123, '大连站南客运站一处', '沈阳', '2022-01-29', '09:40', '客车', '35', 100.50);
+INSERT INTO `bus` VALUES (124, '大连站南客运站一处', '沈阳', '2022-01-30', '09:40', '客车', '36', 111.00);
+INSERT INTO `bus` VALUES (125, '大连站南客运站一处', '沈阳', '2022-01-30', '13:30', '客车', '19', 111.00);
+INSERT INTO `bus` VALUES (126, '大连站南客运站一处', '沈阳', '2022-01-30', '09:40', '客车', '36', 100.50);
+
+-- ----------------------------
+-- Table structure for comment_bus
+-- ----------------------------
+DROP TABLE IF EXISTS `comment_bus`;
+CREATE TABLE `comment_bus`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int NULL DEFAULT NULL,
+  `time` datetime NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `busId` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of comment_bus
+-- ----------------------------
+INSERT INTO `comment_bus` VALUES (2, 2, '2022-01-14 17:56:40', '评论111', NULL);
+INSERT INTO `comment_bus` VALUES (3, 2, '2022-01-14 17:56:53', '评论111', NULL);
 
 -- ----------------------------
 -- Table structure for comment_train
@@ -28,13 +112,29 @@ CREATE TABLE `comment_train`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '评论内容',
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_train
 -- ----------------------------
 INSERT INTO `comment_train` VALUES (3, 123, '2022-01-13 18:05:21', '评论111', 1477);
 INSERT INTO `comment_train` VALUES (4, 222, '2022-01-13 19:48:34', '评论111', 2);
+
+-- ----------------------------
+-- Table structure for like_bus
+-- ----------------------------
+DROP TABLE IF EXISTS `like_bus`;
+CREATE TABLE `like_bus`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int NULL DEFAULT NULL,
+  `busId` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of like_bus
+-- ----------------------------
+INSERT INTO `like_bus` VALUES (2, 2, 83);
 
 -- ----------------------------
 -- Table structure for like_train
@@ -45,7 +145,7 @@ CREATE TABLE `like_train`  (
   `userId` int NULL DEFAULT NULL,
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of like_train
@@ -223,8 +323,10 @@ CREATE TABLE `sys_role`  (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, 'ROLE_SUPER');
-INSERT INTO `sys_role` VALUES (2, 'ROLE_ADMIN');
-INSERT INTO `sys_role` VALUES (3, 'ROLE_USER');
+INSERT INTO `sys_role` VALUES (2, 'ROLE_AIR_ADMIN');
+INSERT INTO `sys_role` VALUES (3, 'ROLE_SEA_ADMIN');
+INSERT INTO `sys_role` VALUES (4, 'ROLE_GROUND_ADMIN');
+INSERT INTO `sys_role` VALUES (5, 'ROLE_USER');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -232,15 +334,19 @@ INSERT INTO `sys_role` VALUES (3, 'ROLE_USER');
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'zhang', '$2a$10$lLWCBtIrraWCaJRWXo9VCOHhL9omTAiYjnd0XKQ5Fgrod8kWMhQMe');
+INSERT INTO `sys_user` VALUES (26, 'super', '$2a$10$mePv.JeH5sVpsnVp0bmJ7.W6Q479Y5.GYjs5pqyBKJTFYhwzmsCMe');
+INSERT INTO `sys_user` VALUES (27, 'sea', '$2a$10$dmACdgHhG9PKWMZLMG3qcOFWU5gkFvYjFY5VeHbOKgWWF1HV4zwFe');
+INSERT INTO `sys_user` VALUES (28, 'ground', '$2a$10$Ww9g7myCrHsCK6QvaxkBwOtFLfcmzPPmqUR8t5nGRxzByRG5Sv27e');
+INSERT INTO `sys_user` VALUES (29, 'air', '$2a$10$1zXmBRnYuaBYXAaunc3TYOkDi3K.lAjUZ6Jy7AY062oJXJLXAnyHu');
+INSERT INTO `sys_user` VALUES (30, 'user', '$2a$10$ZBzSrNGIetVUzEPxW7I3De5YZFeWYIm5medGsGL2KHNR3Af060rpm');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -249,7 +355,7 @@ DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
   `userId` int NOT NULL,
   `roleId` int NOT NULL,
-  PRIMARY KEY (`userId`, `roleId`) USING BTREE,
+  PRIMARY KEY (`userId`) USING BTREE,
   INDEX `fk_role_id`(`roleId` ASC) USING BTREE,
   CONSTRAINT `fk_role_id` FOREIGN KEY (`roleId`) REFERENCES `sys_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_user_id` FOREIGN KEY (`userId`) REFERENCES `sys_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -258,7 +364,11 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES (1, 1);
+INSERT INTO `sys_user_role` VALUES (26, 1);
+INSERT INTO `sys_user_role` VALUES (29, 2);
+INSERT INTO `sys_user_role` VALUES (27, 3);
+INSERT INTO `sys_user_role` VALUES (28, 4);
+INSERT INTO `sys_user_role` VALUES (30, 5);
 
 -- ----------------------------
 -- Table structure for train
@@ -302,7 +412,7 @@ CREATE TABLE `train`  (
   `trainLines` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '车次经停站点集合',
   `fromDate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发车日',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3175 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of train
@@ -2156,5 +2266,6 @@ INSERT INTO `train` VALUES (3172, '1g000G262508', 'G2625', 'G', '大连北', '�
 INSERT INTO `train` VALUES (3173, '130000T3690C', 'T369', 'T', '大连', '武昌', NULL, NULL, '15:26', '17:19', '25:53', 1, '0', NULL, '0', NULL, '0', NULL, '0', NULL, '15', NULL, '0', NULL, '有', NULL, '0', NULL, '有', NULL, '0', NULL, '0', NULL, NULL, '2022-01-27');
 INSERT INTO `train` VALUES (3174, '1g000G125106', 'G1251', 'G', '大连北', '南京南', NULL, NULL, '08:53', '17:43', '08:50', 1, '7', 2662.00, '5', 1302.00, '有', 769.50, '0', NULL, '0', NULL, '0', NULL, '0', NULL, '0', NULL, '0', NULL, '0', 769.50, '0', NULL, '大连北 - 营口东 - 盘锦 - 锦州南 - 山海关 - 秦皇岛 - 唐山 - 天津 - 天津西 - 德州东 - 济南西 - 宿州东 - 蚌埠南 - 南京南', '2022-01-27');
 INSERT INTO `train` VALUES (3175, '130000T13110', 'T131', 'T', '大连', '南京', NULL, NULL, '11:24', '09:20', '21:56', 1, '0', NULL, '0', NULL, '0', NULL, '0', NULL, '10', NULL, '0', NULL, '有', NULL, '0', NULL, '有', NULL, '0', NULL, '0', NULL, '大连 - 金州 - 普兰店 - 瓦房店 - 熊岳城 - 盖州 - 大石桥 - 盘锦 - 锦州 - 葫芦岛 - 绥中 - 山海关 - 北戴河 - 唐山 - 天津 - 德州 - 济南 - 徐州 - 南京', '2022-01-27');
+INSERT INTO `train` VALUES (3176, '1g0000G3890E', 'G389', 'G', '大连北', '济南西', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1560.00, '7', 803.00, '有', 489.50, '0', NULL, '0', NULL, '0', NULL, '0', NULL, '0', NULL, NULL, NULL, '0', 489.50, '0', NULL, '大连北 - 鲅鱼圈 - 营口东 - 盘锦 - 葫芦岛北 - 山海关 - 秦皇岛 - 滦河 - 唐山 - 滨海北 - 天津西 - 沧州西 - 德州东 - 济南西', '2022-10-18');
 
 SET FOREIGN_KEY_CHECKS = 1;
