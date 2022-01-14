@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "e8df9efd-03aa-4f0a-a7dd-52e847260f39",
+		"name": "goout",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取所有城市-火车",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"123\":\"44\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8888/train/getAllCity"
+			},
+			"response": []
+		},
+		{
+			"name": "获取热门城市-火车",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"123\":\"44\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8080/train/getHotCity"
+			},
+			"response": []
+		},
+		{
+			"name": "查询火车票列表",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=79A993B5A1E56693D4E16FBE6F6E5CAE; _jc_save_toDate=2022-01-12; _jc_save_wfdc_flag=dc; BIGipServerotn=3956736266.50210.0000; RAIL_EXPIRATION=1642252445273; RAIL_DEVICEID=Sv1C6haDV4nwwsUBQFm2797sVBgkPStnKAsRfD_IvlHekmH2XYo-cAUD0-tXQ_S5VbmfkXvNdwAor8f9ll7RvV4UccnIr-EXSERUlnlHnV52hHCfHzKJfbXjOmj0B6tKq_oCvINepxmBdXLU0PYWGrZMfwtb-Yex; route=9036359bb8a8a461c164a04f8f50b252; _jc_save_fromStation=%u5927%u8FDE%2CDLT; _jc_save_toStation=%u5317%u4EAC%2CBJP; _jc_save_fromDate=2022-01-16",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fromStation\": \"大连\",\r\n    \"toStation\": \"济南\",\r\n    \"fromDate\": \"2022-01-18\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/train/getTicketList?userId=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"train",
+						"getTicketList"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "模糊搜获站点-火车",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"keyword\":\"北\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8080/train/searchCity"
+			},
+			"response": []
+		},
+		{
+			"name": "查询车次经停信息-火车",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"trainCode\":\"G1251\",\"fromStationCode\":\"DFT\",\"toStationCode\":\"JGK\",\"fromDate\":\"2022-01-16\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8888/train/getTrainLine"
+			},
+			"response": []
+		},
+		{
+			"name": "获取所有 车次 - 列车号 对应关系表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"1\":\"2\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8888/train/getTrainCode"
+			},
+			"response": []
+		},
+		{
+			"name": "查询某个站点的途经列车时",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"trainStationName\":\"大连\",\"trainStationCode\":\"DLT\",\"trainStartDate\":\"2022-01-17\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8080/train/getTrainStationTimeTable"
+			},
+			"response": []
+		},
+		{
+			"name": "登录",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "zhang",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "default"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8888/login"
+			},
+			"response": []
+		},
+		{
+			"name": "收藏列车",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8888/train/like?userId=2&trainId=1800",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"train",
+						"like"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "trainId",
+							"value": "1800"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取消收藏列车",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8888/train/dislike?id=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"train",
+						"dislike"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "评论列车",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":123,\"content\":\"评论111\",\"trainId\":1800}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8888/train/insertComment"
+			},
+			"response": []
+		},
+		{
+			"name": "删除评论",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/train/deleteComment?id=5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"train",
+						"deleteComment"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "连接12306插入数据",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fromStationCode\": \"DLT\",\r\n    \"toStationCode\": \"JNK\",\r\n    \"fromDate\": \"2022-01-16\",\r\n    \"isStudent\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8888/train/REAL_INSERT?userId=123",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"train",
+						"REAL_INSERT"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
