@@ -498,6 +498,252 @@
 			]
 		},
 		{
+			"name": "轮渡",
+			"item": [
+				{
+					"name": "查询轮渡列表",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "JSESSIONID=79A993B5A1E56693D4E16FBE6F6E5CAE; _jc_save_toDate=2022-01-12; _jc_save_wfdc_flag=dc; BIGipServerotn=3956736266.50210.0000; RAIL_EXPIRATION=1642252445273; RAIL_DEVICEID=Sv1C6haDV4nwwsUBQFm2797sVBgkPStnKAsRfD_IvlHekmH2XYo-cAUD0-tXQ_S5VbmfkXvNdwAor8f9ll7RvV4UccnIr-EXSERUlnlHnV52hHCfHzKJfbXjOmj0B6tKq_oCvINepxmBdXLU0PYWGrZMfwtb-Yex; route=9036359bb8a8a461c164a04f8f50b252; _jc_save_fromStation=%u5927%u8FDE%2CDLT; _jc_save_toStation=%u5317%u4EAC%2CBJP; _jc_save_fromDate=2022-01-16",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/ship/getShipList?userId=30",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"ship",
+								"getShipList"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "收藏轮渡",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/ship/like?userId=30&shipId=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"ship",
+								"like"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "30"
+								},
+								{
+									"key": "shipId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消收藏",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/ship/dislike?id=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"ship",
+								"dislike"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "评论",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\":123,\"content\":\"评论111\",\"shipId\":1}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8888/ship/insertComment"
+					},
+					"response": []
+				},
+				{
+					"name": "删除评论",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8888/ship/deleteComment?id=5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"ship",
+								"deleteComment"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增轮渡",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"shipName\": \"ttt\",\r\n            \"startTime\": \"ssss\",\r\n            \"fromStation\": \"aaaaa\",\r\n            \"tdPrice\": 123\r\n            \r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8888/ship/insertShip"
+					},
+					"response": []
+				},
+				{
+					"name": "删除轮渡",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/ship/deleteShip?id=8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"ship",
+								"deleteShip"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "需改轮渡信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"id\": 7,\r\n            \"shipName\": \"海洋岛\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8888/ship/updateShip"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "登录",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
@@ -517,12 +763,12 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "lisi",
+							"value": "user",
 							"type": "default"
 						},
 						{
 							"key": "password",
-							"value": "lisii",
+							"value": "user",
 							"type": "default"
 						}
 					]

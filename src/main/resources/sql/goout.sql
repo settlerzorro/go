@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 14/01/2022 21:52:34
+ Date: 17/01/2022 11:41:24
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `bus`  (
   `ticketLeft` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '剩余票数',
   `ticketPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '票价',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 128 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bus
@@ -93,13 +93,30 @@ CREATE TABLE `comment_bus`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `busId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_bus
 -- ----------------------------
 INSERT INTO `comment_bus` VALUES (2, 2, '2022-01-14 17:56:40', '评论111', NULL);
 INSERT INTO `comment_bus` VALUES (3, 2, '2022-01-14 17:56:53', '评论111', NULL);
+
+-- ----------------------------
+-- Table structure for comment_ship
+-- ----------------------------
+DROP TABLE IF EXISTS `comment_ship`;
+CREATE TABLE `comment_ship`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int NULL DEFAULT NULL,
+  `time` datetime NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `shipId` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of comment_ship
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for comment_train
@@ -112,7 +129,7 @@ CREATE TABLE `comment_train`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '评论内容',
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_train
@@ -129,12 +146,27 @@ CREATE TABLE `like_bus`  (
   `userId` int NULL DEFAULT NULL,
   `busId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of like_bus
 -- ----------------------------
 INSERT INTO `like_bus` VALUES (2, 2, 83);
+
+-- ----------------------------
+-- Table structure for like_ship
+-- ----------------------------
+DROP TABLE IF EXISTS `like_ship`;
+CREATE TABLE `like_ship`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int NULL DEFAULT NULL,
+  `shipId` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of like_ship
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for like_train
@@ -145,7 +177,7 @@ CREATE TABLE `like_train`  (
   `userId` int NULL DEFAULT NULL,
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of like_train
@@ -154,6 +186,39 @@ INSERT INTO `like_train` VALUES (1, 123, 1477);
 INSERT INTO `like_train` VALUES (2, 123, 1478);
 INSERT INTO `like_train` VALUES (4, 2, 1800);
 INSERT INTO `like_train` VALUES (5, 2, 1800);
+
+-- ----------------------------
+-- Table structure for ship
+-- ----------------------------
+DROP TABLE IF EXISTS `ship`;
+CREATE TABLE `ship`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `shipName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '船名',
+  `startTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出发时间',
+  `fromStation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登船港',
+  `endTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '到达时间',
+  `toStation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '抵达港',
+  `tdPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '特等价格',
+  `ydPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '一等价格',
+  `edAprice` decimal(10, 2) NULL DEFAULT NULL COMMENT '二等A价格',
+  `edBprice` decimal(10, 2) NULL DEFAULT NULL COMMENT '二等B价格',
+  `sdAPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '三等A价格',
+  `sdBPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '三等B价格',
+  `sdPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '四等价格',
+  `sxPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '散席价格',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ship
+-- ----------------------------
+INSERT INTO `ship` VALUES (1, '中华复兴号', '22:00', '大连湾港', '05:00', '烟台港客运站', NULL, 1090.00, 450.00, 390.00, 270.00, 240.00, 230.00, NULL);
+INSERT INTO `ship` VALUES (2, '万通海', '08:40', '大连湾港', '15:30', '烟台打捞局', 1180.00, 890.00, 440.00, 380.00, 260.00, 240.00, 210.00, 190.00);
+INSERT INTO `ship` VALUES (3, '吉龙岛(豪华)', '13:00', '大连湾港', '18:30', '烟台港客运站', 1690.00, 1390.00, 450.00, 380.00, 270.00, 240.00, 220.00, NULL);
+INSERT INTO `ship` VALUES (4, '普陀岛', '14:00', '大连湾港', '20:00', '烟台打捞局', 890.00, 1090.00, 440.00, 380.00, 260.00, 240.00, 210.00, 190.00);
+INSERT INTO `ship` VALUES (5, '永兴岛', '20:30', '大连湾港', '04:00', '烟台同三港', NULL, 890.00, 440.00, 380.00, 260.00, NULL, 210.00, 190.00);
+INSERT INTO `ship` VALUES (6, '龙兴岛', '21:35', '大连湾港', '05:00', '烟台同三港', 1180.00, 890.00, 440.00, 380.00, 260.00, 240.00, 210.00, 190.00);
+INSERT INTO `ship` VALUES (7, '海洋岛', '23:00', '大连湾港', '05:30', '烟台打捞局', 890.00, NULL, 450.00, 380.00, 260.00, NULL, 210.00, 1.00);
 
 -- ----------------------------
 -- Table structure for station
@@ -337,7 +402,7 @@ CREATE TABLE `sys_user`  (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
@@ -412,7 +477,7 @@ CREATE TABLE `train`  (
   `trainLines` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '车次经停站点集合',
   `fromDate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发车日',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3175 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3178 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of train
