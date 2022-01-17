@@ -11,11 +11,28 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 17/01/2022 22:03:33
+ Date: 18/01/2022 02:25:39
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for advert
+-- ----------------------------
+DROP TABLE IF EXISTS `advert`;
+CREATE TABLE `advert`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `localUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '存储路径',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of advert
+-- ----------------------------
+INSERT INTO `advert` VALUES (2, '', 'C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\6dccf8b34aad4d0a833d48989d74fa7f.png');
+INSERT INTO `advert` VALUES (3, 'd95cdedc5e654936a4ff06914cee20c0.png', 'C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\d95cdedc5e654936a4ff06914cee20c0.png');
 
 -- ----------------------------
 -- Table structure for air
@@ -2689,6 +2706,51 @@ INSERT INTO `bus` VALUES (220, '大连开发区客运站', '大连黑石礁', '2
 INSERT INTO `bus` VALUES (221, '大连开发区客运站', '大连刘家桥', '2022-01-30', '07:00', '客车', '30', 6.00, 'https://bus.ly.com/#/list?startname=%E5%A4%A7%E8%BF%9E&arrivename=%E5%A4%A7%E8%BF%9E&depCId=1251&desCId=1251&startdatetime=2022-01-30&startStation=&arriveStation=');
 
 -- ----------------------------
+-- Table structure for city
+-- ----------------------------
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE `city`  (
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `stationCode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of city
+-- ----------------------------
+INSERT INTO `city` VALUES ('北京', 'BJP');
+INSERT INTO `city` VALUES ('广州', 'GZQ');
+INSERT INTO `city` VALUES ('上海', 'SHH');
+INSERT INTO `city` VALUES ('天津', 'TJP');
+INSERT INTO `city` VALUES ('重庆', 'CQW');
+INSERT INTO `city` VALUES ('哈尔滨', 'HBB');
+INSERT INTO `city` VALUES ('长春', 'CCT');
+INSERT INTO `city` VALUES ('沈阳', 'SYT');
+INSERT INTO `city` VALUES ('呼和浩特', 'HHC');
+INSERT INTO `city` VALUES ('石家庄', 'SJP');
+INSERT INTO `city` VALUES ('乌鲁木齐', 'WAR');
+INSERT INTO `city` VALUES ('兰州', 'LZJ');
+INSERT INTO `city` VALUES ('西宁', 'XNO');
+INSERT INTO `city` VALUES ('西安', 'XAY');
+INSERT INTO `city` VALUES ('银川', 'YIJ');
+INSERT INTO `city` VALUES ('郑州', 'ZZF');
+INSERT INTO `city` VALUES ('济南', 'JNK');
+INSERT INTO `city` VALUES ('太原', 'TDV');
+INSERT INTO `city` VALUES ('合肥', 'HFH');
+INSERT INTO `city` VALUES ('长沙', 'CSQ');
+INSERT INTO `city` VALUES ('武汉', 'WHN');
+INSERT INTO `city` VALUES ('南京', 'NJH');
+INSERT INTO `city` VALUES ('成都', 'CNW');
+INSERT INTO `city` VALUES ('贵阳', 'GIW');
+INSERT INTO `city` VALUES ('昆明', 'KMM');
+INSERT INTO `city` VALUES ('南宁', 'NNZ');
+INSERT INTO `city` VALUES ('拉萨', 'LSO');
+INSERT INTO `city` VALUES ('杭州', 'HZH');
+INSERT INTO `city` VALUES ('南昌', 'NCG');
+INSERT INTO `city` VALUES ('福州', 'FZS');
+INSERT INTO `city` VALUES ('海口', 'VUQ');
+INSERT INTO `city` VALUES ('香港西九龙', 'XJA');
+
+-- ----------------------------
 -- Table structure for comment_air
 -- ----------------------------
 DROP TABLE IF EXISTS `comment_air`;
@@ -2974,51 +3036,6 @@ INSERT INTO `station` VALUES ('大连西', 'GZT', NULL);
 INSERT INTO `station` VALUES ('北京朝阳', 'IFP', NULL);
 INSERT INTO `station` VALUES ('滨海北', 'FCP', 'TSN');
 INSERT INTO `station` VALUES ('武昌', 'WCN', NULL);
-
--- ----------------------------
--- Table structure for station_copy1
--- ----------------------------
-DROP TABLE IF EXISTS `station_copy1`;
-CREATE TABLE `station_copy1`  (
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `stationCode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of station_copy1
--- ----------------------------
-INSERT INTO `station_copy1` VALUES ('北京', 'BJP');
-INSERT INTO `station_copy1` VALUES ('广州', 'GZQ');
-INSERT INTO `station_copy1` VALUES ('上海', 'SHH');
-INSERT INTO `station_copy1` VALUES ('天津', 'TJP');
-INSERT INTO `station_copy1` VALUES ('重庆', 'CQW');
-INSERT INTO `station_copy1` VALUES ('哈尔滨', 'HBB');
-INSERT INTO `station_copy1` VALUES ('长春', 'CCT');
-INSERT INTO `station_copy1` VALUES ('沈阳', 'SYT');
-INSERT INTO `station_copy1` VALUES ('呼和浩特', 'HHC');
-INSERT INTO `station_copy1` VALUES ('石家庄', 'SJP');
-INSERT INTO `station_copy1` VALUES ('乌鲁木齐', 'WAR');
-INSERT INTO `station_copy1` VALUES ('兰州', 'LZJ');
-INSERT INTO `station_copy1` VALUES ('西宁', 'XNO');
-INSERT INTO `station_copy1` VALUES ('西安', 'XAY');
-INSERT INTO `station_copy1` VALUES ('银川', 'YIJ');
-INSERT INTO `station_copy1` VALUES ('郑州', 'ZZF');
-INSERT INTO `station_copy1` VALUES ('济南', 'JNK');
-INSERT INTO `station_copy1` VALUES ('太原', 'TDV');
-INSERT INTO `station_copy1` VALUES ('合肥', 'HFH');
-INSERT INTO `station_copy1` VALUES ('长沙', 'CSQ');
-INSERT INTO `station_copy1` VALUES ('武汉', 'WHN');
-INSERT INTO `station_copy1` VALUES ('南京', 'NJH');
-INSERT INTO `station_copy1` VALUES ('成都', 'CNW');
-INSERT INTO `station_copy1` VALUES ('贵阳', 'GIW');
-INSERT INTO `station_copy1` VALUES ('昆明', 'KMM');
-INSERT INTO `station_copy1` VALUES ('南宁', 'NNZ');
-INSERT INTO `station_copy1` VALUES ('拉萨', 'LSO');
-INSERT INTO `station_copy1` VALUES ('杭州', 'HZH');
-INSERT INTO `station_copy1` VALUES ('南昌', 'NCG');
-INSERT INTO `station_copy1` VALUES ('福州', 'FZS');
-INSERT INTO `station_copy1` VALUES ('海口', 'VUQ');
-INSERT INTO `station_copy1` VALUES ('香港西九龙', 'XJA');
 
 -- ----------------------------
 -- Table structure for sys_role

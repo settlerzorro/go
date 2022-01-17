@@ -64,19 +64,19 @@ public class AirController {
 
     @PostMapping("/insertAir")
     @PreAuthorize("hasRole('ROLE_AIR_ADMIN')")
-    public RestResponse insertTrain(HttpServletRequest request,@RequestBody Air air) throws Exception {
+    public RestResponse insertAir(HttpServletRequest request,@RequestBody Air air) throws Exception {
         return RestResponse.succuess(airService.insertAir(air));
     }
 
     @DeleteMapping("/deleteAir")
     @PreAuthorize("hasRole('ROLE_AIR_ADMIN')")
-    public RestResponse deleteTrain(HttpServletRequest request,@RequestParam("id") Integer id) throws Exception {
+    public RestResponse deleteAir(HttpServletRequest request,@RequestParam("id") Integer id) throws Exception {
         return RestResponse.succuess(airService.deleteAir(id));
     }
 
     @PostMapping("/updateAir")
     @PreAuthorize("hasRole('ROLE_AIR_ADMIN')")
-    public RestResponse updateTrain(HttpServletRequest request,@RequestBody Air air) throws Exception {
+    public RestResponse updateAir(HttpServletRequest request,@RequestBody Air air) throws Exception {
         return RestResponse.succuess(airService.updateAir(air));
     }
 }
