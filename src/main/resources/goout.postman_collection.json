@@ -265,7 +265,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"dptStation\":\"大连\",\"arrStation\":\"沈阳\",\"dptDate\":\"2022-03-16\"}",
+							"raw": "{\"dptStation\":\"大连\",\"arrStation\":\"沈阳\",\"dptDate\":\"2022-01-20\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -744,6 +744,247 @@
 			]
 		},
 		{
+			"name": "飞机",
+			"item": [
+				{
+					"name": "查询飞机列表",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"oapName\":\"大连\",\"aapName\":\"北京\",\"fromTime\":\"2022-01-20\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8888/air/getAirList?userId=20",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"air",
+								"getAirList"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "收藏飞机",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/air/like?userId=20&airId=2574",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"air",
+								"like"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "20"
+								},
+								{
+									"key": "airId",
+									"value": "2574"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消收藏飞机",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/air/dislike?id=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"air",
+								"dislike"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "评论飞机",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userId\":20,\"content\":\"评论122211\",\"airId\":2574}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8888/air/insertComment"
+					},
+					"response": []
+				},
+				{
+					"name": "删除评论飞机",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/air/deleteComment?id=5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"air",
+								"deleteComment"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增飞机",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"oapName\": \"大连周水子国际机场22222\",\r\n            \"aapName\": \"北京大兴国际机场222222\",\r\n            \"flyOffOnlyTime\": \"08:00\",\r\n            \"arrivalOnlyTime\": \"09:30\",\r\n            \"aep\": 1215.00,\r\n            \"fromTime\": \"2022-01-20\",\r\n            \"useTime\": 90,\r\n            \"si\": null,\r\n            \"buyUrl\": \"https://www.ly.com/flights/itinerary/oneway/DLC-KMG?date=2022-01-20&from=%E5%A4%A7%E8%BF%9E&to=%E5%8C%97%E4%BA%AC&fromairport=&toairport=&p=&childticket=0,0\",\r\n            \"commentAairs\": [],\r\n            \"likeAirs\": []\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8888/air/insertAir"
+					},
+					"response": []
+				},
+				{
+					"name": "修改飞机信息",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"id\": 5111,\r\n            \"oapName\": \"大连周水子国际机场2222233333\",\r\n            \"aapName\": \"北京大兴国际机场222222\",\r\n            \"flyOffOnlyTime\": \"08:00\",\r\n            \"arrivalOnlyTime\": \"09:30\",\r\n            \"aep\": 1215.00,\r\n            \"fromTime\": \"2022-01-20\",\r\n            \"si\": null,\r\n            \"buyUrl\": \"https://www.ly.com/flights/itinerary/oneway/DLC-KMG?date=2022-01-20&from=%E5%A4%A7%E8%BF%9E&to=%E5%8C%97%E4%BA%AC&fromairport=&toairport=&p=&childticket=0,0\",\r\n            \"commentAairs\": [],\r\n            \"likeAirs\": []\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8888/air/updateAir"
+					},
+					"response": []
+				},
+				{
+					"name": "删除飞机信息",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/air/deleteAir?id=5111",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"air",
+								"deleteAir"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5111"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "登录",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
@@ -763,12 +1004,12 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "user",
+							"value": "air",
 							"type": "default"
 						},
 						{
 							"key": "password",
-							"value": "user",
+							"value": "air",
 							"type": "default"
 						}
 					]
@@ -844,6 +1085,53 @@
 						{
 							"key": "userName",
 							"value": "lisi"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "推荐。首页",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8888/transportApi/getTransportList?userId=20&fromCity=大连&toCity=北京&fromDate=2022-01-20",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8888",
+					"path": [
+						"transportApi",
+						"getTransportList"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "20"
+						},
+						{
+							"key": "fromCity",
+							"value": "大连"
+						},
+						{
+							"key": "toCity",
+							"value": "北京"
+						},
+						{
+							"key": "fromDate",
+							"value": "2022-01-20"
 						}
 					]
 				}
