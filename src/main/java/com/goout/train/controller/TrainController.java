@@ -74,7 +74,7 @@ public class TrainController {
 //    }
 
     @PostMapping(value = "getTicketList")
-    public RestResponse getTicketListHandler(@RequestParam("userId") Integer userId,HttpServletRequest request, @RequestBody JSONObject requestBody) {
+    public RestResponse getTicketListHandler(@RequestParam(value = "userId",required = false) Integer userId,HttpServletRequest request, @RequestBody JSONObject requestBody) {
         List list = trainTicketService.getTicketList(userId,requestBody.toJavaObject(GetTicketListRequest.class));
         return RestResponse.succuess(list);
     }

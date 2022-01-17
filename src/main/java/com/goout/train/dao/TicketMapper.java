@@ -39,7 +39,8 @@ public interface TicketMapper {
     Boolean deleteTrain(Integer id);
 
     @Update("<script> " +
-            "update train set " +
+            "update train " +
+            "<set> " +
             "<if test='trainNo!=null'>  trainNo = #{trainNo} ,</if>" +
             "<if test='trainCode!=null'> trainCode = #{trainCode} , </if>" +
             "<if test='trainType!=null'> trainType = #{trainType} ,</if>" +
@@ -69,7 +70,8 @@ public interface TicketMapper {
             "<if test='qtNum!=null'> qtNum = #{qtNum}, </if>" +
             "<if test='qtPrice!=null'> qtPrice = #{qtPrice}, </if>" +
             "<if test='trainLines!=null'> trainLines = #{trainLines}, </if>" +
-            "<if test='fromDate !=null'> fromDate = #{fromDate}</if>" +
+            "<if test='fromDate !=null'> fromDate = #{fromDate}</if> " +
+            "</set>" +
             "where id=#{id}" +
             "</script>")
     Boolean updateTrain(Train ticket);

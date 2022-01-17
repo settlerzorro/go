@@ -39,7 +39,9 @@ public class BusServiceImpl implements IBusService {
         List<Bus> list = busMapper.select(bus);
         for(Bus bu : list){
             bu.setCommentBuses(commentBusMapper.selectByBusId(bu.getId()));
-            bu.setLikeBuses(likeBusMapper.selectByBusIdAndUserId(bu.getId(),userId));
+            if(userId != null){
+                bu.setLikeBuses(likeBusMapper.selectByBusIdAndUserId(bu.getId(),userId));
+            }
         }
         return list;
     }

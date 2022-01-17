@@ -85,7 +85,10 @@ public class TrainTicketServiceImpl implements ITrainTicketService {
         List<Train> list = ticketMapper.select(map);
         for(Train ticket : list){
             ticket.setCommentTrains(commentTrainMapper.selectByTrainId(ticket.getId()));
-            ticket.setLikes(likeTrainMapper.selectByTrainIdAndUserId(ticket.getId(),userId));
+            if(userId != null){
+                ticket.setLikes(likeTrainMapper.selectByTrainIdAndUserId(ticket.getId(),userId));
+            }
+
         }
         return list;
     }

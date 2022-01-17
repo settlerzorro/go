@@ -31,7 +31,7 @@ public class BusController {
 
 
     @PostMapping(value = "getBusList")
-    public RestResponse getBusListHandler(@RequestParam("userId") Integer userId, HttpServletRequest request, @RequestBody Bus bus) {
+    public RestResponse getBusListHandler(@RequestParam(value = "userId",required = false) Integer userId, HttpServletRequest request, @RequestBody Bus bus) {
         List list = busService.getBusList(userId,bus);
         return RestResponse.succuess(list);
     }

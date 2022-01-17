@@ -22,14 +22,16 @@ public interface BusMapper {
     Boolean deleteBus(Integer id);
 
     @Update("<script> " +
-            "update bus set " +
+            "update bus " +
+            "<set> " +
             "<if test='dptStation!=null'>  dptStation = #{dptStation} ,</if>" +
             "<if test='arrStation!=null'> arrStation = #{arrStation} , </if>" +
             "<if test='dptDate!=null'> dptDate = #{dptDate} ,</if>" +
             "<if test='dptTime!=null'> dptTime = #{dptTime}, </if>" +
             "<if test='coachType!=null'> coachType = #{coachType}, </if>" +
             "<if test='ticketLeft!=null'> ticketLeft = #{ticketLeft}, </if>" +
-            "<if test='ticketPrice!=null'> ticketPrice = #{ticketPrice}</if>" +
+            "<if test='ticketPrice!=null'> ticketPrice = #{ticketPrice}</if> " +
+            "</set>" +
             "where id=#{id}" +
             "</script>")
     Boolean updateBus(Bus bus);
