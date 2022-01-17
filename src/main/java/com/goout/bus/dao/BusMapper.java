@@ -15,7 +15,7 @@ public interface BusMapper {
             "#{id},#{dptStation}," +
             "#{arrStation},#{dptDate}," +
             "#{dptTime},#{coachType}," +
-            "#{ticketLeft},#{ticketPrice})")
+            "#{ticketLeft},#{ticketPrice},#{buyUrl})")
     Boolean insertBus(Bus ticket);
 
     @Delete("delete from bus where id=#{id}")
@@ -30,7 +30,8 @@ public interface BusMapper {
             "<if test='dptTime!=null'> dptTime = #{dptTime}, </if>" +
             "<if test='coachType!=null'> coachType = #{coachType}, </if>" +
             "<if test='ticketLeft!=null'> ticketLeft = #{ticketLeft}, </if>" +
-            "<if test='ticketPrice!=null'> ticketPrice = #{ticketPrice}</if> " +
+            "<if test='ticketPrice!=null'> ticketPrice = #{ticketPrice},</if> " +
+            "<if test='buyUrl!=null'> buyUrl = #{buyUrl}</if> " +
             "</set>" +
             "where id=#{id}" +
             "</script>")

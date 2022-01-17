@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -77,9 +78,10 @@ public class REAL_INSERT implements IREALService {
             "to_station_telecode=%s&" +
             "depart_date=%s";
 
+    private static String buy = "https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc&fs=%E5%A4%A7%E8%BF%9E,DLT&ts=%E5%93%88%E5%B0%94%E6%BB%A8,HBB&date=2022-01-17&flag=N,N,Y";
 
     public TicketListResult getTicketList(Integer userId,GetTicketListRequest requestBody) {
-        String StrD ="2022-01-16 00:00:00";
+        String StrD ="2022-01-18 00:00:00";
         SimpleDateFormat sdfd =new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
         try {
             Date dat =sdfd.parse(StrD);
@@ -88,13 +90,23 @@ public class REAL_INSERT implements IREALService {
             e.printStackTrace();
         }
         requestBody.setFromStation("DLT");
-        for(int i=16;i<=27;i++){
+        for(int i=18;i<=31;i++){
             List<Station> stas = stationMapper.selectAll();
             for(Station s:stas){
                 System.err.println("-----------------------------------------------"+new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
                 requestBody.setToStation(s.getStationCode());
                 List<Train> list = getTicketListFrom12306(userId,requestBody);
                 for(Train l : list){
+                    try {
+                        l.setBuyUrl(buy + java.net.URLEncoder.encode("大连","utf-8")
+                        +",DLT"
+                        +"&ts="+java.net.URLEncoder.encode(s.getName(),"utf-8")
+                        +","+s.getStationCode()
+                        +"&date=2022-01-"+i
+                        +"&flag=N,N,Y");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                     l.setFromDate(new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
                     ticketMapper.insertTrain(l);
                 }

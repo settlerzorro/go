@@ -32,8 +32,9 @@ public interface TicketMapper {
             "#{yzNum},#{yzPrice}," +
             "#{wzNum},#{wzPrice}," +
             "#{qtNum},#{qtPrice}," +
-            "#{trainLines},#{fromDate})")
+            "#{trainLines},#{fromDate},#{buyUrl})")
     Boolean insertTrain(Train ticket);
+
 
     @Delete("delete from train where id=#{id}")
     Boolean deleteTrain(Integer id);
@@ -71,6 +72,7 @@ public interface TicketMapper {
             "<if test='qtPrice!=null'> qtPrice = #{qtPrice}, </if>" +
             "<if test='trainLines!=null'> trainLines = #{trainLines}, </if>" +
             "<if test='fromDate !=null'> fromDate = #{fromDate}</if> " +
+            "<if test='buyUrl !=null'> buyUrl = #{buyUrl}</if> " +
             "</set>" +
             "where id=#{id}" +
             "</script>")

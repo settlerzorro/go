@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.util.*;
 
 @Service("BUS_REAL_INSERT")
@@ -41,7 +43,9 @@ public class REAL_INSERT  implements IBUS_REALService {
 
     private static String getBusListUrlFmt = "https://bus.ly.com/busresapi/schedule/getScheduleList?plateId=3";
 
-    public List<Bus> insert(Integer userId, Bus bus) {
+    private static String web = "https://bus.ly.com/#/list?startname=";
+
+    public List<Bus> insert(Integer userId, Bus bus)  {
         for(int i=16;i<=30;i++){
             List<Station> stas = stationMapper.selectAll();
             for(Station s:stas){
@@ -62,6 +66,16 @@ public class REAL_INSERT  implements IBUS_REALService {
                             bus2.setCoachType((String) sc.get("coachType"));
                             bus2.setTicketLeft((String) sc.get("ticketLeft"));
                             bus2.setTicketPrice(new BigDecimal(sc.get("ticketPrice").toString()));
+                            try {
+                                bus2.setBuyUrl(web + java.net.URLEncoder.encode("大连","utf-8")
+                                +"&arrivename="+java.net.URLEncoder.encode(s.getName(),"utf-8")
+                                +"&depCId="+sc.get("depId")
+                                +"&desCId="+sc.get("desId")
+                                +"&startdatetime="+"2022-01-"+i
+                                +"&startStation=&arriveStation=");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
                             busMapper.insertBus(bus2);
                         }
                     }
@@ -120,6 +134,9 @@ public class REAL_INSERT  implements IBUS_REALService {
         return result;
     }
 
-
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        System.out.println((java.net.URLEncoder.encode("您好","utf-8")));
+        ;
+    }
 
 }

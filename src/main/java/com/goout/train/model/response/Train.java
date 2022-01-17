@@ -203,7 +203,15 @@ public class Train implements Serializable {
      */
     private String fromDate;
 
+    private String buyUrl;
 
+    public String getBuyUrl() {
+        return buyUrl;
+    }
+
+    public void setBuyUrl(String buyUrl) {
+        this.buyUrl = buyUrl;
+    }
 
     public String getTrainNo() {
         return trainNo;

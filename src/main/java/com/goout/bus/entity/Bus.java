@@ -47,6 +47,16 @@ public class Bus implements Serializable {
      */
     private BigDecimal ticketPrice;
 
+    private String buyUrl;
+
+    public String getBuyUrl() {
+        return buyUrl;
+    }
+
+    public void setBuyUrl(String buyUrl) {
+        this.buyUrl = buyUrl;
+    }
+
     private List<CommentBus> commentBuses;
     private List<LikeBus> LikeBuses;
 

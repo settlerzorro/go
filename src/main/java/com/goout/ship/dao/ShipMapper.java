@@ -21,7 +21,8 @@ public interface ShipMapper {
             ",#{sdAPrice}" +
             ",#{sdBPrice}" +
             ",#{sdPrice}" +
-            ",#{sxPrice})")
+            ",#{sxPrice}" +
+            ",#{buyUrl})")
     Boolean insertShip(Ship ship);
 
     @Delete("delete from ship where id=#{id}")
@@ -42,7 +43,8 @@ public interface ShipMapper {
             "<if test='sdAPrice!=null'> sdAPrice = #{sdAPrice}, </if>" +
             "<if test='sdBPrice!=null'> sdBPrice = #{sdBPrice}, </if>" +
             "<if test='sdPrice!=null'> sdPrice = #{sdPrice}, </if>" +
-            "<if test='sxPrice!=null'> sxPrice = #{sxPrice} </if> " +
+            "<if test='sxPrice!=null'> sxPrice = #{sxPrice}, </if> " +
+            "<if test='buyUrl!=null'> buyUrl = #{buyUrl} </if> " +
             "</set>" +
             "where id=#{id}" +
             "</script>")

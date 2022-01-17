@@ -79,6 +79,16 @@ public class Ship implements Serializable {
      */
     private BigDecimal sxPrice;
 
+    private String buyUrl;
+
+    public String getBuyUrl() {
+        return buyUrl;
+    }
+
+    public void setBuyUrl(String buyUrl) {
+        this.buyUrl = buyUrl;
+    }
+
     private List<CommentShip> commentShips;
     private List<LikeShip> LikeShips;
 
