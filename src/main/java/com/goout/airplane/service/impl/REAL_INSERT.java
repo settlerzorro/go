@@ -7,9 +7,8 @@ import com.goout.airplane.dao.CommentAirMapper;
 import com.goout.airplane.dao.LikeAirMapper;
 import com.goout.airplane.entity.Air;
 import com.goout.airplane.service.IAIR_REALService;
-import com.goout.train.dao.StationMapper;
+import com.goout.api.dao.StationMapper;
 import com.goout.train.model.response.Station;
-import com.goout.train.model.response.Stop;
 import com.goout.train.utils.JsonUtil;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
@@ -54,7 +53,7 @@ public class REAL_INSERT  implements IAIR_REALService {
     public List<Air> insert(Integer userId, Air bus)  {
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");//如2016-08-10 20:40
         for(int i=20;i<=30;i++){
-            List<Station> stas = stationMapper.selectAll();
+            List<Station> stas = stationMapper.selectStationAll();
             for(Station s:stas){
                 if(s.getAir_stationCode() != null){
                     String[] code = s.getAir_stationCode().split(",");

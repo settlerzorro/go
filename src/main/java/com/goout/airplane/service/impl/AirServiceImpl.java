@@ -7,7 +7,7 @@ import com.goout.airplane.dao.LikeAirMapper;
 import com.goout.airplane.entity.Air;
 import com.goout.airplane.entity.CommentAir;
 import com.goout.airplane.service.IAirService;
-import com.goout.train.dao.StationMapper;
+import com.goout.api.dao.StationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

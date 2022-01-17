@@ -55,10 +55,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 如果有允许匿名的url，填在下面
                 .antMatchers(
                         "/register",
-                        "/train/getAllCity",
                         "/train/getTicketList",
                         "/bus/getBusList",
-                        "/transportApi/getTransportList").permitAll()
+                        "/transportApi/getTransportList",
+                        "/cityStationApi/getAllCity",
+                        "/cityStationApi/getAllStation").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // 设置登陆页

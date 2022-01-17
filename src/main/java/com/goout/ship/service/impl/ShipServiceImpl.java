@@ -7,7 +7,7 @@ import com.goout.ship.dao.LikeShipMapper;
 import com.goout.ship.entity.Ship;
 import com.goout.ship.entity.CommentShip;
 import com.goout.ship.service.IShipService;
-import com.goout.train.dao.StationMapper;
+import com.goout.api.dao.StationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

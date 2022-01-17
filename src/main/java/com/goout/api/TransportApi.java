@@ -1,6 +1,5 @@
 package com.goout.api;
 
-import com.alibaba.fastjson.JSONObject;
 import com.goout.airplane.entity.Air;
 import com.goout.airplane.service.IAirService;
 import com.goout.bus.entity.Bus;
@@ -11,7 +10,6 @@ import com.goout.train.model.request.GetTicketListRequest;
 import com.goout.train.model.response.RestResponse;
 import com.goout.train.model.response.Train;
 import com.goout.train.service.ITrainTicketService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,6 @@ import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/transportApi/",

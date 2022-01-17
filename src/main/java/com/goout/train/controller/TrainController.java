@@ -1,11 +1,11 @@
 package com.goout.train.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.goout.api.service.ICityStationService;
 import com.goout.train.model.request.*;
 import com.goout.train.model.response.*;
 import com.goout.train.model.request.*;
 import com.goout.train.model.response.*;
-import com.goout.train.service.ITrainStationService;
 import com.goout.train.service.ITrainStationTimeTableService;
 import com.goout.train.service.ITrainTicketService;
 import com.goout.train.service.impl.REAL_INSERT;
@@ -28,7 +28,7 @@ public class TrainController {
     private static final Logger logger = LoggerFactory.getLogger(TrainController.class);
 
     @Autowired
-    private ITrainStationService trainStationService;
+    private ICityStationService trainStationService;
     @Autowired
     private ITrainTicketService trainTicketService;
     @Autowired
@@ -37,17 +37,6 @@ public class TrainController {
     @Autowired
     private com.goout.train.service.impl.REAL_INSERT REAL_INSERT;
 
-    /**
-     * 查询目的地城市，只包含省会
-     * @param request
-     * @param requestBody
-     * @return
-     */
-    @PostMapping(value = "getAllCity")
-    @ResponseBody
-    public StationResult getAllCityHandler(HttpServletRequest request, @RequestBody JSONObject requestBody) {
-        return trainStationService.getAllCity(requestBody.toJavaObject(NoneRequest.class));
-    }
 
 //    @RequestMapping(value = "getHotCity")
 //    @ResponseBody

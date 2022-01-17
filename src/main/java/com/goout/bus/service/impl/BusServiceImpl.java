@@ -7,7 +7,7 @@ import com.goout.bus.dao.LikeBusMapper;
 import com.goout.bus.entity.Bus;
 import com.goout.bus.entity.CommentBus;
 import com.goout.bus.service.IBusService;
-import com.goout.train.dao.StationMapper;
+import com.goout.api.dao.StationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

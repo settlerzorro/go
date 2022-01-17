@@ -4,9 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import com.goout.api.service.impl.CityStationServiceImpl;
 import com.goout.train.dao.CommentTrainMapper;
 import com.goout.train.dao.LikeTrainMapper;
-import com.goout.train.dao.StationMapper;
+import com.goout.api.dao.StationMapper;
 import com.goout.train.dao.TicketMapper;
 import com.goout.train.datamap.SeatTypeMap;
 import com.goout.train.enums.train.PassengerType;
@@ -36,7 +37,7 @@ public class REAL_INSERT implements IREALService {
     private static final Logger logger = LoggerFactory.getLogger(REAL_INSERT.class);
 
     @Autowired
-    private TrainStationServiceImpl trainStationService;
+    private CityStationServiceImpl trainStationService;
 
     @Autowired
     private TicketMapper ticketMapper;
@@ -91,7 +92,7 @@ public class REAL_INSERT implements IREALService {
         }
         requestBody.setFromStation("DLT");
         for(int i=18;i<=31;i++){
-            List<Station> stas = stationMapper.selectAll();
+            List<Station> stas = stationMapper.selectStationAll();
             for(Station s:stas){
                 System.err.println("-----------------------------------------------"+new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
                 requestBody.setToStation(s.getStationCode());
@@ -314,8 +315,8 @@ public class REAL_INSERT implements IREALService {
                 ticket.setWzPrice(ticketPrice.getWzPrice());
                 ticket.setQtNum(getTicketNum(qtNum));
                 ticket.setQtPrice(ticketPrice.getQtPrice());
-                Station from = stationMapper.selectByName(ticket.getFromStation());
-                Station to = stationMapper.selectByName(ticket.getToStation());
+                Station from = stationMapper.selectStationByName(ticket.getFromStation());
+                Station to = stationMapper.selectStationByName(ticket.getToStation());
                 if(from != null && to != null){
                     String fromDateTime = new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT);
                     TrainLine line =  getTrainLineFrom12306(ticket.getTrainNo(),fromDateTime,from.getStationCode(),to.getStationCode());

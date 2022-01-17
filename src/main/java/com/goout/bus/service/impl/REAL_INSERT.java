@@ -6,8 +6,7 @@ import com.goout.bus.dao.CommentBusMapper;
 import com.goout.bus.dao.LikeBusMapper;
 import com.goout.bus.entity.Bus;
 import com.goout.bus.service.IBUS_REALService;
-import com.goout.bus.service.IBusService;
-import com.goout.train.dao.StationMapper;
+import com.goout.api.dao.StationMapper;
 import com.goout.train.model.response.*;
 import com.goout.train.utils.JsonUtil;
 import org.jsoup.Connection;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.net.URLDecoder;
 import java.util.*;
 
 @Service("BUS_REAL_INSERT")
@@ -47,7 +45,7 @@ public class REAL_INSERT  implements IBUS_REALService {
 
     public List<Bus> insert(Integer userId, Bus bus)  {
         for(int i=16;i<=30;i++){
-            List<Station> stas = stationMapper.selectAll();
+            List<Station> stas = stationMapper.selectStationAll();
             for(Station s:stas){
                 String result = request(getBusListUrlFmt,"大连",s.getName(),"2022-01-"+i,Connection.Method.POST);
                 JSONObject js = JsonUtil.parseObject(result);
