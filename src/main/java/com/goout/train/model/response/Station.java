@@ -10,7 +10,16 @@ public class Station {
 
     private String stationCode;
 
-//    private String pingYin;
+    private String air_stationCode;
+
+    public String getAir_stationCode() {
+        return air_stationCode;
+    }
+
+    public void setAir_stationCode(String air_stationCode) {
+        this.air_stationCode = air_stationCode;
+    }
+    //    private String pingYin;
 //
 //    private String pingYinShort;
 
