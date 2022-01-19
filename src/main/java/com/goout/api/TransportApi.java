@@ -65,10 +65,12 @@ public class TransportApi {
         List<Bus> busList = busService.getBusList(userId,bus);
 
         busList.sort(Comparator.comparingDouble((Bus a) -> a.getTicketPrice().doubleValue()));
-        if(busList.size() >= 3){
-            map.put("bus_cheap",busList.subList(0,3));
-        }else{
-            map.put("bus_cheap",busList);
+        if(busList.size() != 0){
+            if(busList.size() >= 3){
+                map.put("bus_cheap",busList.subList(0,3));
+            }else{
+                map.put("bus_cheap",busList);
+            }
         }
         List<Ship> shipList = new ArrayList();
         if(toCity.contains("烟台")){
@@ -82,10 +84,12 @@ public class TransportApi {
             Comparator<Ship> byName7 = Comparator.comparing(Ship::getSdPrice);
             Comparator<Ship> byName8 = Comparator.comparing(Ship::getSxPrice);
             shipList.sort(byName.thenComparing(byName2).thenComparing(byName3).thenComparing(byName4).thenComparing(byName5).thenComparing(byName6).thenComparing(byName7).thenComparing(byName8));
-            if(shipList.size() >=3){
-                map.put("ship",shipList.subList(0,3));
-            }else
-                map.put("ship",shipList);
+            if(shipList.size() != 0){
+                if(shipList.size() >=3){
+                    map.put("ship",shipList.subList(0,3));
+                }else
+                    map.put("ship",shipList);
+            }
         }
 
         Air air = new Air();
@@ -96,10 +100,12 @@ public class TransportApi {
         Comparator<Air> byName = Comparator.comparing(Air::getUseTime);
         Comparator<Air> byEtdDepartTimeDesc =Comparator.comparing(Air::getAep);
         airList.sort(byName.thenComparing(byEtdDepartTimeDesc));
-        if(airList.size() >=3){
-            map.put("air",airList.subList(0,3));
-        }else
-            map.put("air",airList);
+        if(airList.size() != 0){
+            if(airList.size() >=3){
+                map.put("air",airList.subList(0,3));
+            }else
+                map.put("air",airList);
+        }
 
 
         GetTicketListRequest train = new GetTicketListRequest();
@@ -231,7 +237,12 @@ public class TransportApi {
                 }
             }
         }
-        map.put("train",newPriceTrainList);
+        if(newPriceTrainList.size() != 0){
+            map.put("train",newPriceTrainList);
+        }
+        if(map.size() == 0){
+            map.put("drive","没有找到合适列车、航班、轮渡、大巴，建议自驾前往目的地");
+        }
         return RestResponse.succuess(map);
     }
 
