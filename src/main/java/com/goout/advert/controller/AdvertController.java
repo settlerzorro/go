@@ -42,7 +42,7 @@ public class AdvertController {
 
     @PostMapping("/insertAdvert")
     @PreAuthorize("hasRole('ROLE_SUPER')")
-    public RestResponse insertAdvet(@RequestParam(value = "userId",required = false) Integer userId, @RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
+    public RestResponse insertAdvet(@RequestParam(value = "userId",required = false) Integer userId, @RequestParam(value = "advertName",required = false) String advertName,@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
         String fileName = file.getOriginalFilename();  // 文件名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
         String filePath = "C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\"; // 上传后的路径
@@ -58,34 +58,62 @@ public class AdvertController {
         }
         Advert ad = new Advert();
         ad.setLocalUrl(dest.getAbsolutePath());
-        ad.setName(fileName);
+        ad.setName(advertName);
+        ad.setShowAd(false);
         return RestResponse.succuess(airService.insertAdvert(ad));
     }
 
 
     @PostMapping("/getAdList")
-    @PreAuthorize("hasRole('ROLE_SUPER')")
     public RestResponse getAd(HttpServletRequest request) throws Exception {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         List<Advert> ads = airService.getAdvertList();
         for(Advert ad : ads){
-            FileInputStream fileInputStream = new FileInputStream(ad.getLocalUrl());
-            byte[] b = new byte[1024];
-            int len = -1;
-            while((len = fileInputStream.read(b)) != -1) {
-                bos.write(b, 0, len);
+            if(ad.getShowAd() != null && ad.getShowAd()){
+                FileInputStream fileInputStream = null;
+                try {
+                    fileInputStream = new FileInputStream(ad.getLocalUrl());
+                }catch (Exception e){
+                    //文件不存在了
+                    continue;
+                }
+                byte[] b = new byte[1024];
+                int len = -1;
+                while((len = fileInputStream.read(b)) != -1) {
+                    bos.write(b, 0, len);
+                }
+                byte[] fileByte = bos.toByteArray();
+                //以上为读取图片变成字节数组
+                HashMap<String, Object> map = new HashMap<>(2);
+                BASE64Encoder encoder = new BASE64Encoder();
+                String data = encoder.encode(fileByte);
+                ad.setImg(data);
             }
-            byte[] fileByte = bos.toByteArray();
-            //以上为读取图片变成字节数组
-            HashMap<String, Object> map = new HashMap<>(2);
-            BASE64Encoder encoder = new BASE64Encoder();
-            String data = encoder.encode(fileByte);
-            ad.setImg(data);
+
         }
-
-
-
         return RestResponse.succuess(ads);
+    }
+
+    @PostMapping("/showAd")
+    @PreAuthorize("hasRole('ROLE_SUPER')")
+    public RestResponse showAdList(HttpServletRequest request,@RequestParam(value = "id",required = true) String id) throws Exception {
+        try {
+            return RestResponse.succuess(airService.showAdvert(id));
+        }catch (Exception e){
+            e.printStackTrace();
+            return RestResponse.fail("false");
+        }
+    }
+
+    @PostMapping("/hideAd")
+    @PreAuthorize("hasRole('ROLE_SUPER')")
+    public RestResponse hideAd(HttpServletRequest request,@RequestParam(value = "id",required = true) String id) throws Exception {
+        try {
+            return RestResponse.succuess(airService.hideAdvert(id));
+        }catch (Exception e){
+            e.printStackTrace();
+            return RestResponse.fail("false");
+        }
     }
 
 

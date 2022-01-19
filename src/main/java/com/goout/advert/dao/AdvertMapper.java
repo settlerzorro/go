@@ -13,10 +13,16 @@ public interface AdvertMapper {
 
     @Insert("Insert into advert values(" +
             "#{id},#{name}," +
-            "#{localUrl})")
+            "#{localUrl},#{showAd})")
     Boolean insertAdvert(Advert air);
 
     @Delete("delete from advert where id=#{id}")
     Boolean deleteAdvert(Integer id);
+
+    @Update("update advert set showAd = true where id=#{id}")
+    Boolean show(@Param("id") String id);
+
+    @Update("update advert set showAd = false where id=#{id}")
+    Boolean hide(@Param("id") String id);
 
 }

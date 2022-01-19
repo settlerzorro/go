@@ -9,7 +9,8 @@ public interface IAdvertService {
 
     public List<Advert> getAdvertList();
 
-
+    public Boolean showAdvert(String id);
+    public Boolean hideAdvert(String id);
 
     public boolean insertAdvert(Advert air);
 

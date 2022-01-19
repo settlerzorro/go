@@ -27,6 +27,16 @@ public class AdvertServiceImpl implements IAdvertService {
     }
 
     @Override
+    public Boolean showAdvert(String id) {
+        return busMapper.show(id);
+    }
+
+    @Override
+    public Boolean hideAdvert(String id) {
+        return busMapper.hide(id);
+    }
+
+    @Override
     public boolean insertAdvert(Advert air) {
         return busMapper.insertAdvert(air);
     }

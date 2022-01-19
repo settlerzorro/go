@@ -1011,7 +1011,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8888/advert/insertAdvert?userId=26",
+							"raw": "http://127.0.0.1:8888/advert/insertAdvert?userId=26&advertName=广告",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1028,6 +1028,10 @@
 								{
 									"key": "userId",
 									"value": "26"
+								},
+								{
+									"key": "advertName",
+									"value": "广告"
 								}
 							]
 						}
@@ -1075,6 +1079,70 @@
 							}
 						],
 						"url": "http://127.0.0.1:8888/advert/getAdList"
+					},
+					"response": []
+				},
+				{
+					"name": "激活展示广告",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/advert/showAd?id=8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"advert",
+								"showAd"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消展示广告",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8888/advert/hideAd?id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"advert",
+								"hideAd"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
 					},
 					"response": []
 				}

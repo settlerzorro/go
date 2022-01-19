@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 18/01/2022 02:25:39
+ Date: 19/01/2022 16:48:42
 */
 
 SET NAMES utf8mb4;
@@ -25,14 +25,17 @@ CREATE TABLE `advert`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `localUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '存储路径',
+  `showAd` tinyint NULL DEFAULT NULL COMMENT '是否展示',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of advert
 -- ----------------------------
-INSERT INTO `advert` VALUES (2, '', 'C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\6dccf8b34aad4d0a833d48989d74fa7f.png');
-INSERT INTO `advert` VALUES (3, 'd95cdedc5e654936a4ff06914cee20c0.png', 'C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\d95cdedc5e654936a4ff06914cee20c0.png');
+INSERT INTO `advert` VALUES (1, '20', '3', 0);
+INSERT INTO `advert` VALUES (5, '广告', 'C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\4898fd6263f948708ff53ad2cc6b0c3f.png', NULL);
+INSERT INTO `advert` VALUES (6, '广告', 'C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\5f473d682aed403c85d72880be536ed2.png', 0);
+INSERT INTO `advert` VALUES (8, '广告', 'C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\e3695fb9d39b4b40b42f9cf634756143.png', 1);
 
 -- ----------------------------
 -- Table structure for air
@@ -50,7 +53,7 @@ CREATE TABLE `air`  (
   `si` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '经停',
   `useTime` int NULL DEFAULT NULL COMMENT '总用时',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5111 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of air
@@ -2608,7 +2611,7 @@ CREATE TABLE `bus`  (
   `ticketPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '票价',
   `buyUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '购票网址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 128 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 221 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bus
@@ -2761,7 +2764,7 @@ CREATE TABLE `comment_air`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `airId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_air
@@ -2779,7 +2782,7 @@ CREATE TABLE `comment_bus`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `busId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_bus
@@ -2815,7 +2818,7 @@ CREATE TABLE `comment_train`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '评论内容',
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_train
@@ -2849,7 +2852,7 @@ CREATE TABLE `like_bus`  (
   `userId` int NULL DEFAULT NULL,
   `busId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of like_bus
@@ -2880,7 +2883,7 @@ CREATE TABLE `like_train`  (
   `userId` int NULL DEFAULT NULL,
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of like_train
@@ -2911,7 +2914,7 @@ CREATE TABLE `ship`  (
   `sxPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '散席价格',
   `buyUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '购买地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ship
@@ -3065,7 +3068,7 @@ CREATE TABLE `sys_user`  (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
@@ -3141,7 +3144,7 @@ CREATE TABLE `train`  (
   `fromDate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发车日',
   `buyUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '购买地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3178 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6442 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of train

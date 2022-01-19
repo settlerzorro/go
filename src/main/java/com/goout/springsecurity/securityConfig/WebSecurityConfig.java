@@ -61,7 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/cityStationApi/getAllCity",
                         "/cityStationApi/getAllStation",
                         "/air/getAirList",
-                        "/ship/getShipList").permitAll()
+                        "/ship/getShipList",
+                        "/advert/getAdList").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // 设置登陆页

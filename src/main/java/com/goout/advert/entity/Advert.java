@@ -42,6 +42,15 @@ public class Advert implements Serializable {
 
     private Object img;
 
+    public Boolean getShowAd() {
+        return showAd;
+    }
+
+    public void setShowAd(Boolean showAd) {
+        this.showAd = showAd;
+    }
+
+    private Boolean showAd;
     public Object getImg() {
         return img;
     }
