@@ -1149,6 +1149,91 @@
 			]
 		},
 		{
+			"name": "爬虫",
+			"item": [
+				{
+					"name": "爬取12306",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/spider/train/insert?startTime=2022-01-21&endTime=2022-02-21",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"spider",
+								"train",
+								"insert"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "2022-01-21"
+								},
+								{
+									"key": "endTime",
+									"value": "2022-02-21"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "同程旅行爬取飞机票",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/spider/air/insert?startTime=2022-01-2 09:001&endTime=2022-02-21 09:00",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"spider",
+								"air",
+								"insert"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "2022-01-2 09:001"
+								},
+								{
+									"key": "endTime",
+									"value": "2022-02-21 09:00"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "登录",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
@@ -1168,12 +1253,12 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "super",
+							"value": "user",
 							"type": "default"
 						},
 						{
 							"key": "password",
-							"value": "super",
+							"value": "user",
 							"type": "default"
 						}
 					]

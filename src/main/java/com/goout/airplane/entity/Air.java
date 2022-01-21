@@ -155,4 +155,22 @@ public class Air implements Serializable {
     public void setBuyUrl(String buyUrl) {
         this.buyUrl = buyUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Air{" +
+                "id=" + id +
+                ", oapName='" + oapName + '\'' +
+                ", aapName='" + aapName + '\'' +
+                ", flyOffOnlyTime='" + flyOffOnlyTime + '\'' +
+                ", arrivalOnlyTime='" + arrivalOnlyTime + '\'' +
+                ", aep=" + aep +
+                ", fromTime='" + fromTime + '\'' +
+                ", useTime=" + useTime +
+                ", si='" + si + '\'' +
+                ", buyUrl='" + buyUrl + '\'' +
+                ", commentAairs=" + commentAairs +
+                ", LikeAirs=" + LikeAirs +
+                '}';
+    }
 }

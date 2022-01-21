@@ -1,14 +1,13 @@
 package com.goout.train.datamap;
 
 import com.google.common.collect.Maps;
-import com.goout.train.utils.PreloadData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class TrainCodeTrainNoMap {
-    private static Logger logger = LoggerFactory.getLogger(PreloadData.class);
+    private static Logger logger = LoggerFactory.getLogger(TrainCodeTrainNoMap.class);
 
     /**
      * 车次号-列车号 映射 对外车次号，内部实用列车号

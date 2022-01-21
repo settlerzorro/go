@@ -138,6 +138,23 @@ public class Bus implements Serializable {
         return ticketPrice;
     }
 
+    @Override
+    public String toString() {
+        return "Bus{" +
+                "id=" + id +
+                ", dptStation='" + dptStation + '\'' +
+                ", arrStation='" + arrStation + '\'' +
+                ", dptDate='" + dptDate + '\'' +
+                ", dptTime='" + dptTime + '\'' +
+                ", coachType='" + coachType + '\'' +
+                ", ticketLeft='" + ticketLeft + '\'' +
+                ", ticketPrice=" + ticketPrice +
+                ", buyUrl='" + buyUrl + '\'' +
+                ", commentBuses=" + commentBuses +
+                ", LikeBuses=" + LikeBuses +
+                '}';
+    }
+
     public void setTicketPrice(BigDecimal ticketPrice) {
         this.ticketPrice = ticketPrice;
     }

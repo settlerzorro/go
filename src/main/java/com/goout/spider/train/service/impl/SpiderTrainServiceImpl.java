@@ -1,22 +1,21 @@
-package com.goout.train.service.impl;
+package com.goout.spider.train.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import com.goout.api.dao.StationMapper;
 import com.goout.api.service.impl.CityStationServiceImpl;
+import com.goout.spider.train.service.ISpiderTrainService;
 import com.goout.train.dao.CommentTrainMapper;
 import com.goout.train.dao.LikeTrainMapper;
-import com.goout.api.dao.StationMapper;
 import com.goout.train.dao.TicketMapper;
 import com.goout.train.datamap.SeatTypeMap;
+import com.goout.train.datamap.TrainCodeTrainNoMap;
 import com.goout.train.enums.train.PassengerType;
 import com.goout.train.model.request.GetTicketListRequest;
 import com.goout.train.model.response.*;
 import com.goout.train.model.vo.TicketPrice;
-import com.goout.train.datamap.TrainCodeTrainNoMap;
-import com.goout.train.model.request.GetTrainLineRequest;
-import com.goout.train.service.IREALService;
 import com.goout.train.utils.TrainHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -33,8 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service("REAL_INSERT")
-public class REAL_INSERT implements IREALService {
-    private static final Logger logger = LoggerFactory.getLogger(REAL_INSERT.class);
+public class SpiderTrainServiceImpl implements ISpiderTrainService {
+    private static final Logger logger = LoggerFactory.getLogger(SpiderTrainServiceImpl.class);
 
     @Autowired
     private CityStationServiceImpl trainStationService;
@@ -81,84 +80,61 @@ public class REAL_INSERT implements IREALService {
 
     private static String buy = "https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc&fs=%E5%A4%A7%E8%BF%9E,DLT&ts=%E5%93%88%E5%B0%94%E6%BB%A8,HBB&date=2022-01-17&flag=N,N,Y";
 
-    public TicketListResult getTicketList(Integer userId,GetTicketListRequest requestBody) {
-        String StrD ="2022-01-18 00:00:00";
-        SimpleDateFormat sdfd =new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
-        try {
-            Date dat =sdfd.parse(StrD);
-            requestBody.setFromDate(dat);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    /**
+     *
+     * @param startTime 要爬取的火车出发日 startTime=2022-01-21
+     * @param endTime   要爬取的火车出发截至日 endTime=2022-02-21
+     * @param requestBody
+     * @return
+     * @throws ParseException
+     */
+    public TicketListResult getTicketList(String startTime,String endTime,GetTicketListRequest requestBody) throws ParseException {
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate =sdf.parse(startTime);
+        requestBody.setFromDate(startDate);
+
+        Calendar start = Calendar.getInstance();
+        start.setTime(startDate);
+        Long startLong = start.getTimeInMillis();
+
+        Date endDate =sdf.parse(endTime);
+        Calendar end = Calendar.getInstance();
+        end.setTime(endDate);
+        Long endLong = end.getTimeInMillis();
+
         requestBody.setFromStation("DLT");
-        for(int i=18;i<=31;i++){
+
+        Long time = startLong;
+        Long oneDay = 1000 * 60 * 60 * 24L;
+        while (time <= endLong) {
             List<Station> stas = stationMapper.selectStationAll();
             for(Station s:stas){
                 System.err.println("-----------------------------------------------"+new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
                 requestBody.setToStation(s.getStationCode());
-                List<Train> list = getTicketListFrom12306(userId,requestBody);
+                List<Train> list = getTicketListFrom12306(requestBody);
                 for(Train l : list){
                     try {
                         l.setBuyUrl(buy + java.net.URLEncoder.encode("大连","utf-8")
                         +",DLT"
                         +"&ts="+java.net.URLEncoder.encode(s.getName(),"utf-8")
                         +","+s.getStationCode()
-                        +"&date=2022-01-"+i
+                        +"&date="+sdf.format(time)
                         +"&flag=N,N,Y");
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    l.setFromDate(new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
+                    l.setFromDate(sdf.format(time));
                     ticketMapper.insertTrain(l);
                 }
             }
-            String StrD2 ="2022-01-" + (i + 1) + " 00:00:00";
-            try {
-                Date dat =sdfd.parse(StrD2);
-                requestBody.setFromDate(dat);
-                System.err.println("================================================"+new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            Date dat = new Date(time);
+            requestBody.setFromDate(dat);
+            time += oneDay;
+            System.err.println("================================================"+new DateTime(requestBody.getFromDate()).toString(DATE_FORMAT));
         }
-
         return new TicketListResult(new TicketList());
     }
 
-    public TrainLineResult getTrainLine(GetTrainLineRequest requestBody) {
-        requestBody.validate();
-        String trainNo = TrainCodeTrainNoMap.getTrainNo(requestBody.getTrainCode());
-        // 在获取不到trainNo时，trainCode必须有值
-        if (StringUtils.isEmpty(trainNo)) {
-            TrainCodeResult trainCodeResult = trainStationService.getAllTrainCode(null);
-            trainNo = (String) trainCodeResult.getResult().get(requestBody.getTrainCode());
-        }
-        String fromDate = convertFromDate(requestBody.getFromDate());
-        return new TrainLineResult(getTrainLineFrom12306(trainNo, fromDate, requestBody.getFromStationCode(), requestBody.getToStationCode()));
-    }
-
-    @Override
-    public boolean like(Integer userId,Integer trainId) {
-        return likeTrainMapper.insertLikeTrain(trainId,userId);
-    }
-
-    @Override
-    public boolean dislike(Integer id) {
-        return likeTrainMapper.deleteLikeTrain(id);
-    }
-
-    @Override
-    public boolean insertComment(JSONObject requestBody) {
-        CommentTrain ct = requestBody.toJavaObject(CommentTrain.class);
-        Date date = new Date();
-        ct.setTime(date);
-        return commentTrainMapper.insert(ct);
-    }
-
-    @Override
-    public boolean deleteComment(Integer id) {
-        return commentTrainMapper.deleteById(id);
-    }
 
 
     /**
@@ -166,7 +142,7 @@ public class REAL_INSERT implements IREALService {
      * @param requestBody 请求
      * @return 车票列表
      */
-    private List<Train> getTicketListFrom12306(Integer userId, GetTicketListRequest requestBody) {
+    private List<Train> getTicketListFrom12306( GetTicketListRequest requestBody) {
         JSONObject ret12306 = TrainHelper.requestTo12306(getTicketListUrl(requestBody));
         if(ret12306 == null){
             return new ArrayList<>();
@@ -182,7 +158,7 @@ public class REAL_INSERT implements IREALService {
         }
 
         JSONObject data = ret12306.getJSONObject("data");
-        return buildTicketList(userId,requestBody, data);
+        return buildTicketList(requestBody, data);
     }
 
 
@@ -202,7 +178,7 @@ public class REAL_INSERT implements IREALService {
      * @param data 12306车票列表信息
      * @return 平台的车票列表
      */
-    private List<Train> buildTicketList(Integer userId, GetTicketListRequest requestBody, JSONObject data) {
+    private List<Train> buildTicketList(GetTicketListRequest requestBody, JSONObject data) {
         List<Train> ret = Lists.newArrayList();
 
         //站点代码和名字映射
@@ -335,7 +311,6 @@ public class REAL_INSERT implements IREALService {
                     }
 
                 }
-
                 ret.add(ticket);
             }
         }
@@ -449,23 +424,6 @@ public class REAL_INSERT implements IREALService {
         return ticketPrice;
     }
 
-    /**
-     * 获取站点类型 始|终|过
-     * @param stationNo 站序（对应火车经停信息中的站序）01表示始发站，大于1则表示过站
-     * @param trainLine 火车经停信息
-     * @return 站点类型
-     */
-    private String getStationTypeName(String stationNo, TrainLine trainLine) {
-        String ret = "过";
-        if (Integer.parseInt(stationNo) == 1) {
-            ret = "始";
-        } else if (Integer.parseInt(stationNo) == trainLine.getStops().size()) {
-            ret = "终";
-        } else {
-            ret = "过";
-        }
-        return ret;
-    }
 
     /**
      * 价格去掉前置¥

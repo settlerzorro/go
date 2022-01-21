@@ -1,7 +1,6 @@
 package com.goout.train.datamap;
 
 import com.google.common.collect.Maps;
-import com.goout.train.utils.PreloadData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +8,7 @@ import java.util.Map;
 
 public class SeatTypeMap {
 
-    private static Logger logger = LoggerFactory.getLogger(PreloadData.class);
+    private static Logger logger = LoggerFactory.getLogger(SeatTypeMap.class);
 
     /**
      * 查询票价时的座位类型和票价代码的映射
