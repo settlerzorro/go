@@ -1,5 +1,6 @@
 package com.goout.bus.dao;
 
+import com.goout.airplane.entity.Air;
 import com.goout.bus.entity.Bus;
 import org.apache.ibatis.annotations.*;
 
@@ -9,6 +10,9 @@ import java.util.List;
 public interface BusMapper {
     @Select("SELECT * FROM bus WHERE dptStation like concat('%','${dptStation}','%') and arrStation like concat('%','${arrStation}','%') and dptDate=#{dptDate}")
     List<Bus> select(Bus bus);
+
+    @Select("SELECT * FROM bus")
+    List<Bus> selectAll();
 
 
     @Insert("Insert into bus values(" +

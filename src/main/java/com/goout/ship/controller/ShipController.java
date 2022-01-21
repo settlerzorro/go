@@ -1,6 +1,7 @@
 package com.goout.ship.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.goout.bus.entity.Bus;
 import com.goout.ship.entity.Ship;
 import com.goout.ship.service.IShipService;
 import com.goout.train.model.response.RestResponse;
@@ -27,9 +28,12 @@ public class ShipController {
 
 
     @PostMapping(value = "getShipList")
-    public RestResponse getShipListHandler(@RequestParam(value = "userId",required = false) Integer userId, HttpServletRequest request) {
-        List list = shipService.getShipList(userId);
-        return RestResponse.succuess(list);
+    public RestResponse getShipListHandler(@RequestParam(value = "userId",required = false) Integer userId, HttpServletRequest request,@RequestBody Ship ship) {
+        if(ship == null){
+            return RestResponse.succuess(shipService.selectAll());
+        }else {
+            return RestResponse.succuess(shipService.getShipList(userId,ship));
+        }
     }
 
     @GetMapping("/like")

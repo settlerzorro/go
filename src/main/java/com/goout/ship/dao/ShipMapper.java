@@ -1,5 +1,6 @@
 package com.goout.ship.dao;
 
+import com.goout.bus.entity.Bus;
 import com.goout.ship.entity.Ship;
 import org.apache.ibatis.annotations.*;
 
@@ -7,6 +8,9 @@ import java.util.List;
 
 @Mapper
 public interface ShipMapper {
+    @Select("SELECT * FROM ship WHERE fromStation like concat('%','${fromStation}','%') and toStation like concat('%','${toStation}','%')")
+    List<Ship> select(Ship ship);
+
     @Select("SELECT * FROM ship")
     List<Ship> selectAll();
 

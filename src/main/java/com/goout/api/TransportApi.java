@@ -19,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -73,16 +74,19 @@ public class TransportApi {
             }
         }
         List<Ship> shipList = new ArrayList();
-        if(toCity.contains("烟台")){
-            shipList = shipService.getShipList(userId);
-            Comparator<Ship> byName = Comparator.comparing(Ship::getTdPrice);
-            Comparator<Ship> byName2 = Comparator.comparing(Ship::getYdPrice);
-            Comparator<Ship> byName3 = Comparator.comparing(Ship::getEdAprice);
-            Comparator<Ship> byName4 = Comparator.comparing(Ship::getEdBprice);
-            Comparator<Ship> byName5 = Comparator.comparing(Ship::getSdAPrice);
-            Comparator<Ship> byName6 = Comparator.comparing(Ship::getSdBPrice);
-            Comparator<Ship> byName7 = Comparator.comparing(Ship::getSdPrice);
-            Comparator<Ship> byName8 = Comparator.comparing(Ship::getSxPrice);
+        if(toCity.contains("烟台") || toCity.contains("威海")){
+            Ship ship = new Ship();
+            ship.setFromStation(fromCity);
+            ship.setToStation(toCity);
+            shipList = shipService.getShipList(userId,ship);
+            Comparator<Ship> byName = Comparator.comparing(Ship::getTdPrice,Comparator.nullsLast(BigDecimal::compareTo));
+            Comparator<Ship> byName2 = Comparator.comparing(Ship::getYdPrice,Comparator.nullsLast(BigDecimal::compareTo));
+            Comparator<Ship> byName3 = Comparator.comparing(Ship::getEdAprice,Comparator.nullsLast(BigDecimal::compareTo));
+            Comparator<Ship> byName4 = Comparator.comparing(Ship::getEdBprice,Comparator.nullsLast(BigDecimal::compareTo));
+            Comparator<Ship> byName5 = Comparator.comparing(Ship::getSdAPrice,Comparator.nullsLast(BigDecimal::compareTo));
+            Comparator<Ship> byName6 = Comparator.comparing(Ship::getSdBPrice,Comparator.nullsLast(BigDecimal::compareTo));
+            Comparator<Ship> byName7 = Comparator.comparing(Ship::getSdPrice,Comparator.nullsLast(BigDecimal::compareTo));
+            Comparator<Ship> byName8 = Comparator.comparing(Ship::getSxPrice,Comparator.nullsLast(BigDecimal::compareTo));
             shipList.sort(byName.thenComparing(byName2).thenComparing(byName3).thenComparing(byName4).thenComparing(byName5).thenComparing(byName6).thenComparing(byName7).thenComparing(byName8));
             if(shipList.size() != 0){
                 if(shipList.size() >=3){

@@ -23,5 +23,7 @@ public interface IAirService {
 
     public boolean updateAir(Air air);
 
+    public List<Air> selectAll();
+
 
 }

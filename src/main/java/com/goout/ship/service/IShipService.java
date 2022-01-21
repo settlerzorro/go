@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface IShipService {
 
-    public List<Ship> getShipList(Integer userId);
+    public List<Ship> getShipList(Integer userId,Ship ship);
+
+    public List<Ship> selectAll();
 
     public boolean like(Integer userId,Integer busId);
 

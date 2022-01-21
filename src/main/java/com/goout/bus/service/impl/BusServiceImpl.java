@@ -1,6 +1,7 @@
 package com.goout.bus.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.goout.airplane.entity.Air;
 import com.goout.bus.dao.BusMapper;
 import com.goout.bus.dao.CommentBusMapper;
 import com.goout.bus.dao.LikeBusMapper;
@@ -83,5 +84,10 @@ public class BusServiceImpl implements IBusService {
     @Override
     public boolean updateBus(Bus bus) {
         return busMapper.updateBus(bus);
+    }
+
+    @Override
+    public List<Bus> selectAll() {
+        return busMapper.selectAll();
     }
 }

@@ -516,6 +516,15 @@
 								"type": "default"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fromStation\":\"大连\",\"toStation\":\"烟台\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:8888/ship/getShipList?userId=30",
 							"protocol": "http",

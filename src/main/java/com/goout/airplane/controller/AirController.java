@@ -28,8 +28,11 @@ public class AirController {
 
     @PostMapping(value = "getAirList")
     public RestResponse getBusListHandler(@RequestParam(value = "userId",required = false) Integer userId, HttpServletRequest request, @RequestBody Air air) {
-        List list = airService.getAirList(userId,air);
-        return RestResponse.succuess(list);
+        if(air == null){
+            return RestResponse.succuess(airService.selectAll());
+        }else{
+            return RestResponse.succuess(airService.getAirList(userId,air));
+        }
     }
 
     @GetMapping("/like")
@@ -69,4 +72,5 @@ public class AirController {
     public RestResponse updateAir(HttpServletRequest request,@RequestBody Air air) throws Exception {
         return RestResponse.succuess(airService.updateAir(air));
     }
+
 }

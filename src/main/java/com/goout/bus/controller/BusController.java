@@ -2,10 +2,8 @@ package com.goout.bus.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.goout.bus.entity.Bus;
-import com.goout.bus.service.IBUS_REALService;
 import com.goout.bus.service.IBusService;
 import com.goout.train.model.response.RestResponse;
-import com.goout.train.model.response.Train;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +24,15 @@ public class BusController {
     @Autowired
     private IBusService busService;
 
-    @Autowired
-    private IBUS_REALService REAL_INSERT;
 
 
     @PostMapping(value = "getBusList")
     public RestResponse getBusListHandler(@RequestParam(value = "userId",required = false) Integer userId, HttpServletRequest request, @RequestBody Bus bus) {
-        List list = busService.getBusList(userId,bus);
-        return RestResponse.succuess(list);
+        if(bus == null){
+            return RestResponse.succuess(busService.selectAll());
+        }else{
+            return RestResponse.succuess(busService.getBusList(userId,bus));
+        }
     }
 
     @GetMapping("/like")
@@ -56,12 +55,6 @@ public class BusController {
         return RestResponse.succuess(busService.deleteComment(id));
     }
 
-
-//    @PostMapping(value = "REAL_INSERT")
-//    @ResponseBody
-//    public RestResponse REAL_INSERT(@RequestParam("userId") Integer userId,HttpServletRequest request, @RequestBody Bus bus) {
-//        return RestResponse.succuess(REAL_INSERT.insert(userId,bus));
-//    }
 
     @PostMapping("/insertBus")
     @PreAuthorize("hasRole('ROLE_GROUND_ADMIN')")

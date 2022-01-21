@@ -21,27 +21,24 @@ public class AirServiceImpl implements IAirService {
     private static final Logger logger = LoggerFactory.getLogger(AirServiceImpl.class);
 
     @Autowired
-    private AirMapper busMapper;
+    private AirMapper airMapper;
 
     @Autowired
     private StationMapper stationMapper;
 
     @Autowired
-    private LikeAirMapper likeBusMapper;
+    private LikeAirMapper likeAirMapper;
 
     @Autowired
-    private CommentAirMapper commentBusMapper;
-
-
-    private static String getBusListUrlFmt = "https://bus.ly.com/busresapi/schedule/getScheduleList?plateId=3";
+    private CommentAirMapper commentAirMapper;
 
 
     public List<Air> getAirList(Integer userId, Air air) {
-        List<Air> list = busMapper.select(air);
+        List<Air> list = airMapper.select(air);
         for(Air bu : list){
-            bu.setCommentAairs(commentBusMapper.selectByAirId(bu.getId()));
+            bu.setCommentAairs(commentAirMapper.selectByAirId(bu.getId()));
             if(userId != null){
-                bu.setLikeAirs(likeBusMapper.selectByAirIdAndUserId(bu.getId(),userId));
+                bu.setLikeAirs(likeAirMapper.selectByAirIdAndUserId(bu.getId(),userId));
             }
         }
         return list;
@@ -50,12 +47,12 @@ public class AirServiceImpl implements IAirService {
 
     @Override
     public boolean like(Integer userId,Integer airId) {
-        return likeBusMapper.insertLikeAir(userId, airId);
+        return likeAirMapper.insertLikeAir(userId, airId);
     }
 
     @Override
     public boolean dislike(Integer id) {
-        return likeBusMapper.deleteLikeAir(id);
+        return likeAirMapper.deleteLikeAir(id);
     }
 
     @Override
@@ -63,26 +60,31 @@ public class AirServiceImpl implements IAirService {
         CommentAir ct = requestBody.toJavaObject(CommentAir.class);
         Date date = new Date();
         ct.setTime(date);
-        return commentBusMapper.insert(ct);
+        return commentAirMapper.insert(ct);
     }
 
     @Override
     public boolean deleteComment(Integer id) {
-        return commentBusMapper.deleteById(id);
+        return commentAirMapper.deleteById(id);
     }
 
     @Override
     public boolean insertAir(Air air) {
-        return busMapper.insertAir(air);
+        return airMapper.insertAir(air);
     }
 
     @Override
     public boolean deleteAir(Integer id) {
-        return busMapper.deleteAir(id);
+        return airMapper.deleteAir(id);
     }
 
     @Override
     public boolean updateAir(Air air) {
-        return busMapper.updateAir(air);
+        return airMapper.updateAir(air);
+    }
+
+    @Override
+    public List<Air> selectAll() {
+        return airMapper.selectAll();
     }
 }

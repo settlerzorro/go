@@ -1,6 +1,7 @@
 package com.goout.bus.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.goout.airplane.entity.Air;
 import com.goout.bus.entity.Bus;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public interface IBusService {
     public boolean deleteBus(Integer id);
 
     public boolean updateBus(Bus bus);
+
+    public List<Bus> selectAll();
 
 
 }

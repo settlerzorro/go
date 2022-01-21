@@ -144,6 +144,11 @@ public class TrainTicketServiceImpl implements ITrainTicketService {
         return ticketMapper.updateTrain(train);
     }
 
+    @Override
+    public List<Train> selectAll() {
+        return ticketMapper.selectAll();
+    }
+
 
     /**
      * 从12306获取车票列表，先请求一次，若URL发生跳转则用新地址继续请求

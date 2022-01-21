@@ -34,8 +34,8 @@ public class ShipServiceImpl implements IShipService {
 
 
 
-    public List<Ship> getShipList(Integer userId) {
-        List<Ship> list = shipMapper.selectAll();
+    public List<Ship> getShipList(Integer userId,Ship ship) {
+        List<Ship> list = shipMapper.select(ship);
         for(Ship bu : list){
             bu.setCommentShips(commentShipMapper.selectByBusId(bu.getId()));
             if(userId != null){
@@ -43,6 +43,11 @@ public class ShipServiceImpl implements IShipService {
             }
         }
         return list;
+    }
+
+    @Override
+    public List<Ship> selectAll() {
+        return shipMapper.selectAll();
     }
 
 

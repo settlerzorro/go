@@ -10,6 +10,8 @@ public interface AirMapper {
     @Select("SELECT * FROM air WHERE oapName like concat('%','${oapName}','%') and aapName like concat('%','${aapName}','%') and fromTime=#{fromTime}")
     List<Air> select(Air air);
 
+    @Select("SELECT * FROM air")
+    List<Air> selectAll();
 
     @Insert("Insert into air values(" +
             "#{id},#{oapName}," +

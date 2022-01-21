@@ -32,8 +32,11 @@ public class TrainController {
 
     @PostMapping(value = "getTicketList")
     public RestResponse getTicketListHandler(@RequestParam(value = "userId",required = false) Integer userId,HttpServletRequest request, @RequestBody JSONObject requestBody) {
-        List list = trainTicketService.getTicketList(userId,requestBody.toJavaObject(GetTicketListRequest.class));
-        return RestResponse.succuess(list);
+        if(requestBody.isEmpty()){
+            return RestResponse.succuess(trainTicketService.selectAll());
+        }else{
+            return RestResponse.succuess(trainTicketService.getTicketList(userId,requestBody.toJavaObject(GetTicketListRequest.class)));
+        }
     }
 
     @GetMapping("/like")

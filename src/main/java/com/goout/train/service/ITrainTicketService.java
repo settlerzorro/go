@@ -28,5 +28,7 @@ public interface ITrainTicketService {
 
     public boolean updateTrain(Train train);
 
+    public List<Train> selectAll();
+
 
 }

@@ -11,6 +11,9 @@ public interface TicketMapper {
     @Select("SELECT * FROM train WHERE fromStation like concat('%','${fromStation}','%') and toStation like concat('%','${toStation}','%') and fromDate=#{fromDate}")
     List<Train> select(Map map);
 
+    @Select("SELECT * FROM train")
+    List<Train> selectAll();
+
 //    @Select("SELECT * FROM train WHERE userId = #{userId} and trainNo=#{ticket.trainNo} and fromStation=#{ticket.fromStation} and toStation=#{ticket.toStation}")
 //    List<Ticket> select(String userId,Ticket ticket);
 
