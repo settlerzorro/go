@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface BusMapper {
-    @Select("SELECT * FROM bus WHERE dptStation like concat('%','${dptStation}','%') and arrStation like concat('%','${arrStation}','%') and dptDate=#{dptDate}")
+    @Select("<script> SELECT * FROM bus WHERE dptStation like concat('%','${dptStation}','%') <if test='arrStation != null'> and arrStation like concat('%','${arrStation}','%') </if> <if test='dptDate != null'>  and dptDate=#{dptDate} </if></script>")
     List<Bus> select(Bus bus);
 
     @Select("SELECT * FROM bus")

@@ -52,6 +52,7 @@ public class AirController {
 
     @DeleteMapping("/deleteComment")
     public RestResponse deleteComment(HttpServletRequest request,@RequestParam("id") Integer id) throws Exception {
+        System.out.println(id);
         return RestResponse.succuess(airService.deleteComment(id));
     }
 

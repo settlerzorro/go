@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Mapper
 public interface TicketMapper {
-    @Select("SELECT * FROM train WHERE fromStation like concat('%','${fromStation}','%') and toStation like concat('%','${toStation}','%') and fromDate=#{fromDate}")
+    @Select("<script> SELECT * FROM train WHERE fromStation like concat('%','${fromStation}','%') <if test='toStation != null'> and toStation like concat('%','${toStation}','%') </if> <if test='fromDate != null'> and fromDate=#{fromDate} </if></script>")
     List<Train> select(Map map);
 
     @Select("SELECT * FROM train")
@@ -61,6 +61,7 @@ public interface TicketMapper {
             "<if test='ydzNum!=null'> ydzNum = #{ydzNum}, </if>" +
             "<if test='ydzPrice!=null'> ydzPrice = #{ydzPrice}, </if>" +
             "<if test='edzNum!=null'> edzNum = #{edzNum}, </if>" +
+            "<if test='edzPrice!=null'> edzPrice = #{edzPrice}, </if>" +
             "<if test='gjrwNum!=null'> gjrwNum = #{gjrwNum}, </if>" +
             "<if test='gjrwPrice!=null'> gjrwPrice = #{gjrwPrice}, </if>" +
             "<if test='rwNum!=null'> rwNum = #{rwNum}, </if>" +
@@ -74,7 +75,7 @@ public interface TicketMapper {
             "<if test='qtNum!=null'> qtNum = #{qtNum}, </if>" +
             "<if test='qtPrice!=null'> qtPrice = #{qtPrice}, </if>" +
             "<if test='trainLines!=null'> trainLines = #{trainLines}, </if>" +
-            "<if test='fromDate !=null'> fromDate = #{fromDate}</if> " +
+            "<if test='fromDate !=null'> fromDate = #{fromDate}, </if> " +
             "<if test='buyUrl !=null'> buyUrl = #{buyUrl}</if> " +
             "</set>" +
             "where id=#{id}" +

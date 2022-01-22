@@ -31,9 +31,8 @@ public class GetTicketListRequest {
 
 
     public void validate() {
-        if (StringUtils.isBlank(fromStation)
-                || StringUtils.isBlank(toStation)
-                || fromDate == null) {
+        if (StringUtils.isBlank(fromStation)) {
+            // || StringUtils.isBlank(toStation) || fromDate == null
             throw new ServiceException(BusinessErrorCode.REQUEST_PARAM_MISS);
         }
 

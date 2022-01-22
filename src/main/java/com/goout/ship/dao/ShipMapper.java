@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface ShipMapper {
-    @Select("SELECT * FROM ship WHERE fromStation like concat('%','${fromStation}','%') and toStation like concat('%','${toStation}','%')")
+    @Select("<script>SELECT * FROM ship WHERE fromStation like concat('%','${fromStation}','%') <if test='toStation != null'> and toStation like concat('%','${toStation}','%') </if></script>")
     List<Ship> select(Ship ship);
 
     @Select("SELECT * FROM ship")
