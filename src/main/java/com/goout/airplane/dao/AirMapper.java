@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface AirMapper {
-    @Select("SELECT * FROM air WHERE oapName like concat('%','${oapName}','%') and aapName like concat('%','${aapName}','%') and fromTime=#{fromTime}")
+    @Select("<script> SELECT * FROM air WHERE oapName like concat('%','${oapName}','%') <if test='aapName != null'> and aapName like concat('%','${aapName}','%') </if> <if test='fromTime != null'> and fromTime=#{fromTime} </if></script>")
     List<Air> select(Air air);
 
     @Select("SELECT * FROM air")
