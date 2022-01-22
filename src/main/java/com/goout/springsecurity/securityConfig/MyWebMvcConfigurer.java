@@ -22,6 +22,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 //        需要在拦截器ResourceHandlerRegistry中通过addLocations()指定对应路径
         registry.addResourceHandler("/hospital_img/**")
                 .addResourceLocations("C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
     @Override
