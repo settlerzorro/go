@@ -3,16 +3,25 @@ import request from '../utils/request';
 // 登录接口
 export const loginApi = message => {
     return request({
-        url: '/api/login',
+        url: '/login',
         method: 'post',
         params: message
+    })
+}
+
+// 退出登录接口
+export const logoutApi = () => {
+    return request({
+        url: '/logout',
+        method: 'get',
+        params: {}
     })
 }
 
 // 获取用户信息接口
 export const getUserInfo = () => {
     return request({
-        url: '/api/loginSuccess',
+        url: '/loginSuccess',
         method: 'get',
         params: {}
     })
@@ -21,8 +30,9 @@ export const getUserInfo = () => {
 // 获取航班信息接口
 export const getAirList = (query) => {
     return request({
-        url: '/api/air/getAirList',
+        url: '/air/getAirList',
         method: 'post',
+        params: query,
         data: query
     })
 }
@@ -30,7 +40,7 @@ export const getAirList = (query) => {
 // 新增航班信息接口
 export const insertAir = (data) => {
     return request({
-        url: '/api/air/insertAir',
+        url: '/air/insertAir',
         method: 'post',
         data: data
     })
@@ -39,7 +49,7 @@ export const insertAir = (data) => {
 // 修改航班信息接口
 export const updateAir = (data) => {
     return request({
-        url: '/api/air/updateAir',
+        url: '/air/updateAir',
         method: 'post',
         data: data
     })
@@ -48,17 +58,45 @@ export const updateAir = (data) => {
 // 删除航班信息接口
 export const deleteAir = (id) => {
     return request({
-        url: '/api/air/deleteAir?id='+id,
+        url: '/air/deleteAir?id='+id,
         method: 'delete',
         data: {}
+    })
+}
+
+// 评论航班
+export const commentAir = (data) => {
+    return request({
+        url: '/air/insertComment',
+        method: 'post',
+        data: data
     })
 }
 
 // 删除航班评论信息接口
 export const deleteAirComment = (id) => {
     return request({
-        url: '/api/air/deleteComment?id='+id,
+        url: '/air/deleteComment?id='+id,
         method: 'delete',
+        data: {}
+    })
+}
+
+// 收藏航班
+export const likeAir = (data) => {
+    return request({
+        url: '/air/like',
+        method: 'get',
+        params: data,
+        data: {}
+    })
+}
+
+// 取消收藏航班
+export const dislikeAir = (id) => {
+    return request({
+        url: '/air/dislike?id='+id,
+        method: 'get',
         data: {}
     })
 }
@@ -66,8 +104,9 @@ export const deleteAirComment = (id) => {
 // 获取游轮信息接口
 export const getShipList = (query) => {
     return request({
-        url: '/api/ship/getShipList',
+        url: '/ship/getShipList',
         method: 'post',
+        params: query,
         data: query
     })
 }
@@ -75,7 +114,7 @@ export const getShipList = (query) => {
 // 新增游轮信息接口
 export const insertShip = (data) => {
     return request({
-        url: '/api/ship/insertShip',
+        url: '/ship/insertShip',
         method: 'post',
         data: data
     })
@@ -84,7 +123,7 @@ export const insertShip = (data) => {
 // 修改游轮信息接口
 export const updateShip = (data) => {
     return request({
-        url: '/api/ship/updateShip',
+        url: '/ship/updateShip',
         method: 'post',
         data: data
     })
@@ -93,17 +132,45 @@ export const updateShip = (data) => {
 // 删除游轮信息接口
 export const deleteShip = (id) => {
     return request({
-        url: '/api/ship/deleteShip?id='+id,
+        url: '/ship/deleteShip?id='+id,
         method: 'delete',
         data: {}
+    })
+}
+
+// 评论游轮
+export const commentShip = (data) => {
+    return request({
+        url: '/ship/insertComment',
+        method: 'post',
+        data: data
     })
 }
 
 // 删除游轮评论信息接口
 export const deleteShipComment = (id) => {
     return request({
-        url: '/api/ship/deleteComment?id='+id,
+        url: '/ship/deleteComment?id='+id,
         method: 'delete',
+        data: {}
+    })
+}
+
+// 收藏游轮
+export const likeShip = (data) => {
+    return request({
+        url: '/ship/like',
+        method: 'get',
+        params: data,
+        data: {}
+    })
+}
+
+// 取消收藏游轮
+export const dislikeShip = (id) => {
+    return request({
+        url: '/ship/dislike?id='+id,
+        method: 'get',
         data: {}
     })
 }
@@ -111,8 +178,9 @@ export const deleteShipComment = (id) => {
 // 获取火车信息接口
 export const getTrainList = (query) => {
     return request({
-        url: '/api/train/getTicketList',
+        url: '/train/getTicketList',
         method: 'post',
+        params: query,
         data: query
     })
 }
@@ -120,7 +188,7 @@ export const getTrainList = (query) => {
 // 新增火车信息接口
 export const insertTrain = (data) => {
     return request({
-        url: '/api/train/insertTrain',
+        url: '/train/insertTrain',
         method: 'post',
         data: data
     })
@@ -129,7 +197,7 @@ export const insertTrain = (data) => {
 // 修改火车信息接口
 export const updateTrain = (data) => {
     return request({
-        url: '/api/train/updateTrain',
+        url: '/train/updateTrain',
         method: 'post',
         data: data
     })
@@ -138,17 +206,45 @@ export const updateTrain = (data) => {
 // 删除火车信息接口
 export const deleteTrain = (id) => {
     return request({
-        url: '/api/train/deleteTrain?id='+id,
+        url: '/train/deleteTrain?id='+id,
         method: 'delete',
         data: {}
+    })
+}
+
+// 评论火车
+export const commentTrain = (data) => {
+    return request({
+        url: '/train/insertComment',
+        method: 'post',
+        data: data
     })
 }
 
 // 删除火车评论信息接口
 export const deleteTrainComment = (id) => {
     return request({
-        url: '/api/train/deleteComment?id='+id,
+        url: '/train/deleteComment?id='+id,
         method: 'delete',
+        data: {}
+    })
+}
+
+// 收藏火车
+export const likeTrain = (data) => {
+    return request({
+        url: '/train/like',
+        method: 'get',
+        params: data,
+        data: {}
+    })
+}
+
+// 取消收藏火车
+export const dislikeTrain = (id) => {
+    return request({
+        url: '/train/dislike?id='+id,
+        method: 'get',
         data: {}
     })
 }
@@ -156,8 +252,9 @@ export const deleteTrainComment = (id) => {
 // 获取汽车信息接口
 export const getBusList = (query) => {
     return request({
-        url: '/api/bus/getBusList',
+        url: '/bus/getBusList',
         method: 'post',
+        params: query,
         data: query
     })
 }
@@ -165,7 +262,7 @@ export const getBusList = (query) => {
 // 新增汽车信息接口
 export const insertBus = (data) => {
     return request({
-        url: '/api/bus/insertBus',
+        url: '/bus/insertBus',
         method: 'post',
         data: data
     })
@@ -174,7 +271,7 @@ export const insertBus = (data) => {
 // 修改汽车信息接口
 export const updateBus = (data) => {
     return request({
-        url: '/api/bus/updateBus',
+        url: '/bus/updateBus',
         method: 'post',
         data: data
     })
@@ -183,17 +280,45 @@ export const updateBus = (data) => {
 // 删除汽车信息接口
 export const deleteBus = (id) => {
     return request({
-        url: '/api/bus/deleteBus?id='+id,
+        url: '/bus/deleteBus?id='+id,
         method: 'delete',
         data: {}
+    })
+}
+
+// 评论汽车
+export const commentBus = (data) => {
+    return request({
+        url: '/bus/insertComment',
+        method: 'post',
+        data: data
     })
 }
 
 // 删除汽车评论信息接口
 export const deleteBusComment = (id) => {
     return request({
-        url: '/api/bus/deleteComment?id='+id,
+        url: '/bus/deleteComment?id='+id,
         method: 'delete',
+        data: {}
+    })
+}
+
+// 收藏汽车
+export const likeBus = (data) => {
+    return request({
+        url: '/bus/like',
+        method: 'get',
+        params: data,
+        data: {}
+    })
+}
+
+// 取消收藏汽车
+export const dislikeBus = (id) => {
+    return request({
+        url: '/bus/dislike?id='+id,
+        method: 'get',
         data: {}
     })
 }

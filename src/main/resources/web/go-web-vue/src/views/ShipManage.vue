@@ -412,9 +412,9 @@ export default {
 
     const viewComment = (index, row) => {
         commentVisible.value = true;
-        if (row.commentAairs) {
-            commentTableData.value = row.commentAairs;
-            commentPageTotal.value = row.commentAairs.length;
+        if (row.commentShips) {
+            commentTableData.value = row.commentShips;
+            commentPageTotal.value = row.commentShips.length;
         }
     }
 

@@ -53,7 +53,11 @@
         </el-table-column>
         <el-table-column prop="oapName" label="出发站点"></el-table-column>
         <el-table-column prop="aapName" label="到达站点"></el-table-column>
-        <el-table-column prop="fromTime" label="出发日" width="120"></el-table-column>
+        <el-table-column
+          prop="fromTime"
+          label="出发日"
+          width="120"
+        ></el-table-column>
         <el-table-column
           prop="flyOffOnlyTime"
           label="出发时刻"
@@ -64,13 +68,17 @@
           label="到达时刻"
           width="100"
         ></el-table-column>
-        <el-table-column prop="useTime" label="总用时" width="100"></el-table-column>
+        <el-table-column
+          prop="useTime"
+          label="总用时"
+          width="100"
+        ></el-table-column>
         <el-table-column prop="aep" label="价格" width="100"></el-table-column>
         <el-table-column label="操作" width="250" align="center">
           <template #default="scope">
             <el-button
               type="text"
-              icon="el-icon-edit"
+              icon="el-icon-lx-comment"
               class="opButton"
               @click="viewComment(scope.$index, scope.row)"
               >查看评论
@@ -105,7 +113,12 @@
     </div>
 
     <!-- 编辑弹出框 -->
-    <el-dialog :title="dialogTitle" v-model="editVisible" width="30%" @close="cancelEdit">
+    <el-dialog
+      :title="dialogTitle"
+      v-model="editVisible"
+      width="30%"
+      @close="cancelEdit"
+    >
       <el-form label-width="100px" :rules="rules" :model="form" ref="formRef">
         <el-form-item label="出发站点" prop="oapName">
           <el-input v-model="form.oapName" readonly="true"></el-input>
@@ -122,21 +135,36 @@
             type="date"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
+            style="width: 100%"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="出发时刻" prop="flyOffOnlyTime">
-          <el-time-picker
-            v-model="form.flyOffOnlyTime"
-            format="HH:mm"
-            value-format="HH:mm"
-          ></el-time-picker>
-        </el-form-item>
-        <el-form-item label="到达时刻" prop="arrivalOnlyTime">
-          <el-time-picker
-            v-model="form.arrivalOnlyTime"
-            format="HH:mm"
-            value-format="HH:mm"
-          ></el-time-picker>
+        <el-form-item label="时刻" required>
+          <el-col :span="11">
+            <el-form-item prop="flyOffOnlyTime">
+              <el-time-picker
+                placeholder="出发时刻"
+                v-model="form.flyOffOnlyTime"
+                format="HH:mm"
+                value-format="HH:mm"
+                style="width: 100%"
+              ></el-time-picker>
+            </el-form-item>
+          </el-col>
+          <el-col class="text-center" :span="2" style="width:8.3333333333%;text-align:center">
+            <span class="text-gray-500">-</span>
+          </el-col>
+          <el-col :span="11">
+            <el-form-item prop="arrivalOnlyTime">
+              <el-time-picker
+                placeholder="到达时刻"
+                v-model="form.arrivalOnlyTime"
+                format="HH:mm"
+                value-format="HH:mm"
+                style="width: 100%"
+                @change="arrivalOnlyTimeChange"
+              ></el-time-picker>
+            </el-form-item>
+          </el-col>
         </el-form-item>
         <el-form-item label="总用时(min)" prop="useTime">
           <el-input v-model="form.useTime" type="number"></el-input>
@@ -156,8 +184,13 @@
       </template>
     </el-dialog>
     <!-- 评论弹出框 -->
-    <el-dialog title="评论" v-model="commentVisible" width="60%" @close="closeComment">
-        <el-table
+    <el-dialog
+      title="评论"
+      v-model="commentVisible"
+      width="60%"
+      @close="closeComment"
+    >
+      <el-table
         :data="
           commentTableData.slice(
             (commentQuery.pageIndex - 1) * commentQuery.pageSize,
@@ -198,7 +231,7 @@
           @current-change="handleCommentPageChange"
         ></el-pagination>
       </div>
-        <template #footer>
+      <template #footer>
         <span class="dialog-footer">
           <el-button @click="closeComment">取 消</el-button>
           <el-button type="primary" @click="closeComment">确 定</el-button>
@@ -211,7 +244,13 @@
 <script>
 import { ref, reactive } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
-import { getAirList, insertAir, updateAir, deleteAir, deleteAirComment } from "../api/index";
+import {
+  getAirList,
+  insertAir,
+  updateAir,
+  deleteAir,
+  deleteAirComment,
+} from "../api/index";
 
 export default {
   name: "airManage",
@@ -262,8 +301,8 @@ export default {
       // getData();
     };
     const handleCommentPageChange = (val) => {
-        commentQuery.pageIndex = val;
-    }
+      commentQuery.pageIndex = val;
+    };
 
     // 表格编辑时弹窗和保存
     const editVisible = ref(false);
@@ -422,15 +461,15 @@ export default {
     };
 
     const viewComment = (index, row) => {
-        commentVisible.value = true;
-        if (row.commentAairs) {
-            commentTableData.value = row.commentAairs;
-            commentPageTotal.value = row.commentAairs.length;
-        }
-    }
+      commentVisible.value = true;
+      if (row.commentAairs) {
+        commentTableData.value = row.commentAairs;
+        commentPageTotal.value = row.commentAairs.length;
+      }
+    };
 
     const handleCommentDelete = (index, row) => {
-        // 二次确认删除
+      // 二次确认删除
       ElMessageBox.confirm("确定要删除吗？", "提示", {
         type: "warning",
       })
@@ -439,7 +478,8 @@ export default {
             .then((res) => {
               if (res.code == 0) {
                 ElMessage.success("删除成功");
-                let startIndex = (commentQuery.pageIndex - 1) * commentQuery.pageSize;
+                let startIndex =
+                  (commentQuery.pageIndex - 1) * commentQuery.pageSize;
                 commentTableData.value.splice(startIndex + index, 1);
                 commentPageTotal.value = commentTableData.value.length;
               } else {
@@ -451,11 +491,25 @@ export default {
             });
         })
         .catch(() => {});
-    }
+    };
 
     const closeComment = () => {
-        commentVisible.value = false;
-        getData();
+      commentVisible.value = false;
+      getData();
+    };
+
+    const arrivalOnlyTimeChange = (val) => {
+      if (form.flyOffOnlyTime) {
+        let flyOffOnlyTime = form.flyOffOnlyTime;
+        if (flyOffOnlyTime > val) {
+          ElMessage.warning("出发时刻不能大于到达时刻");
+          form.useTime = null;
+          return;
+        }
+        let min1=parseInt(flyOffOnlyTime.split(":")[0])*60+parseInt(flyOffOnlyTime.split(":")[1]);
+        let min2=parseInt(val.split(":")[0])*60+parseInt(val.split(":")[1]);
+        form.useTime = min2 - min1;
+      }
     }
 
     return {
@@ -482,7 +536,8 @@ export default {
       viewComment,
       handleCommentPageChange,
       handleCommentDelete,
-      closeComment
+      closeComment,
+      arrivalOnlyTimeChange
     };
   },
 };

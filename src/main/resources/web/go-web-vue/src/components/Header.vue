@@ -5,35 +5,43 @@
       <i v-if="!collapse" class="el-icon-s-fold"></i>
       <i v-else class="el-icon-s-unfold"></i>
     </div>
-    <div class="logo">后台管理系统</div>
+    <div class="logo">大连一站式交通工具推荐系统</div>
     <div class="header-right">
       <div class="header-user-con">
         <!-- 用户名下拉菜单 -->
-        <el-dropdown class="user-name" trigger="click" @command="handleCommand">
-          <span class="el-dropdown-link">
-            {{ username }}
-            <i class="el-icon-caret-bottom"></i>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+        <template v-if="username">
+          <el-dropdown
+            class="user-name"
+            trigger="click"
+            @command="handleCommand"
+          >
+            <span class="el-dropdown-link">
+              {{ username }}
+              <i class="el-icon-caret-bottom"></i>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
+        <template v-if="!username">
+          <div @click="toLogin" class="loginText">您好，请登录</div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { ElMessage } from "element-plus";
-import { getUserInfo } from "../api/index";
+import { getUserInfo, logoutApi } from "../api/index";
 
 export default {
   setup() {
-    const username = localStorage.getItem("ms_username");
+    const username = ref(localStorage.getItem("ms_username"));
     const message = 2;
 
     const store = useStore();
@@ -48,14 +56,19 @@ export default {
         collapseChage();
       }
       getUserInfo().then((res) => {
-          if (res.code == 0) {
-              let userData = res.data;
-              
-          } else {
-            ElMessage.error(res.message);
-            localStorage.removeItem("ms_username");
-            router.push("/login");
-          }
+        if (res.code == 0) {
+          let userData = res.data;
+          localStorage.setItem("ms_username", userData.username);
+          localStorage.setItem("ms_userid", userData.id);
+          localStorage.setItem(
+            "ms_userRole",
+            JSON.stringify(userData.authorities)
+          );
+        } else {
+          localStorage.removeItem("ms_username");
+          localStorage.removeItem("ms_userid");
+          localStorage.removeItem("ms_userRole");
+        }
       });
     });
 
@@ -64,8 +77,19 @@ export default {
     const handleCommand = (command) => {
       if (command == "loginout") {
         localStorage.removeItem("ms_username");
-        router.push("/login");
+        localStorage.removeItem("ms_userid");
+        localStorage.removeItem("ms_userRole");
+        username.value = null;
+        router.push("/dashboard");
+        // router.push("/login");
+        window.location.reload();
+        // 后台退出
+        logoutApi().then(() => {});
       }
+    };
+
+    const toLogin = () => {
+      router.push("/login");
     };
 
     return {
@@ -74,6 +98,7 @@ export default {
       collapse,
       collapseChage,
       handleCommand,
+      toLogin,
     };
   },
 };
@@ -152,5 +177,9 @@ export default {
 }
 .el-dropdown-menu__item {
   text-align: center;
+}
+.loginText {
+  font-size: 14px;
+  cursor: pointer;
 }
 </style>

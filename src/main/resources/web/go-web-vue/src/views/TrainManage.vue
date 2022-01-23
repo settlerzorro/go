@@ -124,36 +124,41 @@
         <el-form-item label="列车号" prop="trainNo">
           <el-input v-model="form.trainNo"></el-input>
         </el-form-item>
-        <el-form-item label="车次类型" prop="trainType">
-          <el-select
-            v-model="form.trainType"
-            class="m-2"
-            size="large"
-          >
-            <el-option
-              v-for="item in trainTypeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
+        <el-form-item label-width="0px">
+          <el-col :span="8">
+            <el-form-item label="车次类型" prop="trainType">
+              <el-select
+                v-model="form.trainType"
+                class="m-2"
+                size="large"
+                @change="trainTypeChange"
+              >
+                <el-option
+                  v-for="item in trainTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-form-item label="车次" prop="trainCode" label-width="100px">
+            <el-input v-model="form.trainCode"></el-input>
+          </el-form-item>
         </el-form-item>
-        <el-form-item label="车次" prop="trainCode">
-          <el-input v-model="form.trainCode"></el-input>
-        </el-form-item>
-        <el-form-item label="出发站点" prop="fromStation">
-          <el-select
-            v-model="form.fromStation"
-            class="m-2"
-            size="large"
-          >
-            <el-option key="11" label="大连" value="大连"></el-option>
-            <el-option key="10" label="大连北" value="大连北"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="到达站点" prop="toStation">
-          <el-input v-model="form.toStation" ></el-input>
+        <el-form-item label-width="0px">
+          <el-col :span="8">
+            <el-form-item label="出发站点" prop="fromStation">
+              <el-select v-model="form.fromStation" class="m-2" size="large">
+                <el-option key="11" label="大连" value="大连"></el-option>
+                <el-option key="10" label="大连北" value="大连北"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-form-item label="到达站点" prop="toStation" label-width="100px">
+            <el-input v-model="form.toStation"></el-input>
+          </el-form-item>
         </el-form-item>
         <el-form-item label="发车日" prop="fromDate">
           <el-date-picker
@@ -161,115 +166,256 @@
             type="date"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
+            style="width: 100%"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="出发时间" prop="fromTime">
-          <el-time-picker
-            v-model="form.fromTime"
-            format="HH:mm"
-            value-format="HH:mm"
-          ></el-time-picker>
-        </el-form-item>
-        <el-form-item label="到达时间" prop="toTime">
-          <el-time-picker
-            v-model="form.toTime"
-            format="HH:mm"
-            value-format="HH:mm"
-          ></el-time-picker>
+        <el-form-item label="时刻" required>
+          <el-col :span="11" style="width: 60%">
+            <el-form-item prop="fromTime" label-width="0px">
+              <el-time-picker
+                placeholder="出发时刻"
+                v-model="form.fromTime"
+                format="HH:mm"
+                value-format="HH:mm"
+                style="width: 100%"
+              ></el-time-picker>
+            </el-form-item>
+          </el-col>
+          <el-col
+            class="text-center"
+            :span="2"
+            style="width: 8.3333333333%; text-align: center"
+          >
+            <span class="text-gray-500">-</span>
+          </el-col>
+          <el-col :span="11" style="width: 60%">
+            <el-form-item prop="toTime" label-width="0px">
+              <el-time-picker
+                placeholder="到达时刻"
+                v-model="form.toTime"
+                format="HH:mm"
+                value-format="HH:mm"
+                style="width: 100%"
+                @change="toTimeChange"
+              ></el-time-picker>
+            </el-form-item>
+          </el-col>
         </el-form-item>
         <el-form-item label="运行时间(小时)" prop="runTime">
-          <el-input v-model="form.runTime" type="number"></el-input>
+          <el-input v-model="form.runTime"></el-input>
         </el-form-item>
         <el-form-item label="是否余票" prop="canBook">
-          <el-select
-            v-model="form.canBook"
-            class="m-2"
-            size="large"
-          >
+          <el-select v-model="form.canBook" class="m-2" size="large" @change="canBookChange">
             <el-option key="1" label="有余票" :value="true"></el-option>
             <el-option key="0" label="无余票" :value="false"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="商务座/特等座余票" prop="swzNum">
-          <el-input v-model="form.swzNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
+        <template v-if="form.trainType == 'G' || form.trainType == 'D'">
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="商务座/特等座余票" prop="swzNum">
+                <el-input v-model="form.swzNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="商务座/特等座价格" prop="swzPrice">
+                <el-input v-model="form.swzPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="一等座余票" prop="ydzNum">
+                <el-input v-model="form.ydzNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="一等座价格" prop="ydzPrice">
+                <el-input v-model="form.ydzPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="二等座余票" prop="edzNum">
+                <el-input v-model="form.edzNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="二等座价格" prop="edzPrice">
+                <el-input v-model="form.edzPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="动卧余票" prop="dwNum">
+                <el-input v-model="form.dwNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="动卧价格" prop="dwPrice">
+                <el-input v-model="form.dwPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+        </template>
+        <template v-if="form.trainType == 'K' || form.trainType == 'T'">
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="高级软卧余票" prop="gjrwNum">
+                <el-input v-model="form.gjrwNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="高级软卧价格" prop="gjrwPrice">
+                <el-input v-model="form.gjrwPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="软卧/一等卧余票" prop="rwNum">
+                <el-input v-model="form.rwNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="软卧/一等卧价格" prop="rwPrice">
+                <el-input v-model="form.rwPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="硬卧余票" prop="ywNum">
+                <el-input v-model="form.ywNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="硬卧价格" prop="ywPrice">
+                <el-input v-model="form.ywPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="软座余票" prop="rzNum">
+                <el-input v-model="form.rzNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="软座价格" prop="rzPrice">
+                <el-input v-model="form.rzPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+          <el-form-item label-width="0px">
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="硬座余票" prop="yzNum">
+                <el-input v-model="form.yzNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12" style="width: 60%">
+              <el-form-item label="硬座价格" prop="yzPrice">
+                <el-input v-model="form.yzPrice" type="number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+          <div
+            class="message"
+            style="position: relative; top: -5px; left: 150px"
+          >
+            说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+          </div>
+        </template>
+        <el-form-item label-width="0px">
+          <el-col :span="12" style="width: 60%">
+            <el-form-item label="无座余票" prop="wzNum">
+              <el-input v-model="form.wzNum"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" style="width: 60%">
+            <el-form-item label="无座价格" prop="wzPrice">
+              <el-input v-model="form.wzPrice" type="number"></el-input>
+            </el-form-item>
+          </el-col>
         </el-form-item>
-        <el-form-item label="商务座/特等座价格" prop="swzPrice">
-          <el-input v-model="form.swzPrice" type="number"></el-input>
+        <div class="message" style="position: relative; top: -5px; left: 150px">
+          说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+        </div>
+        <el-form-item label-width="0px">
+          <el-col :span="12" style="width: 60%">
+            <el-form-item label="其他余票" prop="qtNum">
+              <el-input v-model="form.qtNum"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" style="width: 60%">
+            <el-form-item label="其他价格" prop="qtPrice">
+              <el-input v-model="form.qtPrice" type="number"></el-input>
+            </el-form-item>
+          </el-col>
         </el-form-item>
-        <el-form-item label="一等座余票" prop="ydzNum">
-          <el-input v-model="form.ydzNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="一等座价格" prop="ydzPrice">
-          <el-input v-model="form.ydzPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="二等座余票" prop="edzNum">
-          <el-input v-model="form.edzNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="二等座价格" prop="edzPrice">
-          <el-input v-model="form.edzPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="动卧余票" prop="dwNum">
-          <el-input v-model="form.dwNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="动卧价格" prop="dwPrice">
-          <el-input v-model="form.dwPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="高级软卧余票" prop="gjrwNum">
-          <el-input v-model="form.gjrwNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="高级软卧价格" prop="gjrwPrice">
-          <el-input v-model="form.gjrwPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="软卧/一等卧余票" prop="rwNum">
-          <el-input v-model="form.rwNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="软卧/一等卧价格" prop="rwPrice">
-          <el-input v-model="form.rwPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="硬卧余票" prop="ywNum">
-          <el-input v-model="form.ywNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="硬卧价格" prop="ywPrice">
-          <el-input v-model="form.ywPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="软座余票" prop="rzNum">
-          <el-input v-model="form.rzNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="软座价格" prop="rzPrice">
-          <el-input v-model="form.rzPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="硬座余票" prop="yzNum">
-          <el-input v-model="form.yzNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="硬座价格" prop="yzPrice">
-          <el-input v-model="form.yzPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="无座余票" prop="wzNum">
-          <el-input v-model="form.wzNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="无座价格" prop="wzPrice">
-          <el-input v-model="form.wzPrice" type="number"></el-input>
-        </el-form-item>
-        <el-form-item label="其他余票" prop="qtNum">
-          <el-input v-model="form.qtNum"></el-input>
-          <div class="message">有|表示充足,--|表示无此类型的座位,数字表示剩余座位数</div>
-        </el-form-item>
-        <el-form-item label="其他价格" prop="qtPrice">
-          <el-input v-model="form.qtPrice" type="number"></el-input>
-        </el-form-item>
+        <div class="message" style="position: relative; top: -5px; left: 150px">
+          说明：有|表示充足，--|表示无此类型的座位，数字|表示剩余座位数
+        </div>
         <el-form-item label="经停站点" prop="trainLines">
-          <el-input v-model="form.trainLines" type="textarea"></el-input>
+          <el-input
+            v-model="form.trainLines"
+            type="textarea"
+            class="trainLines"
+          ></el-input>
         </el-form-item>
+        <div class="message" style="position: relative; top: -5px; left: 150px">
+          说明：各站点间使用“ - ”隔开，如：大连 - 沈阳 - 北京
+        </div>
         <el-form-item label="购票地址" prop="buyUrl">
           <el-input v-model="form.buyUrl" type="textarea"></el-input>
         </el-form-item>
@@ -411,17 +557,20 @@ export default {
     const trainTypeOptions = reactive([
       {
         label: "G",
-        value: "G"
-      },{
+        value: "G",
+      },
+      {
         label: "K",
-        value: "K"
-      },{
+        value: "K",
+      },
+      {
         label: "T",
-        value: "T"
-      },{
+        value: "T",
+      },
+      {
         label: "D",
-        value: "D"
-      }
+        value: "D",
+      },
     ]);
     // 表单数据
     let form = reactive({
@@ -666,20 +815,6 @@ export default {
           trigger: "blur",
         },
       ],
-      qtNum: [
-        {
-          required: true,
-          message: "请输入其他剩余票数",
-          trigger: "blur",
-        },
-      ],
-      qtPrice: [
-        {
-          required: true,
-          message: "请输入其他价格",
-          trigger: "blur",
-        },
-      ],
       trainLines: [
         {
           required: true,
@@ -817,6 +952,59 @@ export default {
       getData();
     };
 
+    const trainTypeChange = (val) => {
+      if (val == "G" || val == "D") {
+        form.gjrwNum = form.rwNum = form.dwNum = form.ywNum = form.rzNum = form.yzNum = form.wzNum = null;
+        form.gjrwPrice = form.rwPrice = form.dwPrice = form.ywPrice = form.rzPrice = form.yzPrice = form.wzPrice = null;
+      }
+      if (val == "K" || val == "T") {
+        form.swzNum = form.ydzNum = form.edzNum = form.dwNum = form.wzNum = null;
+        form.swzPrice = form.ydzPrice = form.edzPrice = form.dwPrice = form.wzPrice = null;
+      }
+      form.canBook = null;
+      if (form.trainCode) {
+        form.trainCode = val + form.trainCode.substr(1, form.trainCode.length);
+        return;
+      }
+      form.trainCode = val;
+    };
+
+    const toTimeChange = (val) => {
+      if (form.fromTime) {
+        let fromTime = form.fromTime;
+        if (fromTime > val) {
+          ElMessage.warning("出发时刻不能大于到达时刻");
+          form.runTime = null;
+          return;
+        }
+        let min1 =
+          parseInt(fromTime.split(":")[0]) * 60 +
+          parseInt(fromTime.split(":")[1]);
+        let min2 =
+          parseInt(val.split(":")[0]) * 60 + parseInt(val.split(":")[1]);
+        let min = min2 - min1;
+        let hour = parseInt(min / 60);
+        min = min % 60;
+        form.runTime =
+          (hour >= 10 ? hour : "0" + hour) +
+          ":" +
+          (min >= 10 ? min : "0" + min);
+      }
+    };
+
+    const canBookChange = (val) => {
+      let num = "0";
+      if (val) {
+        num = "有";
+      }
+      if (form.trainType == "G" || form.trainType == "D") {
+        form.swzNum = form.ydzNum = form.edzNum = form.dwNum = form.wzNum = num;
+      }
+      if (form.trainType == "K" || form.trainType == "T") {
+        form.gjrwNum = form.rwNum = form.dwNum = form.ywNum = form.rzNum = form.yzNum = form.wzNum = num;
+      }
+    }
+
     return {
       loading,
       query,
@@ -842,7 +1030,10 @@ export default {
       handleCommentPageChange,
       handleCommentDelete,
       closeComment,
-      trainTypeOptions
+      trainTypeOptions,
+      trainTypeChange,
+      toTimeChange,
+      canBookChange
     };
   },
 };
@@ -878,5 +1069,10 @@ export default {
   margin: auto;
   width: 40px;
   height: 40px;
+}
+.trainLines .el-textarea__inner {
+  height: 150px;
+  overflow-y: auto;
+  /* overflow-y: auto;兼容ie  */
 }
 </style>

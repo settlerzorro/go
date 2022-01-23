@@ -1,39 +1,78 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 
-const routes = [{
+const routes = [
+    {
+        path: '/',
+        redirect: '/dashboard'
+    }, {
         path: "/",
         name: "Home",
         component: Home,
         children: [
             {
+                path: "/dashboard",
+                name: "dashboard",
+                meta: {
+                    title: '系统首页'
+                },
+                component: () => import( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
+            }, {
                 path: "/airManage",
                 name: "airManage",
                 meta: {
                     title: '航班信息管理'
                 },
-                component: () => import ( /* webpackChunkName: "airManage" */ "../views/AirManage.vue")
+                component: () => import( /* webpackChunkName: "airManage" */ "../views/AirManage.vue")
+            }, {
+                path: "/airMessage",
+                name: "airMessage",
+                meta: {
+                    title: '航班信息'
+                },
+                component: () => import( /* webpackChunkName: "airMessage" */ "../views/AirMessage.vue")
             }, {
                 path: "/shipManage",
                 name: "shipManage",
                 meta: {
                     title: '游轮信息管理'
                 },
-                component: () => import ( /* webpackChunkName: "shipManage" */ "../views/ShipManage.vue")
+                component: () => import( /* webpackChunkName: "shipManage" */ "../views/ShipManage.vue")
+            }, {
+                path: "/shipMessage",
+                name: "shipMessage",
+                meta: {
+                    title: '游轮信息'
+                },
+                component: () => import( /* webpackChunkName: "shipMessage" */ "../views/ShipMessage.vue")
             }, {
                 path: "/trainManage",
                 name: "trainManage",
                 meta: {
                     title: '火车信息管理'
                 },
-                component: () => import ( /* webpackChunkName: "trainManage" */ "../views/TrainManage.vue")
+                component: () => import( /* webpackChunkName: "trainManage" */ "../views/TrainManage.vue")
+            }, {
+                path: "/trainMessage",
+                name: "trainMessage",
+                meta: {
+                    title: '火车信息'
+                },
+                component: () => import( /* webpackChunkName: "trainMessage" */ "../views/TrainMessage.vue")
             }, {
                 path: "/busManage",
                 name: "busManage",
                 meta: {
                     title: '汽车信息管理'
                 },
-                component: () => import ( /* webpackChunkName: "busManage" */ "../views/BusManage.vue")
+                component: () => import( /* webpackChunkName: "busManage" */ "../views/BusManage.vue")
+            }, {
+                path: "/busMessage",
+                name: "busMessage",
+                meta: {
+                    title: '汽车信息'
+                },
+                component: () => import( /* webpackChunkName: "busMessage" */ "../views/BusMessage.vue")
             },
         ]
     }, {
@@ -42,7 +81,7 @@ const routes = [{
         meta: {
             title: '登录'
         },
-        component: () => import ( /* webpackChunkName: "login" */ "../views/Login.vue")
+        component: () => import( /* webpackChunkName: "login" */ "../views/Login.vue")
     }
 ];
 
@@ -52,15 +91,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title} | vue-manage-system`;
-    const role = localStorage.getItem('ms_username');
-    if (!role && to.path !== '/login') {
+    document.title = `大连一站式交通工具推荐系统`;
+    const user = localStorage.getItem('ms_userid');
+    if (!user && (to.path === '/airManage' || to.path === '/shipManage' || to.path === '/trainManage' || to.path === '/busManage')) {
         next('/login');
-    } else if (to.meta.permission) {
-        // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
-        role === 'admin'
-            ? next()
-            : next('/403');
     } else {
         next();
     }

@@ -40,8 +40,18 @@ export default {
         const items = [
             {
                 icon: "el-icon-lx-cascades",
+                index: "/dashboard",
+                title: "首页",
+            },
+            {
+                icon: "el-icon-lx-cascades",
                 index: "/airManage",
                 title: "航班信息管理",
+            },
+            {
+                icon: "el-icon-lx-cascades",
+                index: "/airMessage",
+                title: "航班信息",
             },
             {
                 icon: "el-icon-lx-copy",
@@ -50,13 +60,28 @@ export default {
             },
             {
                 icon: "el-icon-lx-copy",
+                index: "/shipMessage",
+                title: "游轮信息",
+            },
+            {
+                icon: "el-icon-lx-copy",
                 index: "/trainManage",
                 title: "火车信息管理",
             },
             {
                 icon: "el-icon-lx-copy",
+                index: "/trainMessage",
+                title: "火车信息",
+            },
+            {
+                icon: "el-icon-lx-copy",
                 index: "/busManage",
                 title: "汽车信息管理",
+            },
+            {
+                icon: "el-icon-lx-copy",
+                index: "/busMessage",
+                title: "汽车信息",
             }
         ];
 
