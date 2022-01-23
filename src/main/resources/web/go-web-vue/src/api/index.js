@@ -9,6 +9,15 @@ export const loginApi = message => {
     })
 }
 
+// 注册接口
+export const registerApi = message => {
+    return request({
+        url: '/register',
+        method: 'post',
+        data: message
+    })
+}
+
 // 退出登录接口
 export const logoutApi = () => {
     return request({
@@ -319,6 +328,63 @@ export const dislikeBus = (id) => {
     return request({
         url: '/bus/dislike?id='+id,
         method: 'get',
+        data: {}
+    })
+}
+
+// 获取广告
+export const getAdList = () => {
+    return request({
+        url: '/advert/getAdList',
+        method: 'post',
+        data: {}
+    })
+}
+
+// 新增广告
+export const insertAdvert = (params, formData) => {
+    return request({
+        url: '/advert/insertAdvert',
+        method: 'post',
+        headers:{"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},//设置响应投
+        data: formData,
+        params: params
+    })
+}
+
+// 删除广告接口
+export const deleteAdvert = (id) => {
+    return request({
+        url: '/advert/deleteAdvert?id='+id,
+        method: 'delete',
+        data: {}
+    })
+}
+
+// 激活广告接口
+export const showAd = (id) => {
+    return request({
+        url: '/advert/showAd?id='+id,
+        method: 'post',
+        data: {}
+    })
+}
+
+// 隐藏广告接口
+export const hideAd = (id) => {
+    return request({
+        url: '/advert/hideAd?id='+id,
+        method: 'post',
+        data: {}
+    })
+}
+
+// 获取推荐接口
+export const getTransportList = (params) => {
+    return request({
+        url: '/transportApi/getTransportList',
+        method: 'get',
+        params: params,
         data: {}
     })
 }

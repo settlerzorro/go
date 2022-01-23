@@ -14,7 +14,7 @@ const routes = [
                 path: "/dashboard",
                 name: "dashboard",
                 meta: {
-                    title: '系统首页'
+                    title: '首页'
                 },
                 component: () => import( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
             }, {
@@ -73,6 +73,13 @@ const routes = [
                     title: '汽车信息'
                 },
                 component: () => import( /* webpackChunkName: "busMessage" */ "../views/BusMessage.vue")
+            }, {
+                path: "/advertManage",
+                name: "advertManage",
+                meta: {
+                    title: '广告信息管理'
+                },
+                component: () => import( /* webpackChunkName: "advertManage" */ "../views/AdvertManage.vue")
             },
         ]
     }, {
@@ -82,6 +89,13 @@ const routes = [
             title: '登录'
         },
         component: () => import( /* webpackChunkName: "login" */ "../views/Login.vue")
+    }, {
+        path: "/register",
+        name: "Register",
+        meta: {
+            title: '注册'
+        },
+        component: () => import( /* webpackChunkName: "register" */ "../views/Register.vue")
     }
 ];
 
@@ -93,7 +107,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     document.title = `大连一站式交通工具推荐系统`;
     const user = localStorage.getItem('ms_userid');
-    if (!user && (to.path === '/airManage' || to.path === '/shipManage' || to.path === '/trainManage' || to.path === '/busManage')) {
+    if (!user && (to.path === '/airManage' || to.path === '/shipManage' || to.path === '/trainManage' || to.path === '/busManage' || to.path === '/advertManage')) {
         next('/login');
     } else {
         next();

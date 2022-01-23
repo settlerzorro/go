@@ -76,15 +76,18 @@ export default {
     const router = useRouter();
     const handleCommand = (command) => {
       if (command == "loginout") {
-        localStorage.removeItem("ms_username");
-        localStorage.removeItem("ms_userid");
-        localStorage.removeItem("ms_userRole");
-        username.value = null;
         router.push("/dashboard");
         // router.push("/login");
-        window.location.reload();
         // 后台退出
-        logoutApi().then(() => {});
+        logoutApi().then((res) => {
+          if (res.code == 0) {
+            username.value = null;
+            localStorage.removeItem("ms_username");
+            localStorage.removeItem("ms_userid");
+            localStorage.removeItem("ms_userRole");
+            window.location.reload();
+          }
+        });
       }
     };
 

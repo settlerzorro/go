@@ -20,8 +20,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
         //通过设置spring.resources.static-locations自定义Spring boot加载前端静态资源路径
 //        如果指定了拦截器，该属性有可能失效
 //        需要在拦截器ResourceHandlerRegistry中通过addLocations()指定对应路径
-        registry.addResourceHandler("/hospital_img/**")
-                .addResourceLocations("C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop");
+        registry.addResourceHandler("/img/**")
+                .addResourceLocations("file:/Users/ll/Downloads/upload/");
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 

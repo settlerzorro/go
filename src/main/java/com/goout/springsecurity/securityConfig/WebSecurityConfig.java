@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -72,6 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 如果有允许匿名的url，填在下面
                 .antMatchers(
                         "/assets/**",
+                        "/img/**",
                         "/register",
                         "/train/getTicketList",
                         "/bus/getBusList",
@@ -126,7 +128,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse resp, Authentication auth)
                             throws IOException {
                         resp.setContentType("application/json;charset=utf-8");
-                        Object curUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                         RestResponse rm = RestResponse.succuess("登录成功!");
                         ObjectMapper om = new ObjectMapper();
                         PrintWriter out = resp.getWriter();
@@ -142,7 +143,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 异常处理跳转
 //                .exceptionHandling().accessDeniedPage("/500")
 //                .and()
-                .logout().permitAll()
+                .logout().logoutSuccessHandler(new LogoutSuccessHandler() {
+                    @Override
+                    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                        response.setContentType("application/json;charset=utf-8");
+                        RestResponse rm = RestResponse.succuess("退出成功!");
+                        ObjectMapper om = new ObjectMapper();
+                        PrintWriter out = response.getWriter();
+                        out.write(om.writeValueAsString(rm));
+                        out.flush();
+                        out.close();
+                    }
+                }).permitAll()
                 .and().
                 //屏蔽默认登陆页面
                 exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {

@@ -45,7 +45,7 @@ public class AdvertController {
     public RestResponse insertAdvet(@RequestParam(value = "userId",required = false) Integer userId, @RequestParam(value = "advertName",required = false) String advertName,@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
         String fileName = file.getOriginalFilename();  // 文件名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
-        String filePath = "C:\\N-20L6PF1GJ6C9-Data\\shuaizha\\Desktop\\"; // 上传后的路径
+        String filePath = "/Users/ll/Downloads/upload/"; // 上传后的路径
         fileName = UUID.randomUUID().toString().replace("-", "") + suffixName; // 新文件名
         File dest = new File(filePath + fileName);
         if (!dest.getParentFile().exists()) {

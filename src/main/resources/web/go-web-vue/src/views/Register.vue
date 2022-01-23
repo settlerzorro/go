@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="ms-login">
-      <div class="ms-title">大连一站式交通工具推荐系统</div>
+      <div class="ms-title">注册</div>
       <el-form
         :model="param"
         :rules="rules"
@@ -17,11 +17,17 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
+          <el-input type="password" placeholder="密码" v-model="param.password">
+            <template #prepend>
+              <el-button icon="el-icon-lock"></el-button>
+            </template>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password2">
           <el-input
             type="password"
-            placeholder="密码"
-            v-model="param.password"
-            @keyup.enter="submitForm()"
+            placeholder="确认密码"
+            v-model="param.password2"
           >
             <template #prepend>
               <el-button icon="el-icon-lock"></el-button>
@@ -29,10 +35,15 @@
           </el-input>
         </el-form-item>
         <div style="text-align: right; margin-bottom: 8px">
-          <p style="font-size: 12px; cursor: pointer;color: #3882E5;" @click="toRegister">注册</p>
+          <p
+            style="font-size: 12px; cursor: pointer; color: #3882e5"
+            @click="toLogin"
+          >
+            已有账号，登录
+          </p>
         </div>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm()">登录</el-button>
+          <el-button type="primary" @click="submitForm()">注册</el-button>
         </div>
       </el-form>
     </div>
@@ -43,19 +54,20 @@
 import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { ElMessage } from "element-plus";
-import { loginApi, getUserInfo } from "../api/index";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { registerApi } from "../api/index";
 
 export default {
   setup() {
     localStorage.removeItem("ms_username");
     localStorage.removeItem("ms_userid");
     localStorage.removeItem("ms_userRole");
-    
+
     const router = useRouter();
     const param = reactive({
       username: "",
       password: "",
+      password2: "",
     });
 
     const rules = {
@@ -67,32 +79,33 @@ export default {
         },
       ],
       password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+      password2: [
+        { required: true, message: "请输入确认密码", trigger: "blur" },
+      ],
     };
     const login = ref(null);
     const submitForm = () => {
       login.value.validate((valid) => {
         if (valid) {
-          loginApi(param).then((res) => {
-            if (res.code == 0) {
-              getUserInfo().then((res) => {
-                if (res.code == 0) {
-                  let userData = res.data;
-                  ElMessage.success("登录成功");
-                  localStorage.setItem("ms_username", userData.username);
-                  localStorage.setItem("ms_userid", userData.id);
-                  localStorage.setItem(
-                    "ms_userRole",
-                    JSON.stringify(userData.authorities)
-                  );
-                  router.push("/");
-                } else {
-                  ElMessage.error(res.message);
-                }
-              });
-            } else {
-              ElMessage.error(res.message);
-            }
-          });
+          if (param.password2 === param.password) {
+            registerApi(param).then((res) => {
+              if (res.code == 0) {
+                ElMessageBox.confirm("注册成功，是否登录？", "注册成功提示", {
+                  confirmButtonText: "是",
+                  cancelButtonText: "否",
+                  type: "success",
+                })
+                  .then(() => {
+                    router.push("/login");
+                  })
+                  .catch(() => {
+
+                  });
+              } else {
+                ElMessage.error(res.message);
+              }
+            });
+          }
         } else {
           ElMessage.error("请输入用户名或密码");
           return false;
@@ -103,16 +116,16 @@ export default {
     const store = useStore();
     store.commit("clearTags");
 
-    const toRegister = () => {
-      router.push("/register");
-    }
+    const toLogin = () => {
+      router.push("/login");
+    };
 
     return {
       param,
       rules,
       login,
       submitForm,
-      toRegister
+      toLogin,
     };
   },
 };
