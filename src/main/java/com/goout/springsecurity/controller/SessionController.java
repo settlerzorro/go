@@ -39,7 +39,7 @@ public class SessionController {
         //给用户默认user权限
         SysUserRole sysUserRole=new SysUserRole();
         sysUserRole.setUserId(user1.getId());
-        sysUserRole.setRoleId(3);//ROLE_USER：3
+        sysUserRole.setRoleId(5);//ROLE_USER：5
         Boolean is=sysUserRoleService.insertUserRole(sysUserRole);
         return RestResponse.succuess(is);
     }
