@@ -21,7 +21,7 @@
           <template v-if="adList.length == 0">
             <el-carousel-item>
               <img
-                src=""
+                src="/public/defaultAd.jpeg"
                 style="
                   width: 100%;
                   height: 300px;
@@ -738,6 +738,7 @@
 </template>
 
 <script>
+
 import { reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
 import {
