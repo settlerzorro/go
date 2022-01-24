@@ -1,5 +1,7 @@
 package com.goout.springsecurity.securityConfig;
 
+import com.goout.properties.Properties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -13,6 +15,10 @@ import java.util.List;
  */
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
+
+    @Autowired
+    private Properties properties;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //addResourceHandler：指的是对外暴露的访问路径
@@ -21,7 +27,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 //        如果指定了拦截器，该属性有可能失效
 //        需要在拦截器ResourceHandlerRegistry中通过addLocations()指定对应路径
         registry.addResourceHandler("/img/**")
-                .addResourceLocations("file:/Users/ll/Downloads/upload/");
+                .addResourceLocations("file:"+properties.getAdvertFolderPath());
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 

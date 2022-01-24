@@ -4,6 +4,7 @@ import com.goout.advert.entity.Advert;
 import com.goout.advert.service.IAdvertService;
 import com.goout.properties.Properties;
 import com.goout.train.model.response.RestResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ public class AdvertController {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         List<Advert> ads = airService.getAdvertList();
         for(Advert ad : ads){
+            ad.setLocalUrl(StringUtils.substringAfterLast(ad.getLocalUrl(),"\\"));
             if(ad.getShowAd() != null && ad.getShowAd()){
                 FileInputStream fileInputStream = null;
                 try {
