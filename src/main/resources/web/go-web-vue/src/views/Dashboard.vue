@@ -2,20 +2,37 @@
   <div>
     <el-row>
       <el-col :span="24">
-        <el-carousel v-loading="loading">
-          <el-carousel-item v-for="item in adList" :key="item.id">
-            <img
-              :src="'/img/' + item.localUrl"
-              style="
-                width: 100%;
-                height: 300px;
-                left: 0px;
-                top: 0px;
-                border-radius: 0px;
-                box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px;
-              "
-            />
-          </el-carousel-item>
+        <el-carousel>
+          <template v-if="adList.length > 0">
+            <el-carousel-item v-for="item in adList" :key="item.id">
+              <img
+                :src="'/img/' + item.localUrl"
+                style="
+                  width: 100%;
+                  height: 300px;
+                  left: 0px;
+                  top: 0px;
+                  border-radius: 0px;
+                  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px;
+                "
+              />
+            </el-carousel-item>
+          </template>
+          <template v-if="adList.length == 0">
+            <el-carousel-item>
+              <img
+                src=""
+                style="
+                  width: 100%;
+                  height: 300px;
+                  left: 0px;
+                  top: 0px;
+                  border-radius: 0px;
+                  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px;
+                "
+              />
+            </el-carousel-item>
+          </template>
         </el-carousel>
       </el-col>
     </el-row>
@@ -763,8 +780,6 @@ export default {
       busPageSize: 5,
     });
 
-    const loading = ref(true);
-
     const getAd = () => {
       getAdList().then((res) => {
         if (res.code == 0) {
@@ -773,7 +788,6 @@ export default {
               adList.value.push(item);
             }
           });
-          loading.value = false;
         }
       });
     };
@@ -1161,7 +1175,6 @@ export default {
     };
 
     return {
-      loading,
       userId,
       activeName,
       name,
