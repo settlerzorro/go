@@ -5,13 +5,7 @@
         <el-carousel>
           <el-carousel-item v-for="item in adList" :key="item.id">
             <img
-              :src="
-                '/img' +
-                item.localUrl.substr(
-                  item.localUrl.lastIndexOf('/'),
-                  item.localUrl.length
-                )
-              "
+              :src="'/img/' + item.localUrl"
               style="
                 width: 100%;
                 height: 300px;
@@ -27,7 +21,7 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :span="24">
-        <h3 style="margin-top: 16px" >综合推荐</h3>
+        <h3 style="margin-top: 16px">综合推荐</h3>
         <div class="handle-box">
           <el-input
             v-model="query.toCity"
@@ -653,7 +647,9 @@
                     class="opButton red"
                     @click="handleLike('bus', scope.$index, scope.row)"
                     >{{
-                      handleGetLike('bus', scope.$index, scope.row) ? "已收藏" : "收藏"
+                      handleGetLike("bus", scope.$index, scope.row)
+                        ? "已收藏"
+                        : "收藏"
                     }}</el-button
                   >
                   <el-button
@@ -812,9 +808,13 @@ export default {
             }
             if (res.data.drive) {
               airTableData.value = [];
+              airPageTotal.value = 0;
               trainTableData.value = [];
+              trainPageTotal.value = 0;
               shipTableData.value = [];
+              shipPageTotal.value = 0;
               busTableData.value = [];
+              busPageTotal.value = 0;
               ElMessage.warning(res.data.drive);
             }
             // 刷新评论信息
@@ -852,6 +852,14 @@ export default {
       query.trainPageIndex = 1;
       query.shipPageIndex = 1;
       query.busPageIndex = 1;
+      airTableData.value = [];
+      airPageTotal.value = 0;
+      trainTableData.value = [];
+      trainPageTotal.value = 0;
+      shipTableData.value = [];
+      shipPageTotal.value = 0;
+      busTableData.value = [];
+      busPageTotal.value = 0;
       getData();
     };
     // 分页导航
