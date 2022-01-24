@@ -3,8 +3,10 @@ package com.goout.train.model.response;
 import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.annotation.JSONType;
 
+import java.io.Serializable;
+
 @JSONType(naming = PropertyNamingStrategy.PascalCase)
-public class LikeTrain {
+public class LikeTrain  implements Serializable {
 
     private Integer id;
     private Integer userId;

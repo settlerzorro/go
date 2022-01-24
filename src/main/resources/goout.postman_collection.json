@@ -1172,7 +1172,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8888/spider/train/insert?startTime=2022-01-21&endTime=2022-02-21",
+							"raw": "http://127.0.0.1:8888/spider/train/insert?startTime=2022-01-25&endTime=2022-02-21",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1189,7 +1189,7 @@
 							"query": [
 								{
 									"key": "startTime",
-									"value": "2022-01-21"
+									"value": "2022-01-25"
 								},
 								{
 									"key": "endTime",
@@ -1224,6 +1224,46 @@
 							"path": [
 								"spider",
 								"air",
+								"insert"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "2022-01-2 09:001"
+								},
+								{
+									"key": "endTime",
+									"value": "2022-02-21 09:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "同程旅行爬取汽车票",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/spider/bus/insert?startTime=2022-01-2 09:001&endTime=2022-02-21 09:00",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"spider",
+								"bus",
 								"insert"
 							],
 							"query": [

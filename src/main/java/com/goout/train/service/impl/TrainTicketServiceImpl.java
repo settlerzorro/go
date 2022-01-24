@@ -107,7 +107,7 @@ public class TrainTicketServiceImpl implements ITrainTicketService {
     }
 
     @Override
-    public boolean like(Integer userId,Integer trainId) {
+    public boolean  like(Integer userId,Integer trainId) {
         return likeTrainMapper.insertLikeTrain(userId,trainId);
     }
 

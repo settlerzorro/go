@@ -3,8 +3,10 @@ package com.goout.ship.entity;
 import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.annotation.JSONType;
 
+import java.io.Serializable;
+
 @JSONType(naming = PropertyNamingStrategy.PascalCase)
-public class LikeShip {
+public class LikeShip  implements Serializable {
 
     private Integer id;
     private Integer userId;

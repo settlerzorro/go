@@ -117,6 +117,7 @@ public class TransportApi {
         train.setToStation(toCity);
         Date dat =sdfd.parse(fromDate);
         train.setFromDate(dat);
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         List<Train> trainList = trainTicketService.getTicketList(userId,train);
         List<Train> timeTrainList = deepCopy(trainList);
         List<Train> priceTrainList = deepCopy(trainList);//二等座-硬卧-一等座-软卧-硬座
@@ -145,60 +146,35 @@ public class TransportApi {
             public int compare(Train o1, Train o2) {
                 try {
                     if(o1.getEdzPrice() != null && o2.getEdzPrice() != null){
-                        if(o1.getEdzPrice().doubleValue() < o2.getEdzPrice().doubleValue()){
-                            return -1;
-                        } else {
-                            return 1;
-                        }
+                        return Double.compare(o1.getEdzPrice().doubleValue(), o2.getEdzPrice().doubleValue());
                     } else if(o1.getEdzPrice() != null){
                         return -1;
                     } else if(o2.getEdzPrice() != null){
                         return 1;
                     }
-
                     else if(o1.getYwPrice() != null && o2.getYwPrice() != null){
-                        if(o1.getYwPrice().doubleValue() < o2.getYwPrice().doubleValue()){
-                            return -1;
-                        } else{
-                            return 1;
-                        }
+                        return Double.compare(o1.getYwPrice().doubleValue(), o2.getYwPrice().doubleValue());
                     } else if(o1.getYwPrice() != null){
                         return -1;
                     } else if(o2.getYwPrice() != null){
                         return 1;
                     }
-
                     else if(o1.getYdzPrice() != null && o2.getYdzPrice() != null){
-                        if(o1.getYdzPrice().doubleValue() < o2.getYdzPrice().doubleValue()){
-                            return -1;
-                        } else{
-                            return 1;
-                        }
+                        return Double.compare(o1.getYdzPrice().doubleValue(), o2.getYdzPrice().doubleValue());
                     } else if(o1.getYdzPrice() != null){
                         return -1;
                     } else if(o2.getYdzPrice() != null){
                         return 1;
                     }
-
                     else if(o1.getRwPrice() != null && o2.getRwPrice() != null){
-                        if(o1.getRwPrice().doubleValue() < o2.getRwPrice().doubleValue()){
-                            return -1;
-                        } else{
-                            return 1;
-                        }
+                        return Double.compare(o1.getRwPrice().doubleValue(), o2.getRwPrice().doubleValue());
                     } else if(o1.getRwPrice() != null){
                         return -1;
                     } else if(o2.getRwPrice() != null){
                         return 1;
                     }
-
-
                     else if(o1.getYzPrice() != null && o2.getYzPrice() != null){
-                        if(o1.getYzPrice().doubleValue() < o2.getYzPrice().doubleValue()){
-                            return -1;
-                        } else{
-                            return 1;
-                        }
+                        return Double.compare(o1.getYzPrice().doubleValue(), o2.getYzPrice().doubleValue());
                     } else if(o1.getYzPrice() != null){
                         return -1;
                     } else if(o2.getYzPrice() != null){

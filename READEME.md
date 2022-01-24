@@ -1,4 +1,5 @@
 # Springboot+Spring Security+Mybatis
+首页：http://127.0.0.1:8888/index.html
 ## 所有可供前端调用的接口已经放入postman文件中。
 ### 系统有3种角色，超级管理员和普通管理员已经内置。后面每次注册的用户都默认为普通用户。
 ### 账号密码： 
