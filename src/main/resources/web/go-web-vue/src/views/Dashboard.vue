@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="24">
-        <el-carousel>
+        <el-carousel v-loading="loading">
           <el-carousel-item v-for="item in adList" :key="item.id">
             <img
               :src="'/img/' + item.localUrl"
@@ -763,6 +763,8 @@ export default {
       busPageSize: 5,
     });
 
+    const loading = ref(true);
+
     const getAd = () => {
       getAdList().then((res) => {
         if (res.code == 0) {
@@ -771,6 +773,7 @@ export default {
               adList.value.push(item);
             }
           });
+          loading.value = false;
         }
       });
     };
@@ -1158,6 +1161,7 @@ export default {
     };
 
     return {
+      loading,
       userId,
       activeName,
       name,
