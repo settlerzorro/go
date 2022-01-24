@@ -1,22 +1,18 @@
 package com.goout.advert.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.goout.advert.dao.CommonResult;
 import com.goout.advert.entity.Advert;
 import com.goout.advert.service.IAdvertService;
+import com.goout.properties.Properties;
 import com.goout.train.model.response.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Encoder;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +33,8 @@ public class AdvertController {
 
     @Autowired
     private IAdvertService airService;
-
+    @Autowired
+    private Properties properties;
 
 
     @PostMapping("/insertAdvert")
@@ -45,7 +42,7 @@ public class AdvertController {
     public RestResponse insertAdvet(@RequestParam(value = "userId",required = false) Integer userId, @RequestParam(value = "advertName",required = false) String advertName,@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
         String fileName = file.getOriginalFilename();  // 文件名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
-        String filePath = "/Users/ll/Downloads/upload/"; // 上传后的路径
+        String filePath = properties.getAdvertFolderPath(); // 上传后的路径
         fileName = UUID.randomUUID().toString().replace("-", "") + suffixName; // 新文件名
         File dest = new File(filePath + fileName);
         if (!dest.getParentFile().exists()) {
