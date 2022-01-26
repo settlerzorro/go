@@ -10,6 +10,9 @@ public interface CommentTrainMapper {
     @Select("SELECT * FROM comment_train WHERE trainId=#{trainId}")
     List<CommentTrain> selectByTrainId(Integer  trainId);
 
+    @Select("SELECT * FROM comment_train WHERE userId=#{userId}")
+    List<CommentTrain> selectByUserId(Integer  userId);
+
     @Insert("insert into comment_train values(#{id},#{userId},#{time},#{content},#{trainId})")
     Boolean insert(CommentTrain commentTrain);
 

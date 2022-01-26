@@ -1,6 +1,7 @@
 package com.goout.bus.dao;
 
 import com.goout.bus.entity.CommentBus;
+import com.goout.ship.entity.CommentShip;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,6 +13,9 @@ import java.util.List;
 public interface CommentBusMapper {
     @Select("SELECT * FROM comment_bus WHERE busId=#{busId}")
     List<CommentBus> selectByBusId(Integer  busId);
+
+    @Select("SELECT * FROM comment_bus WHERE userId=#{userId}")
+    List<CommentBus> selectByUserId(Integer  userId);
 
     @Insert("insert into comment_bus values(#{id},#{userId},#{time},#{content},#{busId})")
     Boolean insert(CommentBus commentBus);

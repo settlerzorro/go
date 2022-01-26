@@ -11,6 +11,9 @@ public interface TicketMapper {
     @Select("<script> SELECT * FROM train WHERE fromStation like concat('%','${fromStation}','%') <if test='toStation != null'> and toStation like concat('%','${toStation}','%') </if> <if test='fromDate != null'> and fromDate=#{fromDate} </if></script>")
     List<Train> select(Map map);
 
+    @Select("SELECT * FROM train WHERE id=${id}")
+    List<Train> selectById(Integer id);
+
     @Select("SELECT * FROM train")
     List<Train> selectAll();
 
@@ -35,7 +38,7 @@ public interface TicketMapper {
             "#{yzNum},#{yzPrice}," +
             "#{wzNum},#{wzPrice}," +
             "#{qtNum},#{qtPrice}," +
-            "#{trainLines},#{fromDate},#{buyUrl})")
+            "#{trainLines},#{fromDate},#{buyUrl},#{weather},#{scenicSpots})")
     Boolean insertTrain(Train ticket);
 
 
@@ -76,7 +79,9 @@ public interface TicketMapper {
             "<if test='qtPrice!=null'> qtPrice = #{qtPrice}, </if>" +
             "<if test='trainLines!=null'> trainLines = #{trainLines}, </if>" +
             "<if test='fromDate !=null'> fromDate = #{fromDate}, </if> " +
-            "<if test='buyUrl !=null'> buyUrl = #{buyUrl}</if> " +
+            "<if test='buyUrl !=null'> buyUrl = #{buyUrl},</if> " +
+            "<if test='weather!=null'> scenicSpots = #{weather},</if> " +
+            "<if test='scenicSpots!=null'> scenicSpots = #{scenicSpots}</if> " +
             "</set>" +
             "where id=#{id}" +
             "</script>")

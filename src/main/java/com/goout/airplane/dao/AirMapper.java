@@ -1,6 +1,7 @@
 package com.goout.airplane.dao;
 
 import com.goout.airplane.entity.Air;
+import com.goout.bus.entity.Bus;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -10,6 +11,9 @@ public interface AirMapper {
     @Select("<script> SELECT * FROM air WHERE oapName like concat('%','${oapName}','%') <if test='aapName != null'> and aapName like concat('%','${aapName}','%') </if> <if test='fromTime != null'> and fromTime=#{fromTime} </if></script>")
     List<Air> select(Air air);
 
+    @Select("SELECT * FROM air WHERE id=${id}")
+    List<Air> selectById(Integer id);
+
     @Select("SELECT * FROM air")
     List<Air> selectAll();
 
@@ -17,7 +21,7 @@ public interface AirMapper {
             "#{id},#{oapName}," +
             "#{aapName},#{flyOffOnlyTime}," +
             "#{arrivalOnlyTime},#{aep}," +
-            "#{fromTime},#{buyUrl},#{si},#{useTime})")
+            "#{fromTime},#{buyUrl},#{si},#{useTime},#{weather},#{scenicSpots})")
     Boolean insertAir(Air air);
 
     @Delete("delete from air where id=#{id}")
@@ -34,7 +38,9 @@ public interface AirMapper {
             "<if test='fromTime!=null'> fromTime = #{fromTime}, </if>" +
             "<if test='buyUrl!=null'> buyUrl = #{buyUrl},</if> " +
             "<if test='useTime!=null'> useTime = #{useTime},</if> " +
-            "<if test='si!=null'> si = #{si}</if> " +
+            "<if test='si!=null'> si = #{si},</if> " +
+            "<if test='weather!=null'> scenicSpots = #{weather},</if> " +
+            "<if test='scenicSpots!=null'> scenicSpots = #{scenicSpots}</if> " +
             "</set>" +
             "where id=#{id}" +
             "</script>")

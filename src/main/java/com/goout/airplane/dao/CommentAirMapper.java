@@ -1,6 +1,7 @@
 package com.goout.airplane.dao;
 
 import com.goout.airplane.entity.CommentAir;
+import com.goout.bus.entity.CommentBus;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,6 +13,9 @@ import java.util.List;
 public interface CommentAirMapper {
     @Select("SELECT * FROM comment_air WHERE airId=#{airId}")
     List<CommentAir> selectByAirId(Integer  airId);
+
+    @Select("SELECT * FROM comment_air WHERE userId=#{userId}")
+    List<CommentAir> selectByUserId(Integer  userId);
 
     @Insert("insert into comment_air values(#{id},#{userId},#{time},#{content},#{airId})")
     Boolean insert(CommentAir commentAir);

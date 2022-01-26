@@ -4,6 +4,7 @@ import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.annotation.JSONType;
 
 import java.io.Serializable;
+import java.util.List;
 
 @JSONType(naming = PropertyNamingStrategy.PascalCase)
 public class LikeAir  implements Serializable {

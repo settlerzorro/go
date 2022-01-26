@@ -106,6 +106,7 @@ public class SpiderAirServiceImpl implements ISpiderAirService {
                                     +"&to=" + java.net.URLEncoder.encode(s.getName(),"utf-8")
                                     +"&fromairport=&toairport=&p=&childticket=0,0");
                                     try {
+                                        System.out.println(air);
                                         airMapper.insertAir(air);
                                     }catch (Exception e){
                                         e.printStackTrace();

@@ -47,7 +47,52 @@ public class Bus implements Serializable {
      */
     private BigDecimal ticketPrice;
 
+    @Override
+    public String toString() {
+        return "Bus{" +
+                "id=" + id +
+                ", dptStation='" + dptStation + '\'' +
+                ", arrStation='" + arrStation + '\'' +
+                ", dptDate='" + dptDate + '\'' +
+                ", dptTime='" + dptTime + '\'' +
+                ", coachType='" + coachType + '\'' +
+                ", ticketLeft='" + ticketLeft + '\'' +
+                ", ticketPrice=" + ticketPrice +
+                ", buyUrl='" + buyUrl + '\'' +
+                ", weather='" + weather + '\'' +
+                ", scenicSpots='" + scenicSpots + '\'' +
+                ", commentBuses=" + commentBuses +
+                ", LikeBuses=" + LikeBuses +
+                '}';
+    }
+
     private String buyUrl;
+
+    /**
+     * 目的地天气
+     */
+    private String weather;
+
+    /**
+     * 目的地景点
+     */
+    private String scenicSpots;
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getScenicSpots() {
+        return scenicSpots;
+    }
+
+    public void setScenicSpots(String scenicSpots) {
+        this.scenicSpots = scenicSpots;
+    }
 
     public String getBuyUrl() {
         return buyUrl;
@@ -136,23 +181,6 @@ public class Bus implements Serializable {
 
     public BigDecimal getTicketPrice() {
         return ticketPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "Bus{" +
-                "id=" + id +
-                ", dptStation='" + dptStation + '\'' +
-                ", arrStation='" + arrStation + '\'' +
-                ", dptDate='" + dptDate + '\'' +
-                ", dptTime='" + dptTime + '\'' +
-                ", coachType='" + coachType + '\'' +
-                ", ticketLeft='" + ticketLeft + '\'' +
-                ", ticketPrice=" + ticketPrice +
-                ", buyUrl='" + buyUrl + '\'' +
-                ", commentBuses=" + commentBuses +
-                ", LikeBuses=" + LikeBuses +
-                '}';
     }
 
     public void setTicketPrice(BigDecimal ticketPrice) {

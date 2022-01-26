@@ -57,6 +57,52 @@ public class Air implements Serializable {
      */
     private String buyUrl;
 
+    @Override
+    public String toString() {
+        return "Air{" +
+                "id=" + id +
+                ", oapName='" + oapName + '\'' +
+                ", aapName='" + aapName + '\'' +
+                ", flyOffOnlyTime='" + flyOffOnlyTime + '\'' +
+                ", arrivalOnlyTime='" + arrivalOnlyTime + '\'' +
+                ", aep=" + aep +
+                ", fromTime='" + fromTime + '\'' +
+                ", useTime=" + useTime +
+                ", si='" + si + '\'' +
+                ", buyUrl='" + buyUrl + '\'' +
+                ", weather='" + weather + '\'' +
+                ", scenicSpots='" + scenicSpots + '\'' +
+                ", commentAairs=" + commentAairs +
+                ", LikeAirs=" + LikeAirs +
+                '}';
+    }
+
+    public String getScenicSpots() {
+        return scenicSpots;
+    }
+
+    public void setScenicSpots(String scenicSpots) {
+        this.scenicSpots = scenicSpots;
+    }
+
+    /**
+     * 目的地天气
+     */
+    private String weather;
+
+    /**
+     * 目的地景点
+     */
+    private String scenicSpots;
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
     private List<CommentAir> commentAairs;
     private List<LikeAir> LikeAirs;
 
@@ -156,21 +202,4 @@ public class Air implements Serializable {
         this.buyUrl = buyUrl;
     }
 
-    @Override
-    public String toString() {
-        return "Air{" +
-                "id=" + id +
-                ", oapName='" + oapName + '\'' +
-                ", aapName='" + aapName + '\'' +
-                ", flyOffOnlyTime='" + flyOffOnlyTime + '\'' +
-                ", arrivalOnlyTime='" + arrivalOnlyTime + '\'' +
-                ", aep=" + aep +
-                ", fromTime='" + fromTime + '\'' +
-                ", useTime=" + useTime +
-                ", si='" + si + '\'' +
-                ", buyUrl='" + buyUrl + '\'' +
-                ", commentAairs=" + commentAairs +
-                ", LikeAirs=" + LikeAirs +
-                '}';
-    }
 }

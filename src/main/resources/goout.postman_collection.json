@@ -21,7 +21,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fromStation\": \"大连\",\r\n    \"toStation\": \"济南\",\r\n    \"fromDate\": \"2022-10-18\"\r\n}",
+							"raw": "{\r\n    \"fromStation\": \"大连\",\r\n    \"toStation\": \"济南\",\r\n    \"fromDate\": \"2022-01-26\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1212,7 +1212,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8888/spider/air/insert?startTime=2022-01-2 09:001&endTime=2022-02-21 09:00",
+							"raw": "http://127.0.0.1:8888/spider/air/insert?startTime=2022-01-25 06:001&endTime=2022-02-21 09:00",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1229,7 +1229,7 @@
 							"query": [
 								{
 									"key": "startTime",
-									"value": "2022-01-2 09:001"
+									"value": "2022-01-25 06:001"
 								},
 								{
 									"key": "endTime",
@@ -1274,6 +1274,89 @@
 								{
 									"key": "endTime",
 									"value": "2022-02-21 09:00"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "用户评论收藏操作",
+			"item": [
+				{
+					"name": "用户收藏评论",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/userInfo/getCommont?userId=2&type=bus",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"userInfo",
+								"getCommont"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								},
+								{
+									"key": "type",
+									"value": "bus"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取指定用户所有收藏",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/userInfo/getLike?userId=30&type=bus",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"userInfo",
+								"getLike"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "30"
+								},
+								{
+									"key": "type",
+									"value": "bus"
 								}
 							]
 						}

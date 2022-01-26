@@ -205,6 +205,79 @@ public class Train implements Serializable {
 
     private String buyUrl;
 
+    /**
+     * 目的地天气
+     */
+    private String weather;
+
+    /**
+     * 目的地景点
+     */
+    private String scenicSpots;
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "id=" + id +
+                ", trainNo='" + trainNo + '\'' +
+                ", trainCode='" + trainCode + '\'' +
+                ", trainType='" + trainType + '\'' +
+                ", fromStation='" + fromStation + '\'' +
+                ", toStation='" + toStation + '\'' +
+                ", fromStationType='" + fromStationType + '\'' +
+                ", toStationType='" + toStationType + '\'' +
+                ", fromTime='" + fromTime + '\'' +
+                ", toTime='" + toTime + '\'' +
+                ", runTime='" + runTime + '\'' +
+                ", canBook=" + canBook +
+                ", swzNum='" + swzNum + '\'' +
+                ", swzPrice=" + swzPrice +
+                ", ydzNum='" + ydzNum + '\'' +
+                ", ydzPrice=" + ydzPrice +
+                ", edzNum='" + edzNum + '\'' +
+                ", edzPrice=" + edzPrice +
+                ", gjrwNum='" + gjrwNum + '\'' +
+                ", gjrwPrice=" + gjrwPrice +
+                ", rwNum='" + rwNum + '\'' +
+                ", rwPrice=" + rwPrice +
+                ", dwNum='" + dwNum + '\'' +
+                ", dwPrice=" + dwPrice +
+                ", ywNum='" + ywNum + '\'' +
+                ", ywPrice=" + ywPrice +
+                ", rzNum='" + rzNum + '\'' +
+                ", rzPrice=" + rzPrice +
+                ", yzNum='" + yzNum + '\'' +
+                ", yzPrice=" + yzPrice +
+                ", wzNum='" + wzNum + '\'' +
+                ", wzPrice=" + wzPrice +
+                ", qtNum='" + qtNum + '\'' +
+                ", qtPrice=" + qtPrice +
+                ", trainLines='" + trainLines + '\'' +
+                ", commentTrains=" + commentTrains +
+                ", likes=" + likes +
+                ", fromDate='" + fromDate + '\'' +
+                ", buyUrl='" + buyUrl + '\'' +
+                ", weather='" + weather + '\'' +
+                ", scenicSpots='" + scenicSpots + '\'' +
+                '}';
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getScenicSpots() {
+        return scenicSpots;
+    }
+
+    public void setScenicSpots(String scenicSpots) {
+        this.scenicSpots = scenicSpots;
+    }
+
     public String getBuyUrl() {
         return buyUrl;
     }
@@ -475,47 +548,6 @@ public class Train implements Serializable {
 
     public void setQtPrice(BigDecimal qtPrice) {
         this.qtPrice = qtPrice;
-    }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("trainNo",trainNo)
-                .add("trainCode", trainCode)
-                .add("trainType", trainType)
-                .add("fromStation", fromStation)
-                .add("toStation", toStation)
-                .add("fromStationType", fromStationType)
-                .add("toStationType", toStationType)
-                .add("fromTime", fromTime)
-                .add("toTime", toTime)
-                .add("runTime", runTime)
-                .add("canBook", canBook)
-                .add("swzNum", swzNum)
-                .add("swzPrice", swzPrice)
-                .add("ydzNum", ydzNum)
-                .add("ydzPrice", ydzPrice)
-                .add("edzNum", edzNum)
-                .add("edzPrice", edzPrice)
-                .add("gjrwNum", gjrwNum)
-                .add("gjrwPrice", gjrwPrice)
-                .add("rwNum", rwNum)
-                .add("rwPrice", rwPrice)
-                .add("dwNum", dwNum)
-                .add("dwPrice", dwPrice)
-                .add("ywNum", ywNum)
-                .add("ywPrice", ywPrice)
-                .add("rzNum", rzNum)
-                .add("rzPrice", rzPrice)
-                .add("yzNum", yzNum)
-                .add("yzPrice", yzPrice)
-                .add("wzNum", wzNum)
-                .add("wzPrice", wzPrice)
-                .add("qtNum", qtNum)
-                .add("qtPrice", qtPrice)
-                .add("trainLines", trainLines)
-                .add("fromDate", fromDate)
-                .toString();
     }
 
     public String getTrainLines() {

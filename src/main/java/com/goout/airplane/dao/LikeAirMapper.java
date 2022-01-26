@@ -13,6 +13,9 @@ public interface LikeAirMapper {
     @Select("SELECT * FROM like_air WHERE airId = #{airId} and userId = #{userId}")
     List<LikeAir> selectByAirIdAndUserId(Integer airId, Integer userId);
 
+    @Select("SELECT * FROM like_air WHERE userId = #{userId}")
+    List<LikeAir> selectByUserId(Integer userId);
+
     @Insert("Insert into like_air (userId,airId) values(" +
 
             "#{userId}," +
