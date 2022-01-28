@@ -144,6 +144,12 @@
         <el-form-item label="散席价格" prop="sxPrice">
           <el-input v-model="form.sxPrice" type="number"></el-input>
         </el-form-item>
+        <el-form-item label="目的地天气" prop="weather">
+          <el-input v-model="form.weather"></el-input>
+        </el-form-item>
+        <el-form-item label="目的地景点" prop="scenicSpots">
+          <el-input v-model="form.scenicSpots"></el-input>
+        </el-form-item>
         <el-form-item label="购票地址" prop="buyUrl">
           <el-input v-model="form.buyUrl" type="textarea"></el-input>
         </el-form-item>
@@ -287,6 +293,8 @@ export default {
       sdPrice: null,
       sxPrice: null,
       buyUrl: null,
+      weather: null,
+      scenicSpots: null
     });
     // 表单校验规则
     const rules = reactive({

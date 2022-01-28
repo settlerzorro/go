@@ -64,9 +64,25 @@
         <el-table-column
           prop="useTime"
           label="总用时"
+          sortable
           width="100"
         ></el-table-column>
-        <el-table-column prop="aep" label="价格" width="100"></el-table-column>
+        <el-table-column
+          prop="aep"
+          label="价格"
+          sortable
+          width="100"
+        ></el-table-column>
+        <el-table-column
+          prop="weather"
+          label="天气"
+          width="100"
+        ></el-table-column>
+        <el-table-column
+          prop="scenicSpots"
+          label="景点"
+          width="100"
+        ></el-table-column>
         <el-table-column label="操作" width="250" align="center">
           <template #default="scope">
             <el-button
@@ -229,21 +245,21 @@ export default {
       let param = { userId: userId.value, airId: row.id };
       // 取消收藏
       if (row.likeAirs.length > 0) {
-        handleDisLike(0, {}, row.likeAirs)
+        handleDisLike(0, {}, row.likeAirs);
         return;
       }
-        likeAir(param)
-          .then((res) => {
-            if (res.code == 0) {
-              ElMessage.success("收藏成功");
-              getData();
-            } else {
-              ElMessage.error("收藏失败");
-            }
-          })
-          .catch(() => {
+      likeAir(param)
+        .then((res) => {
+          if (res.code == 0) {
+            ElMessage.success("收藏成功");
+            getData();
+          } else {
             ElMessage.error("收藏失败");
-          });
+          }
+        })
+        .catch(() => {
+          ElMessage.error("收藏失败");
+        });
     };
 
     // 取消收藏操作
@@ -261,7 +277,7 @@ export default {
           .catch(() => {
             ElMessage.error("取消收藏失败");
           });
-      })
+      });
     };
 
     let airId = "";

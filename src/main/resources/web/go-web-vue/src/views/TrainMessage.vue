@@ -66,7 +66,8 @@
         <el-table-column
           prop="runTime"
           label="运行时间"
-          width="100"
+          sortable
+          width="110"
         ></el-table-column>
         <el-table-column
           prop="swzNum"
@@ -247,6 +248,16 @@
             </template>
           </template>
         </el-table-column>
+        <el-table-column
+          prop="weather"
+          label="天气"
+          width="100"
+        ></el-table-column>
+        <el-table-column
+          prop="scenicSpots"
+          label="景点"
+          width="100"
+        ></el-table-column>
         <el-table-column label="操作" width="250" align="center" fixed="right">
           <template #default="scope">
             <el-button

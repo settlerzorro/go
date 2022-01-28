@@ -81,6 +81,31 @@ public class Ship implements Serializable {
 
     private String buyUrl;
 
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getScenicSpots() {
+        return scenicSpots;
+    }
+
+    public void setScenicSpots(String scenicSpots) {
+        this.scenicSpots = scenicSpots;
+    }
+    /**
+     * 目的地天气
+     */
+    private String weather;
+
+    /**
+     * 目的地景点
+     */
+    private String scenicSpots;
+
     public String getBuyUrl() {
         return buyUrl;
     }

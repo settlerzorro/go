@@ -40,7 +40,7 @@ public interface BusMapper {
             "<if test='ticketLeft!=null'> ticketLeft = #{ticketLeft}, </if>" +
             "<if test='ticketPrice!=null'> ticketPrice = #{ticketPrice},</if> " +
             "<if test='buyUrl!=null'> buyUrl = #{buyUrl},</if> " +
-            "<if test='weather!=null'> scenicSpots = #{weather},</if> " +
+            "<if test='weather!=null'> weather = #{weather},</if> " +
             "<if test='scenicSpots!=null'> scenicSpots = #{scenicSpots}</if> " +
             "</set>" +
             "where id=#{id}" +

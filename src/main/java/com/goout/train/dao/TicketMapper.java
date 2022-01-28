@@ -80,7 +80,7 @@ public interface TicketMapper {
             "<if test='trainLines!=null'> trainLines = #{trainLines}, </if>" +
             "<if test='fromDate !=null'> fromDate = #{fromDate}, </if> " +
             "<if test='buyUrl !=null'> buyUrl = #{buyUrl},</if> " +
-            "<if test='weather!=null'> scenicSpots = #{weather},</if> " +
+            "<if test='weather!=null'> weather = #{weather},</if> " +
             "<if test='scenicSpots!=null'> scenicSpots = #{scenicSpots}</if> " +
             "</set>" +
             "where id=#{id}" +

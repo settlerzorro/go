@@ -102,11 +102,23 @@
               <el-table-column
                 prop="useTime"
                 label="总用时"
+                sortable
                 width="100"
               ></el-table-column>
               <el-table-column
                 prop="aep"
                 label="价格"
+                sortable
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                prop="weather"
+                label="天气"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                prop="scenicSpots"
+                label="景点"
                 width="100"
               ></el-table-column>
               <el-table-column label="操作" width="250" align="center">
@@ -201,7 +213,8 @@
               <el-table-column
                 prop="runTime"
                 label="运行时间"
-                width="100"
+                sortable
+                width="120"
               ></el-table-column>
               <el-table-column
                 prop="swzNum"
@@ -413,6 +426,16 @@
                 </template>
               </el-table-column>
               <el-table-column
+                prop="weather"
+                label="天气"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                prop="scenicSpots"
+                label="景点"
+                width="100"
+              ></el-table-column>
+              <el-table-column
                 label="操作"
                 width="250"
                 align="center"
@@ -506,46 +529,56 @@
                 label="到达时间"
                 width="100"
               ></el-table-column>
-              <el-table-column prop="tdPrice" label="特等价格" width="100">
+              <el-table-column prop="tdPrice" label="特等价格" sortable width="110">
                 <template #default="scope">
                   {{ scope.row.tdPrice || "--" }}
                 </template>
               </el-table-column>
-              <el-table-column prop="ydPrice" label="一等价格" width="100">
+              <el-table-column prop="ydPrice" label="一等价格" sortable width="110">
                 <template #default="scope">
                   {{ scope.row.ydPrice || "--" }}
                 </template>
               </el-table-column>
-              <el-table-column prop="edAprice" label="二等A价格" width="100">
+              <el-table-column prop="edAprice" label="二等A价格" sortable width="120">
                 <template #default="scope">
                   {{ scope.row.edAprice || "--" }}
                 </template>
               </el-table-column>
-              <el-table-column prop="edBprice" label="二等B价格" width="100">
+              <el-table-column prop="edBprice" label="二等B价格" sortable width="120">
                 <template #default="scope">
                   {{ scope.row.edBprice || "--" }}
                 </template>
               </el-table-column>
-              <el-table-column prop="sdAPrice" label="三等A价格" width="100">
+              <el-table-column prop="sdAPrice" label="三等A价格" sortable width="120">
                 <template #default="scope">
                   {{ scope.row.sdAPrice || "--" }}
                 </template>
               </el-table-column>
-              <el-table-column prop="sdBPrice" label="三等B价格" width="100">
+              <el-table-column prop="sdBPrice" label="三等B价格" sortable width="120">
                 <template #default="scope">
                   {{ scope.row.sdBPrice || "--" }}
                 </template>
               </el-table-column>
-              <el-table-column prop="sdPrice" label="四等价格" width="100">
+              <el-table-column prop="sdPrice" label="四等价格" sortable width="110">
                 <template #default="scope">
                   {{ scope.row.sdPrice || "--" }}
                 </template>
               </el-table-column>
-              <el-table-column prop="sxPrice" label="散席价格" width="100">
+              <el-table-column prop="sxPrice" label="散席价格" sortable width="110">
                 <template #default="scope">
                   {{ scope.row.sxPrice || "--" }}
                 </template>
               </el-table-column>
+              <el-table-column
+                prop="weather"
+                label="天气"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                prop="scenicSpots"
+                label="景点"
+                width="100"
+              ></el-table-column>
               <el-table-column
                 label="操作"
                 fixed="right"
@@ -641,7 +674,18 @@
               ></el-table-column>
               <el-table-column
                 prop="ticketPrice"
+                sortable
                 label="票价"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                prop="weather"
+                label="天气"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                prop="scenicSpots"
+                label="景点"
                 width="100"
               ></el-table-column>
               <el-table-column label="操作" width="250" align="center">

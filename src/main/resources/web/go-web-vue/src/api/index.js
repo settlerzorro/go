@@ -388,3 +388,23 @@ export const getTransportList = (params) => {
         data: {}
     })
 }
+
+// 获取用户评论接口
+export const getUserComment = (params) => {
+    return request({
+        url: '/userInfo/getCommont',
+        method: 'get',
+        params: params,
+        data: {}
+    })
+}
+
+// 获取用户收藏
+export const getUserLike = (params) => {
+    return request({
+        url: '/userInfo/getLike',
+        method: 'get',
+        params: params,
+        data: {}
+    })
+}

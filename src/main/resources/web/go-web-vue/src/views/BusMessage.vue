@@ -57,7 +57,17 @@
           width="100"
         ></el-table-column>
         <el-table-column prop="ticketLeft" label="剩余票数" width="100"></el-table-column>
-        <el-table-column prop="ticketPrice" label="票价" width="100"></el-table-column>
+        <el-table-column prop="ticketPrice" label="票价" sortable width="100"></el-table-column>
+        <el-table-column
+          prop="weather"
+          label="天气"
+          width="100"
+        ></el-table-column>
+        <el-table-column
+          prop="scenicSpots"
+          label="景点"
+          width="100"
+        ></el-table-column>
         <el-table-column label="操作" width="250" align="center">
           <template #default="scope">
             <el-button

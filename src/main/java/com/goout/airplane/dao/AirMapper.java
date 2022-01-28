@@ -39,7 +39,7 @@ public interface AirMapper {
             "<if test='buyUrl!=null'> buyUrl = #{buyUrl},</if> " +
             "<if test='useTime!=null'> useTime = #{useTime},</if> " +
             "<if test='si!=null'> si = #{si},</if> " +
-            "<if test='weather!=null'> scenicSpots = #{weather},</if> " +
+            "<if test='weather!=null'> weather = #{weather},</if> " +
             "<if test='scenicSpots!=null'> scenicSpots = #{scenicSpots}</if> " +
             "</set>" +
             "where id=#{id}" +
