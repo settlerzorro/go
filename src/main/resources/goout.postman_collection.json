@@ -1366,6 +1366,162 @@
 			]
 		},
 		{
+			"name": "综合",
+			"item": [
+				{
+					"name": "根据城市和时间查询",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/comprehensive/getComprehensiveByFilter?cityName=大连&date=2022-03-31",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"comprehensive",
+								"getComprehensiveByFilter"
+							],
+							"query": [
+								{
+									"key": "cityName",
+									"value": "大连"
+								},
+								{
+									"key": "date",
+									"value": "2022-03-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "条件查询综合",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/comprehensive/getComprehensiveByFilter?cityName=&date=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"comprehensive",
+								"getComprehensiveByFilter"
+							],
+							"query": [
+								{
+									"key": "cityName",
+									"value": ""
+								},
+								{
+									"key": "date",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增综合",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"cityName\":\"北京\",\"weather\":\"多云\",\"around\":\"周边\",\"hotel\":\"汉庭\",\"date\":\"2022-03-30\"}"
+						},
+						"url": "http://127.0.0.1:8888/comprehensive/insertComprehensive"
+					},
+					"response": []
+				},
+				{
+					"name": "删除综合",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8888/comprehensive/deleteComprehensive?id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8888",
+							"path": [
+								"comprehensive",
+								"deleteComprehensive"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改综合",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"2\",\"cityName\":\"大连\"}"
+						},
+						"url": "http://127.0.0.1:8888/comprehensive/updateComprehensive"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "登录",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
@@ -1385,12 +1541,12 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "user",
+							"value": "super",
 							"type": "default"
 						},
 						{
 							"key": "password",
-							"value": "user",
+							"value": "super",
 							"type": "default"
 						}
 					]

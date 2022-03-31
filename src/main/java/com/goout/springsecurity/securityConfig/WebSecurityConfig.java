@@ -82,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/cityStationApi/getAllStation",
                         "/air/getAirList",
                         "/ship/getShipList",
+                        "/comprehensive/getComprehensiveByFilter",
                         "/advert/getAdList").permitAll()
                 .anyRequest().authenticated()
                 .and()

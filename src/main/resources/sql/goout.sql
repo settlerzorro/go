@@ -1,5 +1,5 @@
 /*
- Navicat Premium Data Transfer
+ Navicat MySQL Data Transfer
 
  Source Server         : goout
  Source Server Type    : MySQL
@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 29/01/2022 09:59:44
+ Date: 31/03/2022 17:35:52
 */
 
 SET NAMES utf8mb4;
@@ -2013,7 +2013,7 @@ CREATE TABLE `bus`  (
   `weather` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `scenicSpots` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 226 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 224 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bus
@@ -2195,7 +2195,7 @@ CREATE TABLE `comment_bus`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `busId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment_bus
@@ -2214,7 +2214,7 @@ CREATE TABLE `comment_ship`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `shipId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment_ship
@@ -2231,13 +2231,32 @@ CREATE TABLE `comment_train`  (
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '评论内容',
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment_train
 -- ----------------------------
 INSERT INTO `comment_train` VALUES (3, 123, '2022-01-13 18:05:21', '评论111', 1477);
 INSERT INTO `comment_train` VALUES (4, 222, '2022-01-13 19:48:34', '评论111', 2);
+
+-- ----------------------------
+-- Table structure for comprehensive
+-- ----------------------------
+DROP TABLE IF EXISTS `comprehensive`;
+CREATE TABLE `comprehensive`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cityName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '城市',
+  `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '时间',
+  `weather` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '天气',
+  `around` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '周边',
+  `hotel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '酒店',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of comprehensive
+-- ----------------------------
+INSERT INTO `comprehensive` VALUES (2, '大连', '2022-03-30', '多云', '周边', '汉庭');
 
 -- ----------------------------
 -- Table structure for like_air
@@ -2248,7 +2267,7 @@ CREATE TABLE `like_air`  (
   `userId` int NULL DEFAULT NULL,
   `airId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of like_air
@@ -2275,7 +2294,7 @@ CREATE TABLE `like_bus`  (
   `userId` int NULL DEFAULT NULL,
   `busId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of like_bus
@@ -2293,7 +2312,7 @@ CREATE TABLE `like_ship`  (
   `userId` int NULL DEFAULT NULL,
   `shipId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of like_ship
@@ -2309,7 +2328,7 @@ CREATE TABLE `like_train`  (
   `userId` int NULL DEFAULT NULL,
   `trainId` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of like_train
@@ -2349,7 +2368,7 @@ CREATE TABLE `ship`  (
   `weather` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `scenicSpots` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ship
@@ -2504,7 +2523,7 @@ CREATE TABLE `sys_user`  (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
@@ -2515,6 +2534,8 @@ INSERT INTO `sys_user` VALUES (28, 'ground', '$2a$10$Ww9g7myCrHsCK6QvaxkBwOtFLfc
 INSERT INTO `sys_user` VALUES (29, 'air', '$2a$10$1zXmBRnYuaBYXAaunc3TYOkDi3K.lAjUZ6Jy7AY062oJXJLXAnyHu');
 INSERT INTO `sys_user` VALUES (30, 'user', '$2a$10$ZBzSrNGIetVUzEPxW7I3De5YZFeWYIm5medGsGL2KHNR3Af060rpm');
 INSERT INTO `sys_user` VALUES (31, 'user2', '$2a$10$zg.1fJn4ivJ0B5AWgDlcp.H0um3LvUutsyMy0IYXuFdNiVfmug2B2');
+INSERT INTO `sys_user` VALUES (32, 'dxj', '$2a$10$of3Zn0/rSugRnHYXt56Y3OPzlsH20PggcAvvX75VOcNDoZXMLvRXa');
+INSERT INTO `sys_user` VALUES (33, '哈哈', '$2a$10$O1IcUlPAXYvQlttiHPLpdupKxIPVGIToLwDJsnRMSr63ClUSLw/Cq');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -2538,6 +2559,8 @@ INSERT INTO `sys_user_role` VALUES (27, 3);
 INSERT INTO `sys_user_role` VALUES (31, 3);
 INSERT INTO `sys_user_role` VALUES (28, 4);
 INSERT INTO `sys_user_role` VALUES (30, 5);
+INSERT INTO `sys_user_role` VALUES (32, 5);
+INSERT INTO `sys_user_role` VALUES (33, 5);
 
 -- ----------------------------
 -- Table structure for train
@@ -2584,7 +2607,7 @@ CREATE TABLE `train`  (
   `weather` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `scenicSpots` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10767 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10765 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of train

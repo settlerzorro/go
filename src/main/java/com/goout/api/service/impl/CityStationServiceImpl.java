@@ -32,22 +32,14 @@ public class CityStationServiceImpl implements ICityStationService {
     }
 
     public TrainCodeResult getAllTrainCode(NoneRequest requestBody) {
-        // 优先从redis获取
-        return new TrainCodeResult(getTrainCodeFromRedis());
+        return new TrainCodeResult(getTrainCode());
     }
 
-    private Map<String, Object> getTrainCodeFromRedis() {
-        // 优先从redis中获取站点信息
-        // String trainNoLinkStr = (String) redisUtils.get(RedisKeyConstant.REDIS_KEY_LOCAL_DATA_TRAIN_NO_LINK);
+    private Map<String, Object> getTrainCode() {
         Map<String, Object> trainNoLinkMap = null;
-//        if (StringUtils.isNotBlank(trainNoLinkStr)) {
-//            trainNoLinkMap = JSONObject.parseObject(trainNoLinkStr, Map.class);
-//        }
 
         if (CollectionUtils.isEmpty(trainNoLinkMap)) {
             trainNoLinkMap = TrainHelper.getAllTrainNoListFromNet();
-            // 设置到缓存
-            //redisUtils.set(RedisKeyConstant.REDIS_KEY_LOCAL_DATA_TRAIN_NO_LINK, JSONObject.toJSONString(trainNoLinkMap), 1L, TimeUnit.DAYS);
         }
         return trainNoLinkMap;
     }
